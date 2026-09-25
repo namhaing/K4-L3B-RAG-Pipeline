@@ -61,3 +61,6 @@ pageindex_pdfs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Vector store (tạo lại bằng python -m src.task4_chunking_indexing)
+chroma_db/

@@ -1,0 +1,116 @@
+{
+  "threshold": 0.5699,
+  "accuracy": 1.0,
+  "rows": [
+    {
+      "question": "Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?",
+      "group": "in",
+      "best_dense_score": 0.6924213767051697
+    },
+    {
+      "question": "Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",
+      "group": "in",
+      "best_dense_score": 0.7555127143859863
+    },
+    {
+      "question": "Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?",
+      "group": "in",
+      "best_dense_score": 0.7528769969940186
+    },
+    {
+      "question": "Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?",
+      "group": "in",
+      "best_dense_score": 0.5891390442848206
+    },
+    {
+      "question": "Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?",
+      "group": "in",
+      "best_dense_score": 0.743019700050354
+    },
+    {
+      "question": "Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?",
+      "group": "in",
+      "best_dense_score": 0.7388246059417725
+    },
+    {
+      "question": "Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",
+      "group": "in",
+      "best_dense_score": 0.7740625739097595
+    },
+    {
+      "question": "Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",
+      "group": "in",
+      "best_dense_score": 0.7563654780387878
+    },
+    {
+      "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",
+      "group": "in",
+      "best_dense_score": 0.6870961785316467
+    },
+    {
+      "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",
+      "group": "in",
+      "best_dense_score": 0.7050551176071167
+    },
+    {
+      "question": "Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?",
+      "group": "in",
+      "best_dense_score": 0.7224186658859253
+    },
+    {
+      "question": "Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?",
+      "group": "in",
+      "best_dense_score": 0.8183546662330627
+    },
+    {
+      "question": "Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",
+      "group": "in",
+      "best_dense_score": 0.802437424659729
+    },
+    {
+      "question": "Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",
+      "group": "in",
+      "best_dense_score": 0.6305938959121704
+    },
+    {
+      "question": "Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?",
+      "group": "in",
+      "best_dense_score": 0.7231188416481018
+    },
+    {
+      "question": "Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?",
+      "group": "in",
+      "best_dense_score": 0.7520079612731934
+    },
+    {
+      "question": "Thủ tục ly hôn thuận tình gồm những bước nào?",
+      "group": "out",
+      "best_dense_score": 0.4477846622467041
+    },
+    {
+      "question": "Giá vàng hôm nay là bao nhiêu?",
+      "group": "out",
+      "best_dense_score": 0.3613607883453369
+    },
+    {
+      "question": "Cách nấu phở bò ngon tại nhà?",
+      "group": "out",
+      "best_dense_score": 0.3272097110748291
+    },
+    {
+      "question": "Đội tuyển Việt Nam đá trận tiếp theo khi nào?",
+      "group": "out",
+      "best_dense_score": 0.2745361328125
+    },
+    {
+      "question": "Thủ tục thành lập công ty cổ phần cần bao nhiêu cổ đông?",
+      "group": "out",
+      "best_dense_score": 0.5317257046699524
+    },
+    {
+      "question": "Thuế thu nhập doanh nghiệp của công ty TNHH là bao nhiêu phần trăm?",
+      "group": "out",
+      "best_dense_score": 0.5507338047027588
+    }
+  ]
+}
