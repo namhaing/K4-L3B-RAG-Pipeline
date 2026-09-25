@@ -4,7 +4,10 @@ Chatbot trả lời câu hỏi về pháp luật dành cho **hộ kinh doanh cá
 
 > ⚠️ **Phiên bản corpus: quy định giai đoạn 2021–2025.** Từ 01/01/2026 chính sách thuế hộ kinh doanh đã thay đổi (ngưỡng miễn thuế tăng, bỏ thuế khoán) và NĐ 01/2021/NĐ-CP đã hết hiệu lực từ 01/07/2025. Câu trả lời chỉ mang tính tham khảo, không thay thế tư vấn pháp lý.
 
-Nhóm Khê — Nguyễn Hải Nam (Leader), Lê Trung Kiên, Bùi Phương Duy. Phân công chi tiết xem [TEAMMATES.md](TEAMMATES.md).
+Nhóm Khê:
+- **Nguyễn Hải Nam** (Leader): chunking, embedding, ChromaDB, dense, BM25, RRF, calibrate threshold (Task 4–7)
+- **Lê Trung Kiên**: thu thập và chuẩn hoá dữ liệu, PageIndex fallback (Task 1–3, 8)
+- **Bùi Phương Duy**: retrieval pipeline, generation, chatbot, evaluation (Task 9–10, `app.py`, `RESULT.md`)
 
 ## Kiến trúc
 
