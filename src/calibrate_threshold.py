@@ -1,7 +1,7 @@
 """
 Hiệu chỉnh SCORE_THRESHOLD cho fallback của Task 9.
 
-Chạy dense search cho câu hỏi trong domain (golden dataset) và ngoài domain,
+Chạy dense search cho câu hỏi trong domain (golden dataset + câu văn nói) và ngoài domain,
 lấy best cosine score gốc của mỗi câu, rồi chọn ngưỡng tách hai nhóm tốt nhất.
 Kết quả lưu vào group_project/evaluation/threshold_calibration.json làm evidence.
 
@@ -18,6 +18,20 @@ EVALUATION_DIR = Path(__file__).parent.parent / "group_project" / "evaluation"
 GOLDEN_PATH = EVALUATION_DIR / "golden_dataset.json"
 OUTPUT_PATH = EVALUATION_DIR / "threshold_calibration.json"
 
+# Câu hỏi đúng domain viết theo văn nói của người dùng. Golden dataset viết theo văn
+# phong văn bản luật nên có score cao hơn thực tế; chỉ dùng golden thì ngưỡng bị lệch
+# lên và câu hỏi thật như "mở quán cà phê cần giấy tờ gì" bị fallback nhầm.
+IN_DOMAIN_CASUAL_QUERIES = [
+    "mở quán cà phê cần giấy tờ gì",
+    "doanh thu ít thì có phải nộp thuế không",
+    "bán hàng trên facebook có phải xuất hóa đơn không",
+    "hộ kinh doanh là gì",
+    "đăng ký hộ kinh doanh mất mấy ngày",
+    "bán tạp hóa thì đóng thuế bao nhiêu phần trăm",
+    "hộ khoán muốn xuất hóa đơn cho khách thì làm sao",
+    "một người được mở mấy hộ kinh doanh",
+]
+
 # Ngoài domain hẳn + sát domain nhưng ngoài phạm vi hộ kinh doanh.
 OUT_OF_DOMAIN_QUERIES = [
     "Thủ tục ly hôn thuận tình gồm những bước nào?",
@@ -26,6 +40,8 @@ OUT_OF_DOMAIN_QUERIES = [
     "Đội tuyển Việt Nam đá trận tiếp theo khi nào?",
     "Thủ tục thành lập công ty cổ phần cần bao nhiêu cổ đông?",
     "Thuế thu nhập doanh nghiệp của công ty TNHH là bao nhiêu phần trăm?",
+    "Thủ tục cấp hộ chiếu mới cần những gì?",
+    "Mức phạt vượt đèn đỏ với xe máy là bao nhiêu?",
 ]
 
 
@@ -49,7 +65,7 @@ def choose_threshold(in_scores: list[float], out_scores: list[float]) -> tuple[f
 
 def main() -> None:
     golden = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))
-    in_domain = [item["question"] for item in golden]
+    in_domain = [item["question"] for item in golden] + IN_DOMAIN_CASUAL_QUERIES
     if not in_domain:
         raise SystemExit("golden_dataset.json chưa có câu hỏi.")
 
