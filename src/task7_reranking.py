@@ -40,6 +40,44 @@ def rerank_rrf(
     ]
 
 
+RERANK_SYSTEM = """Bạn xếp hạng các đoạn văn bản pháp luật theo mức độ giúp trả lời câu hỏi của chủ hộ kinh doanh.
+Ưu tiên đoạn chứa trực tiếp quy định trả lời câu hỏi; đoạn chỉ trùng từ khoá nhưng nói về đối tượng khác
+(ví dụ doanh nghiệp, công ty) xếp sau. Trả về JSON {"ranking": [số thứ tự đoạn, từ liên quan nhất đến ít nhất]}."""
+RERANK_PASSAGE_CHARS = 700
+
+
+def rerank_llm(query: str, candidates: list[dict], top_k: int = 5) -> list[dict]:
+    """Listwise rerank (kiểu RankGPT): LLM đọc cả danh sách ứng viên sau RRF và xếp lại.
+
+    Score mới = 1/rank (chỉ để sort, giữ retrieval_method="hybrid"). Nếu LLM lỗi hoặc
+    trả JSON hỏng thì giữ nguyên thứ tự RRF; ứng viên LLM bỏ sót được nối vào cuối.
+    """
+    if top_k <= 0 or not candidates:
+        return []
+    import json
+
+    from .llm_client import chat
+
+    passages = "\n\n".join(
+        f"[{index}] {item['content'][:RERANK_PASSAGE_CHARS]}" for index, item in enumerate(candidates)
+    )
+    try:
+        reply = chat(RERANK_SYSTEM, f"Câu hỏi: {query}\n\nCác đoạn:\n{passages}", json_mode=True, max_tokens=200)
+        ranking = json.loads(reply).get("ranking", [])
+    except Exception:
+        return candidates[:top_k]
+
+    order = []
+    for index in ranking:
+        if isinstance(index, int) and 0 <= index < len(candidates) and index not in order:
+            order.append(index)
+    order += [index for index in range(len(candidates)) if index not in order]
+    return [
+        {**candidates[index], "score": 1.0 / rank, "retrieval_method": "hybrid"}
+        for rank, index in enumerate(order[:top_k], 1)
+    ]
+
+
 if __name__ == "__main__":
     import sys
 

@@ -21,6 +21,10 @@
 
 Hai config dùng cùng golden dataset, generator, evaluator, prompt và `top_k`; chỉ thay retrieval strategy.
 
+Bonus (cùng điều kiện, mỗi config chỉ khác B đúng một bước):
+- **Config C — hybrid + RRF + LLM rerank:** RRF lấy 15 ứng viên, `gpt-4o-mini` xếp lại theo kiểu listwise (RankGPT) rồi lấy top 5 (`rerank_llm`, Task 7). Bật bằng `RERANKER=llm`.
+- **Config D — HyDE + hybrid + RRF:** `gpt-4o-mini` viết một đoạn giả định theo văn phong văn bản luật; dense search bằng "câu hỏi + đoạn giả định", BM25 vẫn dùng câu hỏi gốc; threshold vẫn tính trên cosine của câu hỏi gốc (`src/query_expansion.py`). Bật bằng `QUERY_EXPANSION=hyde`.
+
 Ghi chú đo lường: RAGAS chấm phần nội dung câu trả lời, đã bỏ dòng disclaimer và nhãn `[Document n]` (câu trả lời gốc vẫn lưu trong `eval_results_*.json`). Để nguyên hai phần này thì answer relevancy chỉ đạt 0.058/0.037, vì RAGAS coi câu "chỉ mang tính tham khảo" là câu trả lời lảng tránh và cho 0 điểm, còn faithfulness đếm disclaimer là khẳng định không có trong context. Thử trên câu #6: relevancy 0.00 → 0.71, faithfulness 0.50 → 1.00.
 
 ## Overall scores
@@ -91,7 +95,7 @@ Config A cùng lúc đổi từ 0.8438 lên 0.8480. Dense cũng hưởng lợi t
 | -------: | ------ | ------------------------------ | --------------- | ------------- |
 | 1 | Task 1–3: bổ sung **Thông tư 78/2021/TT-BTC** (hoá đơn cho hộ kinh doanh) và NĐ 70/2025/NĐ-CP vào corpus luật | Worst #1 và #3: #6 và #15 chỉ có bài báo làm nguồn cho quy định của TT 78; recall 0.50 | Recall #6, #15 lên 1.0, câu trả lời trích được nguyên văn Điều/Khoản thay vì bài báo | `context_hit` và recall của #6, #15 trong `eval_results_*.json` |
 | 2 | Task 10: thêm luật vào `SYSTEM_PROMPT` "không suy diễn thủ tục/bước thực hiện nếu context không nêu" | Worst #1: faithfulness 0.50 (A) và 0.60 (B) do tự thêm bước "làm đơn yêu cầu" | Faithfulness ≥ 0.95 ở cả hai config | So sánh faithfulness #15, #6, #12 trước/sau |
-| 3 | Task 7: thêm reranker cross-encoder (Jina/BGE-reranker-v2-m3) sau RRF, hoặc thử RRF có trọng số (dense 0.7 / BM25 0.3) | Worst #2: ở B, 4/5 chunk của #14 là góp vốn doanh nghiệp do BM25 khớp từ khoá; #15 mất chunk đúng do RRF | Context precision và recall của B ≥ A; giảm chunk nhiễu từ BM25 | Chạy `run_eval.py` thêm config reranker, ghi vào bảng Bonus experiments |
+| 3 | Task 7: thêm reranker sau RRF. **Đã thử (config C):** precision 0.957 → 0.983, recall 0.906 → 0.938, nhưng faithfulness giảm và tốn thêm khoảng 3k token mỗi câu. Bước tiếp: thử cross-encoder (Jina/BGE-reranker-v2-m3) để có cùng hiệu quả với chi phí thấp hơn | Worst #2: ở B, 4/5 chunk của #14 là góp vốn doanh nghiệp do BM25 khớp từ khoá; #15 mất chunk đúng do RRF | Giữ precision/recall của C, latency gần B | Chạy `run_eval.py --configs C` với cross-encoder, so với C hiện tại |
 
 ### Demo fallback PageIndex (chạy thật)
 
@@ -113,5 +117,5 @@ Hạn chế của fallback:
 | ---------- | -------- | -----------: | -----------------: | ---------- |
 | Conversation memory: viết lại câu hỏi nối tiếp thành câu độc lập (`condense_question`) | Không nhớ ngữ cảnh: "Còn nếu bán hàng online thì sao?" retrieve theo nguyên câu mơ hồ | N/A (golden dataset là câu độc lập) | +1 lời gọi `gpt-4o-mini` cho câu có lịch sử (demo 5.8 s so với 2–3 s) | Demo thật: câu được viết lại thành "Tỷ lệ thuế GTGT và TNCN đối với dịch vụ bán hàng online là bao nhiêu?" và trả lời đúng có citation. Có test `test_follow_up_question_is_condensed_before_retrieval` |
 | Highlight câu nguồn được trích (`src/citation_highlight.py`) | Chỉ hiện đoạn trích 700 ký tự đầu của chunk | N/A (tính năng UI) | So khớp từ khoá, không gọi LLM, tốn không đáng kể | Mỗi `[Document n]` được nối với câu trong nguồn có nhiều từ khoá trùng nhất và tô vàng. Có test `test_supporting_span_matches_cited_claim` |
-| Reranker (Jina/BGE) | RRF | N/A | N/A | Chưa thực hiện (khuyến nghị ưu tiên 3) |
-| Query expansion / HyDE | Query gốc | N/A | N/A | Chưa thực hiện |
+| **Reranker LLM listwise** (config C: RRF top 15 → `gpt-4o-mini` xếp lại → top 5) | Config B (RRF) | Precision **+0.026** (0.957 → 0.983, cao nhất trong 4 config); recall **+0.031** (0.906 → 0.938, câu #15 phục hồi 0.5 → 1.0); faithfulness −0.042 (0.933 → 0.892, do #4 và #14 ở C: LLM thêm ý không có trong chunk); average +0.001 (0.8468 → 0.8477) | +1.2 s (2.51 → 3.72 s) và **+3.1k token** mỗi câu (1 lời gọi `gpt-4o-mini`) | Reranker cải thiện retrieval rõ nhất: câu #14 "góp vốn" từ 4/5 chunk nhiễu (Chương IV/VI về doanh nghiệp) thành 5/5 chunk Chương VIII (Điều 79–81); câu "hồ sơ đăng ký hộ kinh doanh" đưa Điều 87 lên hạng 1. Faithfulness giảm là ở bước generation, nằm trong độ dao động judge. Không bật mặc định vì chi phí token |
+| **HyDE** (config D: dense search bằng câu hỏi + đoạn giả định) | Config B (câu hỏi gốc) | Faithfulness +0.046 (0.979, cao nhất); recall bằng B (0.906); precision −0.028 (0.928); relevancy −0.038; average −0.005 (0.8468 → 0.8416) | +1.9 s (2.51 → 4.41 s) và +274 token mỗi câu | **Chưa chứng minh được cải thiện trên golden dataset**: 16 câu golden viết theo văn phong luật nên dense đã tìm tốt, HyDE không còn nhiều chỗ để giúp. HyDE giúp rõ với câu văn nói: "mở quán cà phê cần giấy tờ gì" có cosine 0.51 → 0.70 và dense hạng 1 đổi từ Điều 22 (doanh nghiệp) sang Điều 87 (đăng ký hộ kinh doanh). Cần bộ đánh giá gồm câu văn nói để đo đúng tác dụng |

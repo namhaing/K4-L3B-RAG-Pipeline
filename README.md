@@ -68,6 +68,8 @@ cp .env.example .env            # Windows: copy .env.example .env
 | `EMBEDDING_PROVIDER` / `EMBEDDING_MODEL` | `openai` / `text-embedding-3-small` | Đổi model thì phải xoá `chroma_db/` và index lại |
 | `SCORE_THRESHOLD` | `0.50` | Đã calibrate, xem `threshold_calibration.json` |
 | `PAGEINDEX_API_KEY` | key từ [pageindex.ai](https://pageindex.ai/developer) | Tuỳ chọn. Không có key thì fallback trả rỗng và pipeline dùng kết quả hybrid |
+| `RERANKER` | `none` hoặc `llm` | Bonus: LLM xếp lại 15 ứng viên sau RRF (thêm khoảng 2k token, 2 s mỗi câu) |
+| `QUERY_EXPANSION` | `none` hoặc `hyde` | Bonus: HyDE cho dense search; threshold vẫn tính trên câu hỏi gốc |
 
 ## Chạy lại từ đầu
 
@@ -86,8 +88,9 @@ python -m src.calibrate_threshold
 # 4. (Tuỳ chọn) PageIndex: upload 3 PDF và chờ retrieval_ready=True (vài phút)
 python -m src.task8_pageindex_vectorless
 
-# 5. Evaluation A/B (dense-only vs hybrid + RRF), ghi kết quả vào group_project/evaluation/
-python group_project/evaluation/run_eval.py
+# 5. Evaluation: A dense-only, B hybrid + RRF, C + LLM rerank, D HyDE + hybrid
+python group_project/evaluation/run_eval.py                 # cả 4 config
+python group_project/evaluation/run_eval.py --configs C D   # chỉ chạy lại bonus, giữ kết quả A/B
 
 # 6. Chatbot
 streamlit run app.py
@@ -111,6 +114,8 @@ Chi tiết trong [group_project/evaluation/RESULT.md](group_project/evaluation/R
 |---|---:|---:|---:|---:|---:|---:|
 | A: dense-only | 0.958 | 0.547 | 0.938 | 0.949 | 0.848 | 13/16 |
 | B: hybrid + RRF | 0.933 | 0.591 | 0.906 | 0.957 | 0.847 | 14/16 |
+| C: B + LLM rerank (bonus) | 0.892 | 0.579 | 0.938 | 0.983 | 0.848 | 14/16 |
+| D: HyDE + B (bonus) | 0.979 | 0.552 | 0.906 | 0.928 | 0.842 | 14/16 |
 
 ## Kiểm tra
 

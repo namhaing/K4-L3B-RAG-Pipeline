@@ -1,7 +1,7 @@
 {
   "run": {
-    "date": "2026-09-25T13:20:14+00:00",
-    "commit": "5c072b5",
+    "date": "2026-09-25T16:10:50+00:00",
+    "commit": "688efdf",
     "golden_dataset_size": 16,
     "top_k": 5,
     "generator": "openai/gpt-4o-mini",
@@ -25,7 +25,18 @@
       "latency_p50_s": 1.998,
       "latency_max_s": 4.346,
       "input_tokens_mean": 2191.9,
-      "output_tokens_mean": 99.9
+      "output_tokens_mean": 99.9,
+      "run": {
+        "date": "2026-09-25T13:20:14+00:00",
+        "commit": "5c072b5",
+        "golden_dataset_size": 16,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
     },
     "B": {
       "name": "hybrid + RRF",
@@ -41,7 +52,74 @@
       "latency_p50_s": 2.301,
       "latency_max_s": 3.72,
       "input_tokens_mean": 2202.9,
-      "output_tokens_mean": 95.1
+      "output_tokens_mean": 95.1,
+      "run": {
+        "date": "2026-09-25T13:20:14+00:00",
+        "commit": "5c072b5",
+        "golden_dataset_size": 16,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
+    },
+    "C": {
+      "name": "hybrid + RRF + LLM rerank",
+      "faithfulness": 0.8917,
+      "answer_relevancy": 0.5791,
+      "context_recall": 0.9375,
+      "context_precision": 0.9826,
+      "average": 0.8477,
+      "questions": 16,
+      "refusals": 0,
+      "context_hit_rate": 0.875,
+      "latency_mean_s": 3.722,
+      "latency_p50_s": 3.376,
+      "latency_max_s": 7.462,
+      "input_tokens_mean": 2153.5,
+      "output_tokens_mean": 103.7,
+      "aux_tokens_mean": 3062.8,
+      "run": {
+        "date": "2026-09-25T16:10:50+00:00",
+        "commit": "688efdf",
+        "golden_dataset_size": 16,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
+    },
+    "D": {
+      "name": "HyDE + hybrid + RRF",
+      "faithfulness": 0.9792,
+      "answer_relevancy": 0.5524,
+      "context_recall": 0.9062,
+      "context_precision": 0.9284,
+      "average": 0.8416,
+      "questions": 16,
+      "refusals": 0,
+      "context_hit_rate": 0.875,
+      "latency_mean_s": 4.405,
+      "latency_p50_s": 4.356,
+      "latency_max_s": 5.991,
+      "input_tokens_mean": 2198.2,
+      "output_tokens_mean": 90.9,
+      "aux_tokens_mean": 274.4,
+      "run": {
+        "date": "2026-09-25T16:10:50+00:00",
+        "commit": "688efdf",
+        "golden_dataset_size": 16,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
     }
   }
 }
