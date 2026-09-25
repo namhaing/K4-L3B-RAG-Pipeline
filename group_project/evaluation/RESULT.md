@@ -4,60 +4,108 @@
 
 | Field                              | Value |
 | ---------------------------------- | ----- |
-| Evaluation date                    | 2026-09-25 (UTC 05:37) |
+| Evaluation date                    | 2026-09-25 (UTC 13:20). Lần chạy đầu UTC 05:37, dùng để so sánh trước/sau |
 | Framework and version              | RAGAS 0.4.3 (`ragas.metrics.collections`), script `group_project/evaluation/run_eval.py` |
 | Evaluator model                    | `gpt-4o-mini` (LLM judge) + `text-embedding-3-small` (answer relevancy) |
 | Generator model                    | OpenAI `gpt-4o-mini`, temperature 0.3, top_p 0.9, cùng `SYSTEM_PROMPT` Task 10 |
-| Embedding model                    | OpenAI `text-embedding-3-small` (1536 chiều), ChromaDB cosine, 1041 chunks |
-| Corpus version/commit              | commit `cf4d9fe`: 3 văn bản pháp luật (NĐ 01/2021, NĐ 123/2020, TT 40/2021) + 7 bài viết; chunking `legal_article+recursive`, size 800, overlap 100 |
-| Golden dataset size                | 16 câu (`golden_dataset.json`) |
+| Embedding model                    | OpenAI `text-embedding-3-small` (1536 chiều), ChromaDB cosine, **1025 chunks** |
+| Corpus version/commit              | Corpus như commit `01a4b88`: 3 văn bản pháp luật (NĐ 01/2021, NĐ 123/2020, TT 40/2021, bản Công báo) + 7 bài viết. Chunking theo cấu trúc Chương → Điều → recursive (size 800, overlap 100); mỗi chunk mở đầu bằng nhãn văn bản ngắn + tiêu đề Chương; bỏ chunk gần rỗng (xem mục "Retrieval fix") |
+| Golden dataset size                | 16 câu (`golden_dataset.json`), mọi `expected_context` là đoạn nguyên văn trong corpus |
 | `top_k`                            | 5 (dense và BM25 lấy 10 ứng viên mỗi bên trước khi fuse) |
-| Fallback threshold and calibration | `SCORE_THRESHOLD=0.57`: best dense cosine của 16 câu in-domain (min 0.589, mean 0.728) và 6 câu out/sát domain (max 0.551, mean 0.416), tách đúng 22/22 (`threshold_calibration.json`). PageIndex (Task 8) chưa triển khai nên câu dưới ngưỡng trả hybrid và LLM tự từ chối (đã thử "Thủ tục ly hôn thuận tình" → safe refusal). |
+| Fallback threshold and calibration | `SCORE_THRESHOLD=0.50`. Calibrate trên best dense cosine của 24 câu trong domain (16 câu golden + 8 câu văn nói như "mở quán cà phê cần giấy tờ gì"; min 0.509, mean 0.670) và 8 câu ngoài/sát domain (max 0.551, mean 0.424). Ngưỡng đề xuất 0.497, accuracy 30/32 (`threshold_calibration.json`); 2 câu sát domain vượt ngưỡng ("thuế TNDN công ty TNHH" 0.551, "thành lập công ty cổ phần" 0.526) và được prompt từ chối. Ngưỡng 0.57 lần đầu chỉ calibrate trên câu golden (văn phong luật) nên lệch cao: câu văn nói đúng domain được 0.51 sẽ bị fallback nhầm. PageIndex (Task 8) chạy thật với SDK `pageindex` 0.2.8: 3 PDF luật đã upload, `retrieval_ready`. Eval A/B chạy trước khi có `PAGEINDEX_API_KEY` và mọi câu golden đều có best dense ≥ 0.50, nên không câu golden nào đi qua fallback. Demo fallback thật (xem mục cuối) |
 
 ## Configurations
 
 - **Config A — dense-only:** `_generate(q, top_k=5, use_reranking=False)`: chỉ semantic search (Task 5) lấy top 5 theo cosine, không BM25, không RRF.
-- **Config B — hybrid + RRF:** `_generate(q, top_k=5, use_reranking=True)`: dense top 10 + BM25 top 10 (Task 6, tokenizer giữ số hiệu văn bản), fuse một lần bằng RRF k=60 (Task 7), lấy top 5.
+- **Config B — hybrid + RRF:** `_generate(q, top_k=5, use_reranking=True)`: dense top 10 + BM25 top 10 (Task 6, tokenizer giữ số hiệu văn bản, chấm trên thân chunk), fuse một lần bằng RRF k=60 (Task 7), lấy top 5.
 
-Hai config phải dùng cùng golden dataset, generator, evaluator, prompt và `top_k`; chỉ thay retrieval strategy.
+Hai config dùng cùng golden dataset, generator, evaluator, prompt và `top_k`; chỉ thay retrieval strategy.
 
-Ghi chú đo lường: RAGAS chấm phần nội dung câu trả lời, đã bỏ dòng disclaimer và nhãn `[Document n]` (câu trả lời gốc vẫn lưu trong `eval_results_*.json`). Lần chạy đầu để nguyên hai phần này thì answer relevancy chỉ đạt 0.058/0.037, vì RAGAS coi câu "chỉ mang tính tham khảo" là câu trả lời lảng tránh và cho 0 điểm, còn faithfulness đếm disclaimer là khẳng định không có trong context. Thử trên câu #6: relevancy 0.00 → 0.71, faithfulness 0.50 → 1.00.
+Ghi chú đo lường: RAGAS chấm phần nội dung câu trả lời, đã bỏ dòng disclaimer và nhãn `[Document n]` (câu trả lời gốc vẫn lưu trong `eval_results_*.json`). Để nguyên hai phần này thì answer relevancy chỉ đạt 0.058/0.037, vì RAGAS coi câu "chỉ mang tính tham khảo" là câu trả lời lảng tránh và cho 0 điểm, còn faithfulness đếm disclaimer là khẳng định không có trong context. Thử trên câu #6: relevancy 0.00 → 0.71, faithfulness 0.50 → 1.00.
 
 ## Overall scores
 
 | Metric            | Config A | Config B | Delta B−A |
 | ----------------- | -------: | -------: | --------: |
-| Faithfulness      |   0.9469 |   0.9125 |   −0.0344 |
-| Answer relevance  |   0.5343 |   0.5293 |   −0.0050 |
-| Context recall    |   0.9375 |   0.8750 |   −0.0625 |
-| Context precision |   0.9563 |   0.9776 |   +0.0213 |
-| **Average**       | **0.8438** | **0.8236** | **−0.0202** |
+| Faithfulness      |   0.9583 |   0.9333 |   −0.0250 |
+| Answer relevance  |   0.5474 |   0.5908 |   +0.0434 |
+| Context recall    |   0.9375 |   0.9062 |   −0.0313 |
+| Context precision |   0.9488 |   0.9568 |   +0.0080 |
+| **Average**       | **0.8480** | **0.8468** | **−0.0012** |
 
-Bổ sung (không phải metric RAGAS): `context_hit` (đầu đoạn `expected_context` có nằm nguyên văn trong top 5 không) là 11/16 ở cả hai config; không câu nào bị từ chối.
+Bổ sung (không phải metric RAGAS): `context_hit` (đầu đoạn `expected_context` có nằm nguyên văn trong top 5 không) là **13/16 ở A và 14/16 ở B**; không câu nào bị từ chối.
+
+### Retrieval fix sau lần eval đầu (trước/sau)
+
+Lần eval đầu (UTC 05:37) cho B thua A −0.020 average. Phân tích worst performer chỉ ra lỗi nằm ở cách chunk (Task 4/6), không nằm ở RRF:
+- Tên đầy đủ của văn bản được gắn vào mọi chunk. Ví dụ "…về đăng ký doanh nghiệp (Chương VIII: đăng ký hộ kinh doanh)" có mặt ở cả 477 chunk NĐ 01, nên chunk nào cũng giống nhau với cả dense lẫn BM25.
+- Tiêu đề "Chương VIII" dính vào cuối chunk Điều 78.
+- Chunk bảng Phụ lục chỉ còn ký tự `|` nhưng được BM25 chấm cao nhờ chuẩn hoá độ dài.
+
+Đã sửa:
+- Nhãn văn bản rút gọn còn loại + số hiệu, BM25 bỏ qua nhãn này.
+- Tiêu đề Chương được nhận diện và gắn cho mọi Điều trong chương.
+- Bảng Phụ lục chuyển thành text thường; bỏ chunk gần rỗng (1041 → 1025 chunk).
+
+| Config B (hybrid + RRF) | Trước sửa | Sau sửa |
+| ----------------------- | --------: | ------: |
+| Average                 | 0.8236    | **0.8468** |
+| Context recall          | 0.8750    | 0.9062  |
+| Faithfulness            | 0.9125    | 0.9333  |
+| Answer relevance        | 0.5293    | 0.5908  |
+| Context hit             | 11/16     | 14/16   |
+| #11 "TT 40/2021 do ai ban hành" (recall) | 0.00 | 1.00 |
+| "Hồ sơ đăng ký hộ kinh doanh gồm những gì?": hạng của Điều 87 trong RRF | ngoài top 5 (hạng 2 là Điều 28, doanh nghiệp xã hội) | hạng 2 (top 5 đều thuộc Chương VIII hoặc bài báo về đăng ký hộ kinh doanh) |
+
+Config A cùng lúc đổi từ 0.8438 lên 0.8480. Dense cũng hưởng lợi từ tiêu đề Chương, nhưng ít hơn nhiều so với B.
 
 ## A/B comparison
 
-- Cấu hình tốt hơn: **Config A (dense-only)** nhỉnh hơn trên bộ 16 câu này (average 0.844 so với 0.824). Mức chênh nhỏ: −0.0625 recall tương ứng đúng một câu (#11) mất hoàn toàn context, còn −0.034 faithfulness nằm trong độ dao động của LLM judge. Chưa đủ để kết luận hybrid kém hơn nói chung.
-- Evidence: B chỉ hơn ở context precision (+0.021: #10 tăng 0.53 → 0.80 vì BM25 kéo đúng dòng ngành nghề trong bảng tỷ lệ lên). B thua recall do câu #11 "Thông tư 40/2021/TT-BTC do ai ban hành": dense đưa chunk-2 (lời văn "Bộ trưởng Bộ Tài chính ban hành…") vào top 5, còn BM25 đẩy lên các chunk bảng Phụ lục gần như rỗng (chunk-177: `Điều 20. Hiệu lực thi hành \| \| \| Tỷ lệ % \|`) và RRF loại chunk-2 → recall 1.0 ở A, 0.0 ở B. Các câu tra theo số hiệu còn lại (#12, #13) đạt recall 1.0 ở cả hai config.
-- Trade-off về latency/cost: token như nhau (khoảng 2.14k input và 99 output mỗi câu, một lần gọi `gpt-4o-mini`), vì chỉ khác chunk nào được đưa vào context. Latency trung bình A 3.69 s (p50 3.00 s, max 8.23 s), B 2.44 s (p50 2.38 s, max 2.99 s). Phần chênh không đến từ retrieval: A có 3 câu chậm bất thường (#1 6.7 s gồm cả cold start khởi tạo Chroma/embedding client, #3 6.6 s, #8 8.2 s) do dao động thời gian phản hồi của API OpenAI. Bỏ các câu này thì hai config tương đương khoảng 2–3 s. BM25 + RRF trên 1041 chunk chạy in-memory, tốn không đáng kể so với lời gọi LLM.
+- **Cấu hình tốt hơn:** hai config **ngang nhau** (average A 0.848, B 0.847, chênh −0.001, nằm trong độ dao động của LLM judge khoảng ±0.03). Chatbot giữ **Config B làm mặc định**, vì B có context hit cao hơn (14/16 so với 13/16) và bắt được các câu tra theo số hiệu văn bản mà dense bỏ sót.
+- **Evidence:**
+  - **B hơn A:**
+    - Answer relevance +0.043, ví dụ #1 0.55 → 0.77, #6 0.71 → 1.00.
+    - Context precision +0.008: #3, #4, #7, #12 đạt 1.00 ở B (A: 0.89, 0.81, 0.95, 0.87).
+    - Câu #3 "Hồ sơ đăng ký hộ kinh doanh" chỉ B có context hit.
+    - Ngoài golden, query "Thông tư 78/2021/TT-BTC hộ kinh doanh sử dụng hóa đơn điện tử": BM25 hạng 1 là đúng đoạn trích Điều 6 TT 78, còn dense hạng 1 là đoạn về xử phạt.
+  - **A hơn B:**
+    - Faithfulness +0.025: #6 và #12 ở B được 0.67, do LLM diễn đạt thêm ý mà judge không tìm thấy trong chunk.
+    - Context recall +0.031: #15 ở B mất chunk `article_03#11` ("hộ khoán sử dụng hóa đơn lẻ phải lưu trữ và xuất trình…"), vị trí này bị các chunk Chương II TT 40 thay thế sau RRF.
+- **Trade-off về latency/cost:**
+  - Token gần như nhau (khoảng 2.19k/2.20k input và 100/95 output mỗi câu, một lần gọi `gpt-4o-mini`), vì chỉ khác chunk nào được đưa vào context.
+  - Latency trung bình A 2.18 s (p50 2.00 s, max 4.35 s), B 2.51 s (p50 2.30 s, max 3.72 s). Chênh khoảng 0.3 s chủ yếu do dao động thời gian phản hồi của API OpenAI; BM25 + RRF trên 1025 chunk chạy in-memory, tốn không đáng kể so với lời gọi LLM.
 
 ## Worst performers
 
 |   # | Question | Config | Faithfulness | Relevancy | Recall | Precision | Failure stage | Root cause |
 | --: | -------- | ------ | -----------: | --------: | -----: | --------: | ------------- | ---------- |
-|   1 | Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì? (#11) | B | 0.75 | 0.70 | 0.00 | 1.00 | retrieval | Mọi chunk đều mang sẵn tiền tố tên văn bản "Thông tư 40/2021/TT-BTC…", nên token số hiệu không phân biệt được chunk nào. Các chunk bảng Phụ lục gần rỗng lại được BM25 chấm cao nhờ chuẩn hoá độ dài, và RRF trọng số bằng nhau để chúng đẩy chunk-2 (lời văn "Bộ trưởng Bộ Tài chính ban hành") ra khỏi top 5. LLM trả lời "Bộ Tài chính" thay vì "Bộ trưởng Bộ Tài chính". |
-|   2 | Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không? (#6) | A và B | 1.00 | 0.46 / 0.56 | 0.50 | 1.00 | data | Đáp án chuẩn dựa trên khoản 2 Điều 6 **Thông tư 78/2021/TT-BTC**, nhưng văn bản này không có trong corpus luật. Nó chỉ được nhắc trong `news/article_03.md` và `article_07.md`, nên retrieval chỉ lấy được bài báo diễn giải, không có nguyên văn quy định. Câu #15 (hộ khoán xin cấp hoá đơn lẻ) cũng thiếu nguồn gốc vì cùng lý do. |
-|   3 | Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào? (#15) | B | 0.60 | 0.51 | 1.00 | 1.00 | generation | Context đủ ("cơ quan thuế cấp lẻ hóa đơn điện tử theo từng lần phát sinh"), nhưng LLM tự thêm các bước "làm đơn đề nghị", "lưu trữ chứng từ…" và một ý về chế độ kế toán không có trong đoạn được trích. Prompt chưa chặn việc diễn giải thành quy trình từng bước. |
+|   1 | Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào? (#15) | B | 0.60 | 0.49 | 0.50 | 1.00 | generation + retrieval | Đáp án chỉ có một ý ("cơ quan thuế cấp lẻ hóa đơn điện tử theo từng lần phát sinh"), nhưng LLM tự dựng quy trình "làm đơn yêu cầu cấp hóa đơn…" không có trong nguồn (A cũng chỉ đạt faithfulness 0.50). Ở B, RRF thay chunk `article_03#11` bằng các chunk Chương II TT 40 nên recall còn 0.50 (A: 1.00). Quy định gốc (khoản 2 Điều 6 TT 78/2021) không có trong corpus luật, chỉ có bài báo trích lại. |
+|   2 | Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không? (#14) | A và B | 0.83 / 1.00 | 0.45 / 0.44 | 0.50 | 1.00 | retrieval (B) + đo lường | Chunk đúng (khoản 2 Điều 80, `chunk-401`) đứng hạng 1 ở cả hai config và câu trả lời đúng, nhưng recall vẫn chỉ 0.50. Nhiều khả năng judge không gán được phần trích dẫn "(Điều 80 NĐ 01/2021)" của đáp án chuẩn vào context. Ở B, 4/5 chunk còn lại thuộc Chương IV/VI (góp vốn của doanh nghiệp), nhiều khả năng do BM25 khớp cụm "góp vốn, mua cổ phần". |
+|   3 | Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không? (#6) | A và B | 1.00 / 0.67 | 0.71 / 1.00 | 0.50 | 1.00 | data | Đáp án chuẩn dựa trên khoản 2 Điều 6 **Thông tư 78/2021/TT-BTC**, văn bản này không có trong corpus luật. Retrieval chỉ lấy được bài báo diễn giải (`article_03`), không có nguyên văn quy định, nên recall 0.50 ở cả hai config. |
 
-Câu đáng chú ý khác: #14 "Chủ hộ kinh doanh có được góp vốn…" có recall 0.5 ở cả hai config. Điều 80 NĐ 01/2021 bị cắt thành nhiều chunk con: chunk-393 chứa khoản b) về người bị truy cứu trách nhiệm hình sự, còn câu "được quyền góp vốn, mua cổ phần" nằm ở chunk khác không vào top 5. Ở config B, top 1 còn là Điều 58 (góp vốn của nhà đầu tư nước ngoài) do trùng từ khoá "góp vốn, mua cổ phần".
+Đã khắc phục so với lần eval đầu: #11 (recall B 0.00 → 1.00) và #12 "NĐ 01/2021 quy định về hộ kinh doanh tại chương nào" (recall 1.00 ở cả hai config sau khi tiêu đề Chương được gắn đúng vào các Điều của Chương VIII).
 
 ## Recommendations
 
 | Priority | Action | Evidence from failure analysis | Expected impact | How to verify |
 | -------: | ------ | ------------------------------ | --------------- | ------------- |
-| 1 | Task 4/6: không đưa tiền tố tên văn bản vào nội dung dùng cho BM25 (giữ trong metadata), và gộp hoặc bỏ các chunk bảng Phụ lục chỉ có ký tự `\|` | Worst #1: chunk-177 gần rỗng nhưng lên top vì BM25; chunk-2 bị RRF loại | Hồi phục recall #11 ở Config B; hybrid ít nhất ngang dense trên câu tra số hiệu | Chạy lại `run_eval.py --configs B`; kỳ vọng recall #11 = 1.0 và recall trung bình B ≥ A |
-| 2 | Task 1–3: bổ sung **Thông tư 78/2021/TT-BTC** (hoá đơn cho hộ kinh doanh) và NĐ 70/2025/NĐ-CP vào corpus luật | Worst #2: #6 và #15 chỉ có bài báo làm nguồn cho quy định của TT 78 | Recall #6 lên 1.0, câu trả lời trích được nguyên văn Điều/Khoản thay vì bài báo | `context_hit` của #6 và #15 = True; recall ≥ 0.9 |
-| 3 | Task 10: thêm luật vào `SYSTEM_PROMPT` "không suy diễn thủ tục/bước thực hiện nếu context không nêu"; đồng thời thử RRF có trọng số (dense 0.7 / BM25 0.3) | Worst #3: faithfulness 0.60 do thêm bước không có trong nguồn. B thua A 0.034 faithfulness | Faithfulness ≥ 0.95 ở cả hai config | So sánh faithfulness #15, #7 trước/sau trong `eval_results_*.json` |
+| 1 | Task 1–3: bổ sung **Thông tư 78/2021/TT-BTC** (hoá đơn cho hộ kinh doanh) và NĐ 70/2025/NĐ-CP vào corpus luật | Worst #1 và #3: #6 và #15 chỉ có bài báo làm nguồn cho quy định của TT 78; recall 0.50 | Recall #6, #15 lên 1.0, câu trả lời trích được nguyên văn Điều/Khoản thay vì bài báo | `context_hit` và recall của #6, #15 trong `eval_results_*.json` |
+| 2 | Task 10: thêm luật vào `SYSTEM_PROMPT` "không suy diễn thủ tục/bước thực hiện nếu context không nêu" | Worst #1: faithfulness 0.50 (A) và 0.60 (B) do tự thêm bước "làm đơn yêu cầu" | Faithfulness ≥ 0.95 ở cả hai config | So sánh faithfulness #15, #6, #12 trước/sau |
+| 3 | Task 7: thêm reranker cross-encoder (Jina/BGE-reranker-v2-m3) sau RRF, hoặc thử RRF có trọng số (dense 0.7 / BM25 0.3) | Worst #2: ở B, 4/5 chunk của #14 là góp vốn doanh nghiệp do BM25 khớp từ khoá; #15 mất chunk đúng do RRF | Context precision và recall của B ≥ A; giảm chunk nhiễu từ BM25 | Chạy `run_eval.py` thêm config reranker, ghi vào bảng Bonus experiments |
+
+### Demo fallback PageIndex (chạy thật)
+
+| Câu hỏi | Best dense | Nhánh | Kết quả |
+| ------- | ---------: | ----- | ------- |
+| "shop quần áo nhỏ có cần giấy phép không" | 0.47 | PageIndex | Trả Điều 79, 80 NĐ 01/2021; trả lời đúng (bán hàng rong được miễn đăng ký, shop quần áo phải đăng ký hộ kinh doanh), có citation, `retrieval_source="pageindex"` |
+| "xuất bill cho khách thế nào" | 0.42 | PageIndex | Trả Điều 5, 6 TT 40/2021 và phần quy định chung NĐ 123/2020; trả lời có citation, `retrieval_source="pageindex"` |
+| "Thủ tục ly hôn thuận tình gồm những bước nào?" | 0.45 | PageIndex → LLM từ chối | Các node PageIndex trả về không liên quan, LLM trả safe refusal, `retrieval_source="none"` |
+| "Hồ sơ đăng ký hộ kinh doanh gồm những gì?" (gọi thẳng `pageindex_search`) | — | PageIndex | Điều 87 đứng hạng 1 (hybrid: hạng 2) |
+
+Hạn chế của fallback:
+- **Latency 18–35 s mỗi câu**, so với 2–3 s của hybrid, vì phải hỏi lần lượt 3 văn bản và chờ PageIndex suy luận. Có timeout 45 s nên UI không treo quá mức này.
+- **`relevant_content` là đoạn PageIndex diễn đạt lại**, không phải nguyên văn (ví dụ "a) Giấy đề nghị…" thành "1. Giấy đề nghị…"), nên citation không trích được nguyên văn Điều/Khoản.
+- **Endpoint retrieval đã bị PageIndex đánh dấu deprecated** (khuyên chuyển sang Chat API) nhưng hiện vẫn hoạt động.
 
 ## Bonus experiments
 
@@ -65,5 +113,5 @@ Câu đáng chú ý khác: #14 "Chủ hộ kinh doanh có được góp vốn…
 | ---------- | -------- | -----------: | -----------------: | ---------- |
 | Conversation memory: viết lại câu hỏi nối tiếp thành câu độc lập (`condense_question`) | Không nhớ ngữ cảnh: "Còn nếu bán hàng online thì sao?" retrieve theo nguyên câu mơ hồ | N/A (golden dataset là câu độc lập) | +1 lời gọi `gpt-4o-mini` cho câu có lịch sử (demo 5.8 s so với 2–3 s) | Demo thật: câu được viết lại thành "Tỷ lệ thuế GTGT và TNCN đối với dịch vụ bán hàng online là bao nhiêu?" và trả lời đúng có citation. Có test `test_follow_up_question_is_condensed_before_retrieval` |
 | Highlight câu nguồn được trích (`src/citation_highlight.py`) | Chỉ hiện đoạn trích 700 ký tự đầu của chunk | N/A (tính năng UI) | So khớp từ khoá, không gọi LLM, tốn không đáng kể | Mỗi `[Document n]` được nối với câu trong nguồn có nhiều từ khoá trùng nhất và tô vàng. Có test `test_supporting_span_matches_cited_claim` |
-| Reranker (Jina/BGE) | RRF | N/A | N/A | Chưa thực hiện |
+| Reranker (Jina/BGE) | RRF | N/A | N/A | Chưa thực hiện (khuyến nghị ưu tiên 3) |
 | Query expansion / HyDE | Query gốc | N/A | N/A | Chưa thực hiện |

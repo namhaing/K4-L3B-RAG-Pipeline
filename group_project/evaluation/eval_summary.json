@@ -1,47 +1,47 @@
 {
   "run": {
-    "date": "2026-09-25T05:37:28+00:00",
-    "commit": "cf4d9fe",
+    "date": "2026-09-25T13:20:14+00:00",
+    "commit": "5c072b5",
     "golden_dataset_size": 16,
     "top_k": 5,
     "generator": "openai/gpt-4o-mini",
     "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
     "embedding_model": "text-embedding-3-small",
     "chunking": "legal_article+recursive, size=800, overlap=100",
-    "score_threshold": 0.57
+    "score_threshold": 0.5
   },
   "configs": {
     "A": {
       "name": "dense-only",
-      "faithfulness": 0.9469,
-      "answer_relevancy": 0.5343,
+      "faithfulness": 0.9583,
+      "answer_relevancy": 0.5474,
       "context_recall": 0.9375,
-      "context_precision": 0.9563,
-      "average": 0.8438,
+      "context_precision": 0.9488,
+      "average": 0.848,
       "questions": 16,
       "refusals": 0,
-      "context_hit_rate": 0.6875,
-      "latency_mean_s": 3.69,
-      "latency_p50_s": 3.002,
-      "latency_max_s": 8.231,
-      "input_tokens_mean": 2136.2,
-      "output_tokens_mean": 98.8
+      "context_hit_rate": 0.8125,
+      "latency_mean_s": 2.177,
+      "latency_p50_s": 1.998,
+      "latency_max_s": 4.346,
+      "input_tokens_mean": 2191.9,
+      "output_tokens_mean": 99.9
     },
     "B": {
       "name": "hybrid + RRF",
-      "faithfulness": 0.9125,
-      "answer_relevancy": 0.5293,
-      "context_recall": 0.875,
-      "context_precision": 0.9776,
-      "average": 0.8236,
+      "faithfulness": 0.9333,
+      "answer_relevancy": 0.5908,
+      "context_recall": 0.9062,
+      "context_precision": 0.9568,
+      "average": 0.8468,
       "questions": 16,
       "refusals": 0,
-      "context_hit_rate": 0.6875,
-      "latency_mean_s": 2.438,
-      "latency_p50_s": 2.378,
-      "latency_max_s": 2.988,
-      "input_tokens_mean": 2152.6,
-      "output_tokens_mean": 98.9
+      "context_hit_rate": 0.875,
+      "latency_mean_s": 2.509,
+      "latency_p50_s": 2.301,
+      "latency_max_s": 3.72,
+      "input_tokens_mean": 2202.9,
+      "output_tokens_mean": 95.1
     }
   }
 }

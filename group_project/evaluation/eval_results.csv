@@ -1,154 +1,153 @@
 ﻿config,id,question,faithfulness,answer_relevancy,context_recall,context_precision,context_hit,refused,retrieval_source,citations,latency_s,input_tokens,output_tokens,source_ids,answer
-A,1,Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?,0.75,0.4724,1.0,1.0,False,False,hybrid,1 3,6.719,2597,110,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-39 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-40 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-54 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-55,"Hộ kinh doanh cá thể không phải nộp thuế GTGT và thuế TNCN nếu có doanh thu từ 100 triệu đồng/năm trở xuống. Đây là quy định áp dụng cho hộ khoán kinh doanh không trọn năm (không đủ 12 tháng trong năm dương lịch) và được quy định tại Điều 7 Thông tư 40/2021/TT-BTC [Document 1][Document 3]. 
+A,1,Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?,1.0,0.5521,1.0,1.0,True,False,hybrid,5,4.346,2683,72,news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-32 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-55 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-33 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-19,"Hộ kinh doanh cá thể có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì không phải nộp thuế GTGT và thuế TNCN theo quy định pháp luật [Document 5]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,2,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",1.0,0.4345,1.0,1.0,True,False,hybrid,1 4 2,3.539,2434,82,news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-174 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-175 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là:
+A,2,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",1.0,0.4345,1.0,1.0,True,False,hybrid,1 5 2,2.016,2392,86,news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-156 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-157 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là:
 
-- Thuế GTGT: 1%
-- Thuế TNCN: 0,5% [Document 1][Document 4][Document 2].
+- **Thuế GTGT**: 1%
+- **Thuế TNCN**: 0,5% [Document 1][Document 5][Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,3,Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?,1.0,0.5885,1.0,0.95,False,False,hybrid,1 4 2,6.609,2012,147,news/article_02.md::chunk-2 news/article_01.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-111 news/article_01.md::chunk-3 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-67,"Hồ sơ đăng ký hộ kinh doanh bao gồm các giấy tờ sau:
+A,3,Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?,1.0,0.5885,1.0,0.8875,False,False,hybrid,1 3 4 2,2.245,1957,152,news/article_02.md::chunk-2 news/article_01.md::chunk-0 news/article_01.md::chunk-3 news/article_01.md::chunk-1 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-111,"Hồ sơ đăng ký hộ kinh doanh bao gồm các giấy tờ sau:
 
 - Giấy đề nghị đăng ký hộ kinh doanh.
 - Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của chủ hộ kinh doanh.
 - Nếu các thành viên trong gia đình cùng góp vốn, cần bổ sung:
   - Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của các thành viên trong gia đình.
-  - Bản sao biên bản họp của các thành viên trong gia đình về việc thành lập hộ kinh doanh [Document 1][Document 4][Document 2].
+  - Bản sao biên bản họp của các thành viên trong gia đình về việc thành lập hộ kinh doanh đó [Document 1][Document 3][Document 4][Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,4,Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?,1.0,0.6373,1.0,0.8667,True,False,hybrid,2,2.663,2005,60,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-393 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-390 news/article_02.md::chunk-3 news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-394,"Theo Điều 79 Nghị định 01/2021/NĐ-CP, cá nhân hoặc thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 2]. 
+A,4,Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?,1.0,0.7089,1.0,0.8056,True,False,hybrid,4,1.909,2155,66,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 news/article_02.md::chunk-3 news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 news/article_02.md::chunk-0,"Theo quy định tại khoản 2 Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân hoặc thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 4]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,5,Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?,1.0,0.4457,1.0,1.0,False,False,hybrid,1 3,4.151,2141,76,news/article_01.md::chunk-1 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-362 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-143 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-365 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-387,"- Hồ sơ đăng ký hộ kinh doanh được nộp tại Cơ quan đăng ký kinh doanh cấp huyện.
-- Thời hạn cấp Giấy chứng nhận đăng ký hộ kinh doanh là 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ [Document 1][Document 3].
+A,5,Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?,1.0,0.38,1.0,1.0,False,False,hybrid,1 3 4 2,2.033,2101,114,news/article_01.md::chunk-1 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-143 news/article_01.md::chunk-3 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-142 news/article_01.md::chunk-2,"- **Nơi nộp hồ sơ**: Hồ sơ đăng ký hộ kinh doanh được nộp tại Cơ quan đăng ký kinh doanh cấp huyện [Document 1][Document 3].
+
+- **Thời hạn cấp Giấy chứng nhận**: Cơ quan đăng ký kinh doanh cấp huyện sẽ cấp Giấy chứng nhận đăng ký hộ kinh doanh trong thời hạn 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ [Document 4][Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,6,Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?,1.0,0.4606,0.5,1.0,True,False,hybrid,1 5,2.792,1819,113,news/article_03.md::chunk-14 news/article_07.md::chunk-5 news/article_07.md::chunk-4 news/article_07.md::chunk-6 news/article_03.md::chunk-16,"Hộ kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử. Cụ thể, theo Khoản 2, Điều 6 Thông tư số 78/2021/TT-BTC ngày 17/9/2021, hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai là đối tượng bắt buộc phải sử dụng hóa đơn điện tử [Document 1][Document 5].
+A,6,Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?,1.0,0.7102,0.5,1.0,True,False,hybrid,1 5,1.91,1819,88,news/article_03.md::chunk-14 news/article_07.md::chunk-5 news/article_07.md::chunk-4 news/article_07.md::chunk-6 news/article_03.md::chunk-16,"Hộ kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử. Điều này được quy định tại Khoản 2, Điều 6 Thông tư số 78/2021/TT-BTC ngày 17/9/2021 của Bộ Tài chính [Document 1][Document 5]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,7,"Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",1.0,0.4703,1.0,0.95,True,False,hybrid,1,2.93,1791,85,news/article_07.md::chunk-0 news/article_07.md::chunk-4 news/article_07.md::chunk-1 news/article_07.md::chunk-5 news/article_07.md::chunk-3,"Từ ngày 1/6, theo quy định tại Nghị định 70, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế giao cho người mua [Document 1]. 
+A,7,"Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",1.0,0.5937,1.0,0.95,True,False,hybrid,1,2.032,1791,87,news/article_07.md::chunk-0 news/article_07.md::chunk-4 news/article_07.md::chunk-1 news/article_07.md::chunk-5 news/article_07.md::chunk-3,"Từ ngày 1/6, theo quy định tại Nghị định 70, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng trở lên phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế giao cho người mua [Document 1]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,8,"Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",1.0,0.5514,1.0,1.0,True,False,hybrid,1 3,8.231,1863,118,news/article_06.md::chunk-2 news/article_06.md::chunk-5 news/article_06.md::chunk-3 news/article_06.md::chunk-4 news/article_06.md::chunk-7,"Hộ kinh doanh bán hàng online có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở lên thì có nghĩa vụ nộp thuế, bao gồm lệ phí môn bài, thuế TNCN và thuế GTGT [Document 1][Document 3].
+A,8,"Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",1.0,0.5519,1.0,1.0,True,False,hybrid,1 3,2.227,1863,167,news/article_06.md::chunk-2 news/article_06.md::chunk-5 news/article_06.md::chunk-3 news/article_06.md::chunk-4 news/article_06.md::chunk-7,"Hộ kinh doanh bán hàng online có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở lên thì có nghĩa vụ nộp thuế. Cụ thể:
 
-Tỷ lệ thuế TNCN phải nộp đối với hoạt động bán hàng online là 0,5% tổng doanh thu một năm [Document 1]. 
+- **Tỷ lệ thuế TNCN** phải nộp là 0,5% tổng doanh thu một năm, theo quy định tại Phụ lục I Thông tư 40/2021/TT-BTC [Document 1].
+
+Ngoài ra, hộ kinh doanh cũng phải nộp thêm 1% thuế GTGT (VAT), tổng cộng là 1,5% trên tổng doanh thu khi có mức doanh thu từ 100 triệu đồng trở lên/năm [Document 3].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,9,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",1.0,0.4991,1.0,1.0,True,False,hybrid,3,4.147,2483,75,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-184 news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-174 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-176,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu được quy định như sau:
+A,9,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",1.0,0.5114,1.0,0.8042,True,False,hybrid,1 3 4,2.72,2592,93,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-162 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-158 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-156 news/article_06.md::chunk-6,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là:
 
 - Thuế GTGT: 5%
-- Thuế TNCN: 2-5% [Document 3].
+- Thuế TNCN: 2% đến 5% (tùy thuộc vào từng trường hợp cụ thể) [Document 1][Document 3][Document 4].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,10,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",1.0,0.4885,1.0,0.5333,True,False,hybrid,2,4.263,2610,95,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-174 news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-184 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-175,"Theo thông tin từ các tài liệu hiện có:
+A,10,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",1.0,0.4885,1.0,1.0,True,False,hybrid,2,1.891,2456,83,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-156 news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-162 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160 news/article_06.md::chunk-4,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa được quy định như sau:
 
-- Tỷ lệ thuế GTGT đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là 3% [Document 2].
-- Tỷ lệ thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là 1,5% [Document 2].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,11,Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?,1.0,0.7447,1.0,1.0,True,False,hybrid,1 2,1.887,2052,103,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-2 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-177 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-169 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-191,"Thông tư 40/2021/TT-BTC được ban hành bởi Bộ Tài chính, theo đề nghị của Tổng cục trưởng Tổng cục Thuế. Thông tư này hướng dẫn về thuế giá trị gia tăng (GTGT), thuế thu nhập cá nhân (TNCN) và quản lý thuế đối với hộ kinh doanh, cá nhân kinh doanh [Document 1][Document 2]. 
+- Tỷ lệ thuế GTGT: 3%
+- Tỷ lệ thuế TNCN: 1,5% [Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,12,Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?,1.0,0.6056,1.0,1.0,False,False,hybrid,1,1.588,2017,50,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-475 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-45 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-465 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-95,"Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại Chương VIII [Document 1]. 
+A,11,Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?,1.0,0.7127,1.0,0.8667,True,False,hybrid,1 5,1.98,2237,87,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-3 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-2 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-152 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-8 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-0,"Thông tư 40/2021/TT-BTC được ban hành bởi Bộ trưởng Bộ Tài chính, hướng dẫn về thuế giá trị gia tăng (GTGT), thuế thu nhập cá nhân (TNCN) và quản lý thuế đối với hộ kinh doanh, cá nhân kinh doanh [Document 1][Document 5]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,13,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",1.0,0.6235,1.0,1.0,True,False,hybrid,1 3 5,2.045,2179,64,legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-108 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-100 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-113 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-103 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-105,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại Điều 13 [Document 1][Document 3][Document 5]. 
+A,12,Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?,1.0,0.6215,1.0,0.8667,True,False,hybrid,1,1.594,2221,50,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-405 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-8 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-31 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415,"Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại Chương VIII [Document 1]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,14,"Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",1.0,0.4651,0.5,1.0,True,False,hybrid,1,1.737,2180,73,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-393 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-396 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-264 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-100 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-404,"Chủ hộ kinh doanh có quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân. Tuy nhiên, cá nhân hoặc thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 1]. 
+A,13,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",1.0,0.6235,1.0,1.0,True,False,hybrid,1 3 5 4 2,1.858,2373,72,legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-98 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-106 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-111 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-110 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-108,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại Điều 13 [Document 1][Document 3][Document 5][Document 4][Document 2]. 
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,15,Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?,0.8,0.59,1.0,1.0,True,False,hybrid,3 5 1 2,2.66,2266,200,news/article_03.md::chunk-16 news/article_03.md::chunk-14 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-37 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-41 news/article_03.md::chunk-11,"Hộ kinh doanh nộp thuế theo phương pháp khoán, khi có nhu cầu sử dụng hóa đơn, cần thực hiện các bước sau:
-
-- **Lưu trữ và xuất trình hóa đơn, chứng từ**: Hộ khoán phải lưu trữ và có khả năng xuất trình cho cơ quan thuế các hóa đơn, chứng từ, hợp đồng, hồ sơ chứng minh hàng hóa, dịch vụ hợp pháp khi đề nghị cấp hóa đơn [Document 3][Document 5].
-  
-- **Đề nghị cấp hóa đơn**: Hộ khoán có thể yêu cầu cơ quan thuế cấp lẻ hóa đơn điện tử theo từng lần phát sinh [Document 1][Document 2].
-
-Lưu ý rằng, hộ khoán không phải thực hiện chế độ kế toán, nhưng vẫn cần tuân thủ các quy định về hóa đơn khi có nhu cầu [Document 3].
+A,14,"Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",0.8333,0.4466,0.5,1.0,True,False,hybrid,1 5,1.923,2260,108,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-99 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-404 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-400 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-402,"Theo Nghị định 01/2021/NĐ-CP, chủ hộ kinh doanh có quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân. Điều này được quy định tại khoản 2 Điều 80, nêu rõ rằng cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh và có quyền tham gia góp vốn vào doanh nghiệp [Document 1][Document 5].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-A,16,Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?,0.6,0.4718,1.0,1.0,False,False,hybrid,3 2 5,3.073,1730,129,news/article_03.md::chunk-10 news/article_04.md::chunk-1 news/article_04.md::chunk-3 news/article_03.md::chunk-8 news/article_04.md::chunk-5,"Phương pháp kê khai thuế áp dụng cho các hộ kinh doanh sau:
-
-- Hộ kinh doanh, cá nhân kinh doanh quy mô lớn.
-- Hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai [Document 3][Document 2].
-
-Căn cứ theo Điều 5 Thông tư số 40/2021/TT-BTC, các hộ kinh doanh này phải thực hiện chế độ kế toán, hóa đơn, chứng từ [Document 5]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,1,Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?,1.0,0.3387,1.0,1.0,True,False,hybrid,5,2.378,2540,80,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-39 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-54 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-40 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-26,"Hộ kinh doanh cá thể có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì thuộc trường hợp không phải nộp thuế GTGT và không phải nộp thuế TNCN theo quy định pháp luật [Document 5]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,2,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",1.0,0.4345,1.0,1.0,True,False,hybrid,1 2,2.372,2225,78,news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-174 news/article_06.md::chunk-4 news/article_06.md::chunk-5 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là:
-
-- Thuế GTGT: 1%
-- Thuế TNCN: 0,5% [Document 1][Document 2].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,3,Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?,0.8333,0.5885,1.0,1.0,False,False,hybrid,4 2,2.591,2032,171,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-111 news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-85 news/article_01.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-82,"Hồ sơ đăng ký hộ kinh doanh bao gồm các giấy tờ sau:
-
-- Giấy đề nghị đăng ký hộ kinh doanh.
-- Bản sao văn bản ủy quyền của thành viên hộ gia đình cho một thành viên làm chủ hộ kinh doanh (nếu có nhiều thành viên).
-- Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của chủ hộ kinh doanh.
-- Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của các thành viên trong gia đình (nếu có góp vốn).
-- Bản sao biên bản họp của các thành viên trong gia đình về việc thành lập hộ kinh doanh (nếu có nhiều thành viên) [Document 4][Document 2].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,4,Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?,1.0,0.7089,1.0,0.95,True,False,hybrid,3,2.931,2075,66,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-390 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-393 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-394 news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-407,"Theo quy định tại khoản 2 Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân hoặc thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 3]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,5,Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?,0.75,0.4238,1.0,1.0,False,False,hybrid,1 5,2.203,2259,96,news/article_01.md::chunk-1 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-442 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-362 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-454 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-143,"- Hồ sơ đăng ký hộ kinh doanh được nộp tại Cơ quan đăng ký kinh doanh cấp huyện nơi hộ kinh doanh đặt trụ sở chính [Document 1].
-- Thời hạn cấp Giấy chứng nhận đăng ký hộ kinh doanh là 03 ngày làm việc kể từ ngày Cơ quan đăng ký kinh doanh nhận hồ sơ hợp lệ [Document 1][Document 5].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,6,Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?,1.0,0.557,0.5,1.0,True,False,hybrid,1,2.096,2007,87,news/article_03.md::chunk-14 news/article_03.md::chunk-16 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-112 news/article_07.md::chunk-5 news/article_07.md::chunk-4,"Hộ kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử. Đây là quy định được nêu rõ tại Khoản 2, Điều 6 Thông tư số 78/2021/TT-BTC ngày 17/9/2021 của Bộ Tài chính [Document 1]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,7,"Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",0.6667,0.4747,1.0,1.0,True,False,hybrid,1 5,2.132,1890,108,news/article_07.md::chunk-0 news/article_07.md::chunk-4 news/article_07.md::chunk-1 news/article_07.md::chunk-6 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-96,"Từ ngày 1/6 theo quy định tại Nghị định 70/2025/NĐ-CP, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng trở lên phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế khi bán hàng hóa, cung cấp dịch vụ trực tiếp đến người tiêu dùng [Document 1][Document 5]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,8,"Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",1.0,0.563,1.0,1.0,True,False,hybrid,1 3,2.369,1885,114,news/article_06.md::chunk-2 news/article_06.md::chunk-4 news/article_06.md::chunk-3 news/article_06.md::chunk-5 news/article_06.md::chunk-6,"Hộ kinh doanh bán hàng online có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở lên thì có nghĩa vụ nộp thuế. Cụ thể:
-
-- Tỷ lệ thuế TNCN phải nộp là 0,5% tổng doanh thu một năm theo quy định tại Phụ lục I Thông tư 40/2021/TT-BTC [Document 1][Document 3].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,9,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",1.0,0.4976,1.0,1.0,True,False,hybrid,4 2,2.422,2360,97,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181 news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-184 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-66,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu được quy định như sau:
-
-- Tỷ lệ thuế GTGT: 5%
-- Tỷ lệ thuế TNCN: 2-5% (tùy thuộc vào từng trường hợp cụ thể) [Document 4][Document 2].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,10,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",1.0,0.4914,1.0,0.8042,True,False,hybrid,3 5,2.173,2362,116,news/article_06.md::chunk-6 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-184 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-181 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-66,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa được quy định như sau:
-
-- **Thuế GTGT**: 3%
-- **Thuế TNCN**: 1,5% 
-
-Các tỷ lệ này được nêu trong hướng dẫn thuế cho hộ kinh doanh theo Thông tư 40/2021/TT-BTC [Document 3][Document 5]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,11,Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?,0.75,0.7024,0.0,1.0,False,False,hybrid,4,2.379,2157,84,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-177 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-169 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-172 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-64,"Thông tư 40/2021/TT-BTC do Bộ Tài chính ban hành. Thông tư này hướng dẫn về thuế giá trị gia tăng (GTGT), thuế thu nhập cá nhân (TNCN) và quản lý thuế đối với hộ kinh doanh, cá nhân kinh doanh [Document 4]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,12,Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?,1.0,0.6215,1.0,1.0,False,False,hybrid,1 2,2.153,2005,54,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-397 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-447 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-475 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-94,"Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại Chương VIII [Document 1][Document 2]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,13,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",1.0,0.6235,1.0,0.8875,True,False,hybrid,1 5,2.496,2328,60,legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-100 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-108 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-293 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-113 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-101,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại Điều 13 [Document 1][Document 5]. 
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,14,"Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",1.0,0.4651,0.5,1.0,True,False,hybrid,4,2.988,2233,89,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-264 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-219 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-242 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-393 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-96,"Chủ hộ kinh doanh có quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân. Tuy nhiên, theo Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 4].
-
-Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,15,Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?,0.6,0.506,1.0,1.0,True,False,hybrid,3 4 5,2.603,2266,195,news/article_03.md::chunk-16 news/article_03.md::chunk-14 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-37 news/article_03.md::chunk-11 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-41,"Hộ kinh doanh nộp thuế theo phương pháp khoán, khi có nhu cầu sử dụng hóa đơn, cần thực hiện các bước sau:
+A,15,Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?,0.5,0.3618,1.0,1.0,True,False,hybrid,5 4 1 2,2.294,2324,168,news/article_03.md::chunk-16 news/article_03.md::chunk-14 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-34 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-30 news/article_03.md::chunk-11,"Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn cần thực hiện các bước sau:
 
 - **Đề nghị cấp hóa đơn**: Hộ kinh doanh phải làm đơn đề nghị cấp hóa đơn điện tử theo từng lần phát sinh.
-- **Lưu trữ chứng từ**: Cần lưu trữ và xuất trình cho cơ quan thuế các hóa đơn, chứng từ, hợp đồng, hồ sơ chứng minh hàng hóa, dịch vụ hợp pháp khi đề nghị cấp hóa đơn [Document 3][Document 4].
+- **Xuất trình hồ sơ**: Cần lưu trữ và xuất trình cho cơ quan thuế các hóa đơn, chứng từ, hợp đồng, hồ sơ chứng minh hàng hóa, dịch vụ hợp pháp khi đề nghị cấp hóa đơn [Document 5][Document 4].
 
-Cụ thể, theo Điều 7 Thông tư 40/2021/TT-BTC, hộ khoán không phải thực hiện chế độ kế toán, nhưng phải có hóa đơn lẻ và lưu trữ chứng từ hợp pháp khi yêu cầu cấp hóa đơn [Document 5].
+Cơ quan thuế sẽ cấp lẻ hóa đơn điện tử cho hộ kinh doanh theo từng lần phát sinh khi có yêu cầu [Document 1][Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
-B,16,Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?,1.0,0.4719,1.0,1.0,False,False,hybrid,3 5 4,2.728,1818,88,news/article_03.md::chunk-10 news/article_03.md::chunk-8 news/article_04.md::chunk-3 news/article_04.md::chunk-1 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-28,"Phương pháp kê khai thuế áp dụng cho các hộ kinh doanh sau:
+A,16,Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?,1.0,0.4729,1.0,1.0,False,False,hybrid,4 2,1.851,1847,106,news/article_03.md::chunk-10 news/article_04.md::chunk-1 news/article_04.md::chunk-3 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-21 news/article_03.md::chunk-8,"Phương pháp kê khai thuế áp dụng cho các hộ kinh doanh sau:
 
 - Hộ kinh doanh, cá nhân kinh doanh quy mô lớn.
-- Hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai [Document 3][Document 5][Document 4].
+- Hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai.
+
+Căn cứ theo Điều 5 Thông tư số 40/2021/TT-BTC [Document 4][Document 2]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,1,Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?,1.0,0.7656,1.0,1.0,True,False,hybrid,3 5,3.72,2302,76,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-32 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-19 news/article_06.md::chunk-3 news/article_06.md::chunk-1,"Hộ kinh doanh cá thể có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì không phải nộp thuế GTGT và thuế TNCN theo quy định pháp luật [Document 3][Document 5]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,2,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",1.0,0.4345,1.0,1.0,True,False,hybrid,1 4 2,1.813,2237,86,news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-156 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160 news/article_06.md::chunk-5,"Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là:
+
+- **Thuế GTGT**: 1%
+- **Thuế TNCN**: 0,5% [Document 1][Document 4][Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,3,Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?,1.0,0.5885,1.0,1.0,True,False,hybrid,3 5 2,2.978,2107,166,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-111 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415 news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-93 news/article_01.md::chunk-0,"Hồ sơ đăng ký hộ kinh doanh bao gồm các giấy tờ sau:
+
+- Giấy đề nghị đăng ký hộ kinh doanh.
+- Giấy tờ pháp lý của cá nhân đối với chủ hộ kinh doanh.
+- Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của chủ hộ kinh doanh.
+- Nếu có nhiều thành viên trong gia đình cùng góp vốn, cần bổ sung thêm:
+  - Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của các thành viên trong gia đình.
+  - Bản sao biên bản họp của các thành viên trong gia đình về việc thành lập hộ kinh doanh [Document 3][Document 5][Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,4,Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?,1.0,0.72,1.0,1.0,True,False,hybrid,3 4,2.023,2172,67,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-398 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-402 news/article_02.md::chunk-3,"Theo quy định tại Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân hoặc thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 3][Document 4]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,5,Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?,1.0,0.4457,1.0,1.0,False,False,hybrid,1 2,1.973,2295,76,news/article_01.md::chunk-1 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-416 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-449 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-143 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-452,"- Hồ sơ đăng ký hộ kinh doanh được nộp tại Cơ quan đăng ký kinh doanh cấp huyện.
+- Thời hạn cấp Giấy chứng nhận đăng ký hộ kinh doanh là 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ [Document 1][Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,6,Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?,0.6667,1.0,0.5,1.0,True,False,hybrid,1,2.214,2048,108,news/article_03.md::chunk-14 news/article_03.md::chunk-16 news/article_07.md::chunk-5 news/article_07.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-24,"Có, hộ kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử. Cụ thể, theo Khoản 2, Điều 6 Thông tư số 78/2021/TT-BTC ngày 17/9/2021, hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai bắt buộc phải sử dụng hóa đơn điện tử [Document 1]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,7,"Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",1.0,0.6177,1.0,1.0,True,False,hybrid,1,3.481,1779,85,news/article_07.md::chunk-0 news/article_07.md::chunk-4 news/article_07.md::chunk-3 news/article_07.md::chunk-1 news/article_07.md::chunk-6,"Từ ngày 1/6, theo quy định tại Nghị định 70, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế giao cho người mua [Document 1]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,8,"Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",1.0,0.5559,1.0,1.0,True,False,hybrid,1 4,2.388,1941,118,news/article_06.md::chunk-2 news/article_06.md::chunk-3 news/article_06.md::chunk-4 news/article_06.md::chunk-6 news/article_06.md::chunk-0,"Hộ kinh doanh bán hàng online có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở lên sẽ phải nộp thuế, bao gồm lệ phí môn bài, thuế TNCN và thuế GTGT [Document 1].
+
+Cụ thể, tỷ lệ thuế TNCN phải nộp đối với hoạt động bán hàng online là 0,5% tổng doanh thu một năm [Document 1][Document 4].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,9,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",1.0,0.5134,1.0,0.8042,True,False,hybrid,1 4 3,1.939,2375,87,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-162 news/article_06.md::chunk-6 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-158 news/article_06.md::chunk-4,"Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là:
+
+- Thuế GTGT: 5% [Document 1][Document 4].
+- Thuế TNCN: từ 2% đến 5% [Document 3][Document 4].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,10,"Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",1.0,0.4745,1.0,0.7,True,False,hybrid,1,2.644,2377,85,news/article_06.md::chunk-6 news/article_06.md::chunk-4 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-162 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-160 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-158,"- Tỷ lệ thuế GTGT đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là 3% [Document 1].
+- Tỷ lệ thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là 1,5% [Document 1].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,11,Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?,1.0,0.6977,1.0,0.8042,True,False,hybrid,1 3,3.535,2194,90,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-0 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-164 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-3 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-2 news/article_03.md::chunk-11,"Thông tư 40/2021/TT-BTC do Bộ trưởng Bộ Tài chính ban hành. Thông tư này hướng dẫn về thuế giá trị gia tăng (GTGT), thuế thu nhập cá nhân (TNCN) và quản lý thuế đối với hộ kinh doanh, cá nhân kinh doanh [Document 1][Document 3]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,12,Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?,0.6667,0.6141,1.0,1.0,True,False,hybrid,2,1.823,2509,50,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-405 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-8 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-8 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-65,"Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại Chương VIII [Document 2]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,13,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",1.0,0.6235,1.0,1.0,True,False,hybrid,1 3,2.07,2285,60,legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-98 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-106 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-115 news/article_03.md::chunk-14 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-306,"Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại Điều 13 [Document 1][Document 3]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,14,"Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",1.0,0.4443,0.5,1.0,True,False,hybrid,1,2.147,2392,92,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-89 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-95 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-99 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-247,"Chủ hộ kinh doanh có quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân. Tuy nhiên, theo quy định tại Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc [Document 1].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,15,Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?,0.6,0.4854,0.5,1.0,True,False,hybrid,3 4,2.63,2386,187,news/article_03.md::chunk-16 news/article_03.md::chunk-14 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-34 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-30 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-31,"Hộ kinh doanh nộp thuế theo phương pháp khoán, khi có nhu cầu sử dụng hóa đơn, cần thực hiện các bước sau:
+
+- **Yêu cầu cấp hóa đơn**: Hộ kinh doanh phải làm đơn yêu cầu cấp hóa đơn điện tử theo từng lần phát sinh.
+- **Cơ quan thuế cấp hóa đơn**: Cơ quan thuế sẽ cấp lẻ hóa đơn điện tử cho hộ kinh doanh theo từng lần phát sinh khi có yêu cầu.
+
+Theo quy định tại Điều 7 Thông tư 40/2021/TT-BTC, hộ khoán sử dụng hóa đơn do cơ quan thuế cấp và phải lưu trữ hóa đơn, chứng từ, hợp đồng liên quan để xuất trình khi có yêu cầu từ cơ quan quản lý nhà nước [Document 3][Document 4].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,16,Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?,1.0,0.4719,1.0,1.0,False,False,hybrid,3 4 2,2.761,1847,88,news/article_03.md::chunk-10 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-21 news/article_04.md::chunk-3 news/article_04.md::chunk-1 news/article_03.md::chunk-8,"Phương pháp kê khai thuế áp dụng cho các hộ kinh doanh sau:
+
+- Hộ kinh doanh, cá nhân kinh doanh quy mô lớn.
+- Hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai [Document 3][Document 4][Document 2].
 
 Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
