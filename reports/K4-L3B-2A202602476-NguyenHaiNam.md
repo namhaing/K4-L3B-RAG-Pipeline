@@ -5,7 +5,7 @@
 - Họ và tên: Nguyễn Hải Nam
 - Mã học viên: 2A202602476
 - Nhóm: Khê (Leader)
-- Repository/branch: K4-L3B-RAG-Pipeline / `02476-NguyenHaiNam` (code, data, eval và README đã lên `main`; hash commit trong bảng là hash trên `main`, trừ các commit đầu của nhánh)
+- Repository/branch: K4-L3B-RAG-Pipeline / `02476-NguyenHaiNam` (code, data, eval, README và báo cáo này đã lên `main`; hash commit trong bảng là hash trên `main`, trừ các commit đầu của nhánh)
 
 ## Phần việc đã thực hiện
 
@@ -20,7 +20,7 @@
 | Làm lại dữ liệu (hỗ trợ Task 1–3) | Phát hiện data cũ không dùng được: PDF là file text đổi đuôi, URL `Source` trỏ sai văn bản, 4/5 bài báo là menu/404/nội dung tự viết. Thay bằng 3 PDF Công báo và 7 bài báo thật; viết lại Task 1–3 | `data/` — `01a4b88`; `src/task1–3` — `1d848a5` | Done |
 | Sửa Task 8 — PageIndex fallback (hỗ trợ) | Bản trước không chạy được: import class không có trong SDK (`PageIndex`), gọi hàm không tồn tại (`client.search`), upload `.md` trong khi SDK chỉ nhận PDF, output sai contract. Viết lại theo SDK `pageindex` 0.2.8 (upload PDF gốc, `submit_query` → chờ `get_retrieval`), parse đúng response thật, metadata đúng contract, timeout 45 s để UI không treo; thêm 7 test giả lập. **Chạy thật:** câu dưới ngưỡng "shop quần áo nhỏ có cần giấy phép không" (dense 0,47) được PageIndex trả Điều 79–80 NĐ 01, trả lời có citation | `src/task8_pageindex_vectorless.py`, `tests/test_pageindex.py` — `9bc9cf4` | Done |
 | Cập nhật `RESULT.md` | Ghi lại run info, overall scores, A/B, worst performers, recommendations theo lần eval sau khi sửa retrieval; thêm bảng trước/sau và demo fallback PageIndex | `group_project/evaluation/RESULT.md`, `eval_results_*.json` — `10732b2` | Done |
-| Bonus: reranker và HyDE | **LLM listwise reranker** (RRF top 15 → `gpt-4o-mini` xếp lại → top 5) và **HyDE** cho dense search; bật bằng `RERANKER=llm` / `QUERY_EXPANSION=hyde`, mặc định tắt; thêm config C/D vào `run_eval.py` (gộp kết quả, đo token phụ); 6 test. Kết quả: C tăng precision 0,957 → 0,983 và recall 0,906 → 0,938 so với RRF; D không giúp trên golden (câu văn phong luật) nên tôi tạo thêm tập 14 câu văn nói (`golden_casual.json`, context nguyên văn): **D tăng context recall 0,786 → 0,905, average 0,717 → 0,757** so với B | `src/task7_reranking.py`, `src/query_expansion.py`, `src/llm_client.py`, `tests/test_bonus_retrieval.py`, `golden_casual.json`, `RESULT.md` | Done |
+| Bonus: reranker và HyDE | **LLM listwise reranker** (RRF top 15 → `gpt-4o-mini` xếp lại → top 5) và **HyDE** cho dense search; bật bằng `RERANKER=llm` / `QUERY_EXPANSION=hyde`, mặc định tắt; thêm config C/D vào `run_eval.py` (gộp kết quả, đo token phụ); 6 test. Kết quả: C tăng precision 0,957 → 0,983 và recall 0,906 → 0,938 so với RRF; D không giúp trên golden (câu văn phong luật) nên tôi tạo thêm tập 14 câu văn nói (`golden_casual.json`, context nguyên văn): **D tăng context recall 0,786 → 0,905, average 0,717 → 0,757** so với B | `src/task7_reranking.py`, `src/query_expansion.py`, `src/llm_client.py`, `tests/test_bonus_retrieval.py`, `golden_casual.json`, `RESULT.md` — `51db58f`, `146f876` | Done |
 | Golden dataset | 16 câu; mọi `expected_context` được script kiểm tra là đoạn nguyên văn trong corpus | `golden_dataset.json` — `01a4b88` | Done |
 | Leader | Chọn đề tài, chia việc A/B/C, viết kế hoạch, hướng dẫn và lý thuyết phần B; viết lại README (bảng nguồn dữ liệu, cấu hình `.env`, các bước chạy lại, ghi chú phiên bản corpus) | `docs/TEAM_PLAN.md`, `docs/GUIDE_B.md` — `5634cc7`; `README.md` — `6dc4ddf`, `277e5c3` | Done |
 
