@@ -20,7 +20,7 @@
 | Làm lại dữ liệu (hỗ trợ Task 1–3) | Phát hiện data cũ không dùng được: PDF là file text đổi đuôi, URL `Source` trỏ sai văn bản, 4/5 bài báo là menu/404/nội dung tự viết. Thay bằng 3 PDF Công báo và 7 bài báo thật; viết lại Task 1–3 | `data/` — `01a4b88`; `src/task1–3` — `1d848a5` | Done |
 | Sửa Task 8 — PageIndex fallback (hỗ trợ) | Bản trước không chạy được: import class không có trong SDK (`PageIndex`), gọi hàm không tồn tại (`client.search`), upload `.md` trong khi SDK chỉ nhận PDF, output sai contract. Viết lại theo SDK `pageindex` 0.2.8 (upload PDF gốc, `submit_query` → chờ `get_retrieval`), parse đúng response thật, metadata đúng contract, timeout 45 s để UI không treo; thêm 7 test giả lập. **Chạy thật:** câu dưới ngưỡng "shop quần áo nhỏ có cần giấy phép không" (dense 0,47) được PageIndex trả Điều 79–80 NĐ 01, trả lời có citation | `src/task8_pageindex_vectorless.py`, `tests/test_pageindex.py` — `9bc9cf4` | Done |
 | Cập nhật `RESULT.md` | Ghi lại run info, overall scores, A/B, worst performers, recommendations theo lần eval sau khi sửa retrieval; thêm bảng trước/sau và demo fallback PageIndex | `group_project/evaluation/RESULT.md`, `eval_results_*.json` — `10732b2` | Done |
-| Bonus: reranker và HyDE | **LLM listwise reranker** (RRF top 15 → `gpt-4o-mini` xếp lại → top 5) và **HyDE** cho dense search; bật bằng `RERANKER=llm` / `QUERY_EXPANSION=hyde`, mặc định tắt; thêm config C/D vào `run_eval.py` (gộp kết quả, đo token phụ); 6 test. Kết quả: C tăng precision 0,957 → 0,983 và recall 0,906 → 0,938 so với RRF; D chưa cải thiện trên golden (câu văn phong luật) nhưng câu văn nói "mở quán cà phê" có cosine 0,51 → 0,70 | `src/task7_reranking.py`, `src/query_expansion.py`, `src/llm_client.py`, `tests/test_bonus_retrieval.py`, `RESULT.md` | Done |
+| Bonus: reranker và HyDE | **LLM listwise reranker** (RRF top 15 → `gpt-4o-mini` xếp lại → top 5) và **HyDE** cho dense search; bật bằng `RERANKER=llm` / `QUERY_EXPANSION=hyde`, mặc định tắt; thêm config C/D vào `run_eval.py` (gộp kết quả, đo token phụ); 6 test. Kết quả: C tăng precision 0,957 → 0,983 và recall 0,906 → 0,938 so với RRF; D không giúp trên golden (câu văn phong luật) nên tôi tạo thêm tập 14 câu văn nói (`golden_casual.json`, context nguyên văn): **D tăng context recall 0,786 → 0,905, average 0,717 → 0,757** so với B | `src/task7_reranking.py`, `src/query_expansion.py`, `src/llm_client.py`, `tests/test_bonus_retrieval.py`, `golden_casual.json`, `RESULT.md` | Done |
 | Golden dataset | 16 câu; mọi `expected_context` được script kiểm tra là đoạn nguyên văn trong corpus | `golden_dataset.json` — `01a4b88` | Done |
 | Leader | Chọn đề tài, chia việc A/B/C, viết kế hoạch, hướng dẫn và lý thuyết phần B; viết lại README (bảng nguồn dữ liệu, cấu hình `.env`, các bước chạy lại, ghi chú phiên bản corpus) | `docs/TEAM_PLAN.md`, `docs/GUIDE_B.md` — `5634cc7`; `README.md` — `6dc4ddf`, `277e5c3` | Done |
 
@@ -48,7 +48,7 @@
   | Context recall | 0,938 → 0,938 | 0,875 → 0,906 |
   | Context hit | 11 → 13/16 | 11 → **14/16** |
 
-  Bonus so với B: C (LLM rerank) precision +0,026, recall +0,031, faithfulness −0,042, +3,1k token và +1,2 s mỗi câu; D (HyDE) faithfulness +0,046, precision −0,028, average −0,005.
+  Bonus so với B: C (LLM rerank) precision +0,026, recall +0,031, faithfulness −0,042, +3,1k token và +1,2 s mỗi câu; D (HyDE) trên golden: average −0,005; trên 14 câu văn nói: recall +0,119, average +0,040, context hit 5 → 7/14.
   Corpus: 89% chunk rác → 1.025 chunk sạch. Golden: 11/16 → 16/16 context khớp nguyên văn.
 - **Lỗi đã phát hiện và cách xử lý:**
   - Tiêu đề "Chương VIII" dính vào cuối chunk Điều 78: tách tiêu đề Chương thành mục riêng.
@@ -63,8 +63,8 @@
   - Câu #14 (góp vốn) vẫn chỉ recall 0,5, vì Điều 80 bị tách thành nhiều chunk con.
   - Chênh lệch giữa A và B hiện nằm trong độ dao động của LLM judge (khoảng ±0,03), nên chưa đủ căn cứ để nói hybrid tốt hơn.
   - Fallback PageIndex chậm (18–35 s mỗi câu, so với 2–3 s của hybrid) và trả đoạn đã được diễn đạt lại chứ không phải nguyên văn; endpoint retrieval đã bị PageIndex đánh dấu deprecated.
-  - Reranker LLM tốn khoảng 3k token mỗi câu nên chưa bật mặc định; HyDE chưa chứng minh được cải thiện trên golden dataset vì bộ câu hỏi viết theo văn phong luật.
-- **Nếu có thêm thời gian, thay đổi đầu tiên tôi sẽ thực hiện:** thay LLM reranker bằng cross-encoder (BGE-reranker-v2-m3) để giữ precision với chi phí thấp; thêm khoảng 20 câu văn nói vào golden dataset để đo đúng tác dụng của HyDE; tách từ tiếng Việt cho BM25.
+  - Reranker LLM tốn khoảng 3k token mỗi câu nên chưa bật mặc định; tập câu văn nói chỉ có 14 câu nên mức cải thiện của HyDE cần tập lớn hơn để khẳng định chắc chắn.
+- **Nếu có thêm thời gian, thay đổi đầu tiên tôi sẽ thực hiện:** thay LLM reranker bằng cross-encoder (BGE-reranker-v2-m3) để giữ precision với chi phí thấp; mở rộng tập câu văn nói lên khoảng 40 câu; tách từ tiếng Việt cho BM25.
 
 ## Xác nhận đóng góp
 
