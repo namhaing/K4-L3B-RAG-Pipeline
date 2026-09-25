@@ -1,6 +1,57 @@
-# Cổng thông tin điện tử Bộ Tài Chính
-**Source:** https://mof.gov.vn/webcenter/portal/vclpolicy/pages_r/l/chi-tiet-tin?dDocName=MOFUCM203403
-**Crawled:** 2026-09-25T11:01:46.872432
+# Đăng ký kinh doanh cho gia đình gồm những thủ tục gì?
+**Source:** https://tuoitre.vn/dang-ky-kinh-doanh-cho-gia-dinh-gom-nhung-thu-tuc-gi-20230406100955234.htm
+**Ngày đăng:** 2023-04-07T08:24:00+07:00
+**Crawled:** 2026-09-25T11:42:58
 ---
 
-[ ![EMC](https://mof.gov.vn/) Đã kết nối EMC ](javascript:void\(0\) "TRUNG TÂM GIÁM SÁT QUỐC GIA VỀ CHÍNH PHỦ SỐ") [ ![](https://mof.gov.vn/) Trực thuộc BTTTT ](https://mic.gov.vn/ "BỘ THÔNG TIN VÀ TRUYỀN THÔNG")
+*Gia đình tôi sản xuất trà theo quy trình trà sạch (từ chọn loại trà, giống trà, nước tưới, chăm sóc đến quy trình thu hái, sao sấy...) đều đảm bảo an toàn vệ sinh. Trà gia đình tôi làm được người tiêu dùng đánh giá rất cao.*
+
+*Tuy nhiên tôi sản xuất thủ công nên không có thương hiệu gì để đảm bảo ký kết hợp đồng. Khi tôi bán được trà cho nhiều khách hàng ở xa thì trong xã tôi có nhiều người cũng làm theo, nhưng tôi quan sát thấy chưa đảm bảo quy trình trà sạch và vệ sinh như tôi làm.*
+
+*Giờ tôi muốn đăng ký là hộ sản xuất, vậy nhờ luật sư hướng dẫn cho tôi.*
+
+*Bạn đọc Vũ Thị Ngân (35 tuổi, huyện Yên Bình, tỉnh Yên Bái) gửi câu hỏi nhờ luật sư tư vấn:*
+
+### Luật sư Trần Duy Cảnh (Đoàn luật sư TP.HCM) tư vấn như sau:
+
+Với mô hình sản xuất và kinh doanh trà thủ công quy mô nhỏ, chi phí đầu tư thấp và yêu cầu sử dụng lao động ít, việc thành lập hộ sản xuất (hay còn gọi là hộ kinh doanh) là một sự lựa chọn phù hợp cho mô hình kinh doanh của bạn. Tuy nhiên, để thành lập hộ kinh doanh, bạn cần tuân thủ các quy định của pháp luật liên quan đến hoạt động kinh doanh.
+
+Thủ tục để thành lập hộ kinh doanh rất đơn giản, bạn đọc chỉ cần chuẩn bị và nộp 1 (một) bộ hồ sơ gồm:
+
+Giấy đề nghị đăng ký hộ kinh doanh
+
+Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của chủ hộ kinh doanh.
+
+Các giấy tờ này được gửi đến phòng tài chính - kế hoạch thuộc ủy ban nhân dân cấp huyện nơi bạn dự định đặt trụ sở hộ kinh doanh. Bạn có thể liên hệ với cơ quan này tại địa phương bạn muốn đặt trụ sở hộ kinh doanh để được hướng dẫn cụ thể.
+
+Lưu ý rằng, nếu các thành viên trong gia đình bạn cùng góp vốn để đăng k‎ý hộ kinh doanh thì bạn cần bổ sung thêm các giấy tờ sau:
+
+Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu của các thành viên trong gia đình bạn.
+
+Bản sao biên bản họp của các thành viên trong gia đình về việc thành lập hộ kinh doanh đó.
+
+Đồng thời, các thành viên trong gia đình cũng cần chọn ra một người để đại diện làm chủ hộ kinh doanh và cung cấp bản sao giấy ủy quyền cho thành viên đó.
+
+Trong vòng 3 ngày làm việc kể từ ngày nộp hồ sơ đầy đủ và hợp lệ, phòng tài chính - kế hoạch thuộc ủy ban nhân dân cấp huyện sẽ cấp cho bạn giấy chứng nhận đăng ký hộ kinh doanh.
+
+Thêm vào đó, theo như thông tin bạn cung cấp, trà nhà bạn làm ra đã được khách hàng đánh giá rất cao.
+
+Vì vậy, để phát triển một cách lâu dài và bền vững, việc đăng ký bảo hộ nhãn hiệu đối với hàng hóa do gia đình bạn sản xuất là một điều vô cùng quan trọng.
+
+Bởi vậy, bạn nên đăng ký nhãn hiệu để được bảo hộ cho nhãn hiệu và chất lượng sản phẩm cho gia đình bạn.
+
+Cơ quan nhận đăng ký nhãn hiệu là Cục Sở hữu trí tuệ Việt nam.
+
+Bạn có thể lên website của cục để tham khảo các thông tin cần thiết. Việc này sẽ giúp hộ kinh doanh của bạn bảo vệ quyền sở hữu trí tuệ đối với sản phẩm và nhãn hiệu, ngăn chặn các đối tác cạnh tranh sao chép, sử dụng nhãn hiệu của bạn để cạnh tranh không lành mạnh, gây nhầm lẫn trên thị trường, làm mất uy tín đối với sản phẩm và làm giảm niềm tin của khách hàng đối với hộ kinh doanh.
+
+Chúc bạn và gia đình thành công.
+
+#### Mời bạn đọc gửi câu hỏi để được luật sư tư vấn Với đội ngũ các luật sư và chuyên gia pháp lý dày dạn kinh nghiệm trên tất cả các lĩnh vực như hôn nhân - gia đình, kinh doanh - thương mại, mua bán đất đai, sở hữu trí tuệ, lao động, hộ tịch, thừa kế..., chuyên mục Tư vấn pháp luật trên Tuổi Trẻ Sao sẽ giải đáp thắc mắc của bạn một cách nhiệt tình, nhanh chóng, chính xác, hiệu quả. Bạn đọc vui lòng gửi câu hỏi (gõ bằng tiếng Việt có dấu, font chữ UNICODE) về Tuổi Trẻ Sao qua địa chỉ tuvanphapluat@tuoitre.com.vn.
+
+Luật sư tư vấn mọi vấn đề pháp luật trên Tuổi Trẻ Sao
+
+Mời bạn đọc gửi câu hỏi, vướng mắc pháp lý về chuyên mục Tư vấn pháp luật trên Tuổi Trẻ Sao để được các chuyên gia nhiều kinh nghiệm giải đáp tường tận.
+
+Đọc tiếp
+
+Về trang Chủ đề
