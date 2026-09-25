@@ -1,11 +1,33 @@
 """
 Task 1 — Thu thập tài liệu chính sách/quy định gốc từ nguồn .gov.vn.
+
+Nguồn: bản đăng Công báo (congbao.chinhphu.vn). Bản "signed" trên
+vanban.chinhphu.vn là PDF scan không có lớp text nên MarkItDown không đọc được;
+bản Công báo là PDF dàn trang có text đầy đủ.
+Nếu tải lỗi thì báo lỗi, không ghi nội dung thay thế.
 """
 
 from pathlib import Path
+
 import requests
 
+
 DATA_DIR = Path(__file__).parent.parent / "data" / "landing" / "legal"
+
+SOURCES = {
+    "tt-40-2021-tt-btc-thue-ho-kinh-doanh.pdf":
+        "https://congbaocdn.chinhphu.vn/CongBaoCP/VanBan/2021/6/33850/36037-1-2021649-65040-2021-tt-btc.pdf",
+    "nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.pdf":
+        "https://congbaocdn.chinhphu.vn/CongBaoCP/VanBan/2021/1/32981/34281-1-2021113-11401-2021-nd-cp.pdf",
+    # Công báo số 1011+1012 chứa toàn bộ 61 Điều; số 1013+1014 chỉ là phụ lục mẫu biểu.
+    "nd-123-2020-nd-cp-hoa-don-chung-tu.pdf":
+        "https://congbaocdn.chinhphu.vn/CongBaoCP/VanBan/2020/10/32290/32999-1-20201011-1012123-2020-nd-cp.pdf",
+}
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+}
 
 
 def setup_directory() -> None:
@@ -14,35 +36,25 @@ def setup_directory() -> None:
     print(f"Ready: {DATA_DIR}")
 
 
-# Danh sách URL tải trực tiếp file gốc từ .gov.vn
-SOURCES = {
-    "tt-40-2021-tt-btc-thue-ho-kinh-doanh.pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2021/06/40-btc.pdf",
-    "nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2021/01/01-cp.pdf",
-    "nd-123-2020-nd-cp-hoa-don-chung-tu.pdf": "https://datafiles.chinhphu.vn/cpp/files/vbpq/2020/10/123-cp.pdf",
-}
-
-
 def download_documents() -> None:
-    """Tải và lưu tài liệu pháp luật gốc từ nguồn .gov.vn."""
+    """Tải PDF gốc; bỏ qua file đã có để chạy lại không tải trùng."""
     setup_directory()
-
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
-
-    for filename, direct_url in SOURCES.items():
-        file_path = DATA_DIR / filename
-        print(f"Downloading {filename} from {direct_url}...")
+    for filename, url in SOURCES.items():
+        path = DATA_DIR / filename
+        if path.exists() and path.read_bytes()[:5] == b"%PDF-":
+            print(f"Skip (exists): {filename}")
+            continue
         try:
-            response = requests.get(direct_url, headers=headers, timeout=30)
+            response = requests.get(url, headers=HEADERS, timeout=300)
             response.raise_for_status()
-            file_path.write_bytes(response.content)
-            print(f"Successfully downloaded {filename} ({len(response.content)} bytes)")
-        except Exception as e:
-            print(f"Error downloading {filename} from {direct_url}: {e}")
-            print(f"LƯU Ý: Nếu mạng chặn, hãy tải thủ công {filename} vào {DATA_DIR}")
+            if not response.content.startswith(b"%PDF-"):
+                raise ValueError("response is not a PDF")
+            path.write_bytes(response.content)
+            print(f"Downloaded: {filename} ({len(response.content):,} bytes)")
+        except Exception as error:
+            print(f"FAILED {filename} from {url}: {error}")
+            print(f"  -> tải thủ công file PDF vào {DATA_DIR}")
 
 
 if __name__ == "__main__":
-    setup_directory()
     download_documents()
