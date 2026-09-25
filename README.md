@@ -13,8 +13,8 @@ Nhóm tự chọn bài toán và thu thập dữ liệu phù hợp; repo không 
 - Pipeline: convert → chunk → index → dense + BM25 → RRF → fallback → generation có citation.
 - Chatbot Streamlit hiển thị câu trả lời và nguồn đã dùng.
 - Golden dataset tối thiểu 15 câu; đánh giá 4 metric và so sánh A/B.
-- `group_project/evaluation/RESULT.md`.
-- Mỗi thành viên nộp báo cáo cá nhân theo template trong `group_project/ịndividual/INDIVIDUAL_REPORT.md`.
+- [group_project/evaluation/RESULT.md](group_project/evaluation/RESULT.md).
+- Mỗi thành viên nộp báo cáo cá nhân theo template trong [reports/INDIVIDUAL_REPORT.md](reports/INDIVIDUAL_REPORT.md).
 
 ## Quick start
 
@@ -67,7 +67,7 @@ streamlit run app.py
 - [Module contracts](docs/MODULE_CONTRACTS.md): schema, interface và invariant mà code/test nên tuân theo.
 - [Step-by-step guide](docs/STEP_BY_STEP.md): thứ tự triển khai và tiêu chí hoàn thành từng bước.
 - [Grading rubric](docs/GRADING_RUBRIC.md): Rubric thang điểm.
-- [Individual report](group_project/ịndividual/INDIVIDUAL_REPORT.md): template báo cáo cá nhân.
+- [Individual report](reports/INDIVIDUAL_REPORT.md): template báo cáo cá nhân.
 - [Suggested topics](docs/SUGGESTED_TOPICS.md): danh sách chủ đề tham khảo, không bắt buộc.
 
 ## Kiểm tra
