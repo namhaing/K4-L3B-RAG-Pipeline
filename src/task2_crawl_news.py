@@ -1,155 +1,133 @@
 """
-Task 2 — Crawl bài viết/thông báo.
+Task 2 — Crawl bài viết hướng dẫn về hộ kinh doanh.
 
-Hướng dẫn:
-    1. Điền tối thiểu 5 URL công khai vào ARTICLE_URLS.
-    2. Crawl từng URL bằng Crawl4AI.
-    3. Lưu mỗi bài thành một JSON trong data/landing/news/.
-    4. Giữ đủ url, title, date_crawled và content_markdown.
+Mỗi URL là một bài viết cụ thể (không phải trang chủ/danh mục). Chỉ lấy phần
+thân bài theo CSS selector của từng báo để loại menu, quảng cáo, bài liên quan.
+Bài nào crawl lỗi hoặc quá ngắn thì báo lỗi, không ghi nội dung thay thế.
 
-Cài browser trước khi chạy:
-    python -m playwright install chromium
-    
--> Dùng Firecrawl or bất cứ công cụ nào bạn quen    
+Các bài được chọn cùng giai đoạn với văn bản pháp luật trong corpus (2022–2025).
 """
 
-import asyncio
 import json
+import re
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
+
+import requests
+from bs4 import BeautifulSoup
+from markdownify import markdownify
+
 
 DATA_DIR = Path(__file__).parent.parent / "data" / "landing" / "news"
 
 ARTICLE_URLS = [
-    "https://dangkykinhdoanh.gov.vn/vn/tin-tuc/611/5842/huong-dan-dang-ky-ho-kinh-doanh.aspx",
-    "https://mof.gov.vn/webcenter/portal/vclpolicy/pages_r/l/chi-tiet-tin?dDocName=MOFUCM203403",
-    "https://gdt.gov.vn/wps/portal/home/hotro/hoidapthue",
-    "https://chinhphu.vn/cac-truong-hop-mien-thue-voi-ho-kinh-doanh",
-    "https://hanoi.gdt.gov.vn/wps/portal/hanoi/tin-tuc/huong-dan-thue-hkd",
+    "https://baochinhphu.vn/ho-so-thu-tuc-dang-ky-ho-kinh-doanh-nhu-the-nao-102230906140208218.htm",
+    "https://tuoitre.vn/dang-ky-kinh-doanh-cho-gia-dinh-gom-nhung-thu-tuc-gi-20230406100955234.htm",
+    "https://baochinhphu.vn/ho-kinh-doanh-phai-nop-cac-loai-thue-phi-nao-102220722151801844.htm",
+    "https://baochinhphu.vn/dieu-kien-ho-kinh-doanh-nop-thue-theo-phuong-phap-ke-khai-102230620094419843.htm",
+    "https://baochinhphu.vn/ho-kinh-doanh-co-the-lua-chon-phuong-phap-nop-thue-102231030145643482.htm",
+    "https://dansinh.dantri.com.vn/tien-luong-tien-cong/huong-dan-nguoi-ban-hang-online-tinh-cac-loai-thue-phi-phai-nop-20241003104726709.htm",
+    "https://vnexpress.net/luu-y-khi-ho-kinh-doanh-su-dung-hoa-don-dien-tu-tu-may-tinh-tien-4944139.html",
 ]
 
-# Các bài viết chất lượng cao được thu thập chuẩn bị sẵn cho domain Hộ kinh doanh
-FALLBACK_ARTICLES = {
-    "https://dangkykinhdoanh.gov.vn/vn/tin-tuc/611/5842/huong-dan-dang-ky-ho-kinh-doanh.aspx": {
-        "title": "Hướng dẫn chi tiết thủ tục đăng ký hộ kinh doanh cá thể",
-        "content_markdown": """# Hướng dẫn chi tiết thủ tục đăng ký hộ kinh doanh cá thể
+# domain -> (selector sapo/lead, selector thân bài)
+SITE_SELECTORS = {
+    "baochinhphu.vn": ("h2.detail-sapo", "div.detail-content"),
+    "tuoitre.vn": ("h2.detail-sapo", "div.detail-content"),
+    "dansinh.dantri.com.vn": ("h2.singular-sapo, div.singular-sapo", "div.content"),
+    "vnexpress.net": ("p.description", "article.fck_detail"),
+}
+# Khối không thuộc nội dung bài (box liên quan, ảnh, quảng cáo...).
+NOISE_SELECTORS = "script, style, figure, table.picture, h1, [type='RelatedNewsBox'], .kbwscwl-relatedbox, " \
+                  ".box-tinlienquanv2, .related, .ads, .banner, iframe, video"
 
-Hộ kinh doanh do một cá nhân hoặc các thành viên hộ gia đình đăng ký thành lập. Mỗi cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trên phạm vi toàn quốc.
-
-## Hồ sơ đăng ký hộ kinh doanh
-1. Giấy đề nghị đăng ký hộ kinh doanh theo mẫu quy định.
-2. Bản sao CCCD/Hộ chiếu của chủ hộ kinh doanh hoặc các thành viên hộ gia đình.
-3. Bản sao biên bản họp gia đình về việc thành lập hộ kinh doanh.
-4. Văn bản ủy quyền cho một thành viên làm chủ hộ kinh doanh (nếu có).
-
-## Nơi nộp hồ sơ và thời hạn giải quyết
-Hồ sơ được nộp tại Cơ quan đăng ký kinh doanh cấp huyện (Bộ phận một cửa UBND cấp huyện/Phòng Tài chính - Kế hoạch).
-Thời hạn cấp Giấy chứng nhận đăng ký hộ kinh doanh là 03 ngày làm việc kể từ ngày nhận đủ hồ sơ hợp lệ."""
-    },
-    "https://mof.gov.vn/webcenter/portal/vclpolicy/pages_r/l/chi-tiet-tin?dDocName=MOFUCM203403": {
-        "title": "Hướng dẫn tính thuế và kê khai thuế đối với hộ kinh doanh",
-        "content_markdown": """# Hướng dẫn tính thuế và kê khai thuế đối với hộ kinh doanh
-
-Theo quy định tại Thông tư 40/2021/TT-BTC, hộ kinh doanh có doanh thu từ 100 triệu đồng/năm trở xuống thuộc diện miễn thuế GTGT và thuế TNCN.
-
-## Phương pháp tính thuế
-- **Thuế khoán**: Áp dụng đối với hộ kinh doanh nhỏ lẻ, doanh thu cố định do cơ quan thuế ấn định.
-- **Thuế kê khai**: Áp dụng cho hộ kinh doanh quy mô lớn hoặc hộ tự nguyện lựa chọn. Hộ kê khai thực hiện nộp tờ khai thuế theo tháng hoặc quý.
-
-## Tỷ lệ thuế theo ngành nghề
-- Phân phối, cung cấp hàng hóa: GTGT 1%, TNCN 0.5%.
-- Dịch vụ, xây dựng không bao thầu nguyên vật liệu: GTGT 5%, TNCN 2%.
-- Sản xuất, vận tải, dịch vụ có gắn với hàng hóa: GTGT 3%, TNCN 1.5%."""
-    },
-    "https://gdt.gov.vn/wps/portal/home/hotro/hoidapthue": {
-        "title": "Quy định về thuế đối với hộ kinh doanh online trên sàn thương mại điện tử",
-        "content_markdown": """# Quy định về thuế đối với hộ kinh doanh online trên sàn thương mại điện tử
-
-Cá nhân, hộ kinh doanh bán hàng trên các sàn thương mại điện tử như Shopee, Lazada, TikTok Shop phải thực hiện nghĩa vụ thuế theo quy định.
-
-## Nghĩa vụ của sàn TMĐT
-Chủ sở hữu sàn giao dịch thương mại điện tử có trách nhiệm cung cấp thông tin doanh thu của người bán cho cơ quan thuế.
-
-## Nghĩa vụ của hộ kinh doanh online
-- Tự kê khai và nộp thuế nếu sàn chưa khấu trừ thuế tại nguồn.
-- Doanh thu bán hàng qua mạng trên 100 triệu đồng/năm phải nộp thuế GTGT và TNCN tương ứng theo tỷ lệ ngành nghề phân phối hàng hóa (tổng 1.5%)."""
-    },
-    "https://chinhphu.vn/cac-truong-hop-mien-thue-voi-ho-kinh-doanh": {
-        "title": "Sử dụng hóa đơn điện tử khởi tạo từ máy tính tiền cho hộ kinh doanh bán lẻ",
-        "content_markdown": """# Sử dụng hóa đơn điện tử khởi tạo từ máy tính tiền cho hộ kinh doanh bán lẻ
-
-Nghị định 123/2020/NĐ-CP quy định các hộ kinh doanh trong một số lĩnh vực trực tiếp cung cấp hàng hóa, dịch vụ đến người tiêu dùng phải áp dụng hóa đơn điện tử khởi tạo từ máy tính tiền.
-
-## Đối tượng áp dụng
-- Trung tâm thương mại, siêu thị.
-- Bán lẻ hàng tiêu dùng, cửa hàng tiện lợi.
-- Ăn uống, nhà hàng, khách sạn.
-- Tiệm vàng, cửa hàng bán thuốc tân dược.
-
-## Lợi ích của hóa đơn từ máy tính tiền
-- Xuất hóa đơn ngay cho khách hàng 24/7.
-- Không bắt buộc có chữ ký số của người bán trên từng hóa đơn.
-- Dữ liệu hóa đơn được chuyển tự động đến cơ quan thuế."""
-    },
-    "https://hanoi.gdt.gov.vn/wps/portal/hanoi/tin-tuc/huong-dan-thue-hkd": {
-        "title": "Giải đáp thắc mắc về phương pháp thuế khoán hộ kinh doanh",
-        "content_markdown": """# Giải đáp thắc mắc về phương pháp thuế khoán hộ kinh doanh
-
-Thuế khoán là phương pháp tính thuế theo tỷ lệ trên doanh thu do cơ quan thuế xác định để ấn định mức thuế phải nộp.
-
-## Quy trình xác định thuế khoán
-1. Hộ kinh doanh tự kê khai doanh thu dự kiến trong Tờ khai thuế đầu năm.
-2. Cơ quan thuế điều tra doanh thu thực tế và tham khảo ý kiến Hội đồng tư vấn thuế xã/phường.
-3. Cơ quan thuế công khai bảng mức thuế khoán dự kiến tại trụ sở UBND và chi cục thuế.
-4. Thông báo mức thuế khoán chính thức phải nộp hàng tháng."""
-    }
+MIN_CONTENT_CHARS = 800
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 }
 
 
-async def crawl_article(url: str) -> dict:
-    """Crawl từng bài viết bằng Crawl4AI hoặc dùng bộ dữ liệu chuẩn hóa."""
-    try:
-        from crawl4ai import AsyncWebCrawler
-        async with AsyncWebCrawler() as crawler:
-            result = await crawler.arun(url=url)
-            if result and result.markdown and len(result.markdown.strip()) > 100:
-                return {
-                    "url": url,
-                    "title": result.metadata.get("title", "Hướng dẫn Hộ kinh doanh"),
-                    "date_crawled": datetime.now().isoformat(),
-                    "content_markdown": result.markdown,
-                }
-    except Exception as e:
-        print(f"Note for {url}: {e}")
+def _meta(soup: BeautifulSoup, *names: str) -> str | None:
+    for name in names:
+        tag = soup.find("meta", attrs={"property": name}) or soup.find("meta", attrs={"name": name}) \
+            or soup.find("meta", attrs={"itemprop": name})
+        if tag and tag.get("content"):
+            return tag["content"].strip()
+    return None
 
-    fallback = FALLBACK_ARTICLES.get(url, {
-        "title": "Hướng dẫn về hộ kinh doanh",
-        "content_markdown": "# Nội dung hướng dẫn hộ kinh doanh\n\nNội dung chi tiết quy định."
-    })
+
+def crawl_article(url: str) -> dict:
+    """Tải một bài và trích thân bài thành Markdown."""
+    domain = urlparse(url).netloc.removeprefix("www.")
+    if domain not in SITE_SELECTORS:
+        raise ValueError(f"Chưa có selector cho {domain}")
+    sapo_selector, body_selector = SITE_SELECTORS[domain]
+
+    response = None
+    for _ in range(3):
+        try:
+            response = requests.get(url, headers=HEADERS, timeout=30)
+            break
+        except requests.ConnectionError:
+            continue
+    if response is None:
+        raise ConnectionError("không kết nối được sau 3 lần thử")
+    response.raise_for_status()
+    response.encoding = "utf-8"
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    body = soup.select_one(body_selector)
+    if body is None:
+        raise ValueError(f"Không tìm thấy thân bài ({body_selector})")
+    for noise in body.select(NOISE_SELECTORS):
+        noise.decompose()
+
+    title = _meta(soup, "og:title") or (soup.title.string if soup.title else "")
+    title = re.sub(r"\s*[-|]\s*(Báo VnExpress.*|Tuổi Trẻ Online|Báo Dân trí)$", "", title).strip()
+    body_md = markdownify(str(body), heading_style="ATX", strip=["a", "img"])
+    sapo = soup.select_one(sapo_selector)
+    sapo_text = sapo.get_text(" ", strip=True) if sapo else ""
+    # Một số báo (vnexpress) đã có sẵn sapo trong thân bài.
+    parts = [sapo_text] if sapo_text and sapo_text[:80] not in body_md else []
+    parts.append(body_md)
+    content = re.sub(r"\n{3,}", "\n\n", "\n\n".join(parts)).strip()
+
+    if len(content) < MIN_CONTENT_CHARS:
+        raise ValueError(f"Nội dung quá ngắn ({len(content)} ký tự)")
+    if re.search(r"\b404\b|not found", title, re.IGNORECASE):
+        raise ValueError(f"Trang lỗi: {title}")
+
     return {
         "url": url,
-        "title": fallback["title"],
-        "date_crawled": datetime.now().isoformat(),
-        "content_markdown": fallback["content_markdown"],
+        "title": title,
+        "published_date": _meta(soup, "article:published_time", "datePublished", "pubdate"),
+        "date_crawled": datetime.now().isoformat(timespec="seconds"),
+        "content_markdown": content,
     }
 
 
-async def crawl_all() -> None:
-    """Crawl và lưu từng bài thành một file JSON."""
+def crawl_all() -> None:
+    """Crawl và lưu từng bài thành một file JSON; xoá JSON cũ không còn trong danh sách."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    expected = {f"article_{index:02d}.json" for index in range(1, len(ARTICLE_URLS) + 1)}
+    for stale in DATA_DIR.glob("article_*.json"):
+        if stale.name not in expected:
+            stale.unlink()
+            print(f"Removed stale: {stale.name}")
 
     for index, url in enumerate(ARTICLE_URLS, 1):
+        output = DATA_DIR / f"article_{index:02d}.json"
         try:
-            article = await crawl_article(url)
-            output = DATA_DIR / f"article_{index:02d}.json"
-            output.write_text(
-                json.dumps(article, ensure_ascii=False, indent=2),
-                encoding="utf-8",
-            )
-            print(f"Saved: {output}")
+            article = crawl_article(url)
+            output.write_text(json.dumps(article, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"Saved {output.name} ({len(article['content_markdown']):,} chars): {article['title']}")
         except Exception as error:
-            print(f"Failed: {url} — {error}")
+            # Không giữ lại file cũ của vị trí này: nó thuộc URL/lần crawl khác.
+            output.unlink(missing_ok=True)
+            print(f"FAILED {url}: {error}")
 
 
 if __name__ == "__main__":
-    asyncio.run(crawl_all())
+    crawl_all()

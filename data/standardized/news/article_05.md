@@ -1,14 +1,39 @@
-# Giải đáp thắc mắc về phương pháp thuế khoán hộ kinh doanh
-**Source:** https://hanoi.gdt.gov.vn/wps/portal/hanoi/tin-tuc/huong-dan-thue-hkd
-**Crawled:** 2026-09-25T10:44:49.142493
+# Hộ kinh doanh có thể lựa chọn phương pháp nộp thuế?
+**Source:** https://baochinhphu.vn/ho-kinh-doanh-co-the-lua-chon-phuong-phap-nop-thue-102231030145643482.htm
+**Ngày đăng:** 2023-10-31T09:02:00+07:00
+**Crawled:** 2026-09-25T11:43:01
 ---
 
-# Giải đáp thắc mắc về phương pháp thuế khoán hộ kinh doanh
+(Chinhphu.vn) - Hộ kinh doanh của ông Nguyễn Minh Sang (Tây Ninh) kinh doanh ngành nghề dịch vụ, lao động dưới 10 người. Hộ của ông đóng thuế khoán hằng tháng đầy đủ.
 
-Thuế khoán là phương pháp tính thuế theo tỷ lệ trên doanh thu do cơ quan thuế xác định để ấn định mức thuế phải nộp.
+Nay ông Sang muốn lựa chọn nộp thuế theo phương pháp kê khai vì phương pháp này phù hợp với ông, làm giảm chi phí đi lại, thuận lợi hơn trong công việc lập hóa đơn điện tử để giao cho khách hàng. Ông Sang đề nghị cơ quan thuế hướng dẫn về vấn đề này.
 
-## Quy trình xác định thuế khoán
-1. Hộ kinh doanh tự kê khai doanh thu dự kiến trong Tờ khai thuế đầu năm.
-2. Cơ quan thuế điều tra doanh thu thực tế và tham khảo ý kiến Hội đồng tư vấn thuế xã/phường.
-3. Cơ quan thuế công khai bảng mức thuế khoán dự kiến tại trụ sở UBND và chi cục thuế.
-4. Thông báo mức thuế khoán chính thức phải nộp hàng tháng.
+*Cục Thuế tỉnh Tây Ninh trả lời vấn đề này như sau:*
+
+Tại Khoản 4 Điều 3; Điểm b Khoản 3, Tiết b6 Điểm b Khoản 4 Điều 3 Thông tư số 40/2021/TT-BTC ngày 1/6/2021 của Bộ Tài chính quy định:
+
+"Điều 3. Giải thích từ ngữ
+
+… 4. "Hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai" là hộ kinh doanh, cá nhân kinh doanh quy mô lớn; hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai.
+
+Điều 13. Quản lý thuế đối với hộ khoán
+
+… 3. Thời hạn nộp hồ sơ khai thuế
+
+Thời hạn nộp hồ sơ khai thuế đối với hộ khoán quy định tại Điểm c Khoản 2, Khoản 3 Điều 44 Luật Quản lý thuế, cụ thể như sau:
+
+… b) Trường hợp hộ khoán mới ra kinh doanh (bao gồm hộ kê khai chuyển đổi sang phương pháp khoán), hoặc hộ khoán chuyển đổi sang phương pháp kê khai, hoặc hộ khoán thay đổi ngành nghề, hoặc hộ khoán thay đổi quy mô kinh doanh trong năm thì thời hạn nộp hồ sơ khai thuế của hộ khoán chậm nhất là ngày thứ 10 kể từ ngày bắt đầu kinh doanh, hoặc chuyển đổi phương pháp tính thuế, hoặc thay đổi ngành nghề, hoặc thay đổi quy mô kinh doanh.
+
+4. Xác định doanh thu và mức thuế khoán
+
+… b) Điều chỉnh doanh thu và mức thuế khoán
+
+Hộ khoán trong năm có đề nghị điều chỉnh doanh thu, mức thuế khoán do thay đổi hoạt động kinh doanh thì cơ quan thuế điều chỉnh lại mức thuế khoán theo quy định tại Khoản 3 Điều 51 Luật Quản lý thuế kể từ thời điểm có thay đổi. Cụ thể như sau:
+
+… b.6) Hộ khoán chuyển đổi sang phương pháp kê khai thì hộ khoán khai điều chỉnh, bổ sung Tờ khai thuế khoán theo Mẫu số 01/CNKD ban hành kèm theo Thông tư này. Cơ quan thuế căn cứ Tờ khai điều chỉnh, bổ sung để điều chỉnh giảm mức thuế đã khoán cho thời gian chuyển đổi".
+
+Căn cứ các quy định trên, trường hợp ông Sang có hộ kinh doanh đang nộp thuế theo phương pháp khoán muốn chuyển đổi sang phương pháp kê khai thì thực hiện khai điều chỉnh, bổ sung Tờ khai thuế khoán Mẫu 01/CNKD. Cơ quan thuế căn cứ Tờ khai điều chỉnh, bổ sung của hộ khoán để điều chỉnh giảm thuế đã khoán cho thời gian chuyển đổi. Thời hạn hộ khoán nộp tờ khai điều chỉnh chậm nhất là ngày thứ 10 kể từ ngày bắt đầu chuyển đổi phương pháp tính thuế.
+
+Hộ kê khai thực hiện chế độ kế toán theo hướng dẫn tại Thông tư số 88/2021/TT-BTC ngày 11/10/2021 của Bộ Tài chính từ ngày 1/1/2022.
+
+**Mai Chi**
