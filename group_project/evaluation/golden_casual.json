@@ -1,0 +1,72 @@
+[
+  {
+    "question": "mở quán cà phê cần giấy tờ gì",
+    "expected_answer": "Cần hồ sơ đăng ký hộ kinh doanh gồm: giấy đề nghị đăng ký hộ kinh doanh; giấy tờ pháp lý của chủ hộ; nếu các thành viên hộ gia đình cùng đăng ký thì thêm bản sao biên bản họp thành viên hộ gia đình và văn bản ủy quyền cho một thành viên làm chủ hộ.",
+    "expected_context": "2. Hồ sơ đăng ký hộ kinh doanh bao gồm:\n\na) Giấy đề nghị đăng ký hộ kinh doanh;\n\nb) Giấy tờ pháp lý của cá nhân đối với chủ hộ kinh doanh, thành viên hộ gia đình đăng ký hộ kinh doanh trong trường hợp các thành viên hộ gia đình đăng ký hộ kinh doanh;\n\nc) Bản sao biên bản họp thành viên hộ gia đình về việc thành lập hộ kinh doanh trong trường hợp các thành viên hộ gia đình đăng ký hộ kinh doanh;\n\n82\n\nd) Bản sao văn bản ủy quyền của thành viên hộ gia đình cho một thành viên làm chủ hộ kinh doanh đối với trường hợp các thành viên hộ gia đình đăng ký hộ kinh doanh."
+  },
+  {
+    "question": "đăng ký kinh doanh cho gia đình thì nộp ở đâu, bao lâu có giấy",
+    "expected_answer": "Nộp tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở hộ kinh doanh; Giấy chứng nhận đăng ký hộ kinh doanh được cấp trong 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ.",
+    "expected_context": "1. Đăng ký hộ kinh doanh được thực hiện tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở hộ kinh doanh.\n...\n3. Khi tiếp nhận hồ sơ, Cơ quan đăng ký kinh doanh cấp huyện trao Giấy biên nhận và cấp Giấy chứng nhận đăng ký hộ kinh doanh cho hộ kinh doanh trong thời hạn 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ."
+  },
+  {
+    "question": "một người được mở mấy hộ kinh doanh",
+    "expected_answer": "Mỗi cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc.",
+    "expected_context": "chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc và được quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân."
+  },
+  {
+    "question": "đi bán hàng rong có cần đăng ký kinh doanh không",
+    "expected_answer": "Không. Người bán hàng rong, quà vặt, buôn chuyến, kinh doanh lưu động, kinh doanh thời vụ, làm dịch vụ có thu nhập thấp không phải đăng ký hộ kinh doanh, trừ khi kinh doanh ngành, nghề đầu tư kinh doanh có điều kiện.",
+    "expected_context": "bán hàng rong, quà vặt, buôn chuyến, kinh doanh lưu động, kinh doanh thời vụ, làm dịch vụ có thu nhập thấp không phải đăng ký hộ kinh doanh, trừ trường hợp kinh doanh các ngành, nghề đầu tư kinh doanh có điều kiện."
+  },
+  {
+    "question": "đang có hộ kinh doanh rồi thì có được làm chủ doanh nghiệp tư nhân nữa không",
+    "expected_answer": "Không. Cá nhân, thành viên hộ gia đình đăng ký hộ kinh doanh không được đồng thời là chủ doanh nghiệp tư nhân, thành viên hợp danh của công ty hợp danh, trừ khi được các thành viên hợp danh còn lại nhất trí.",
+    "expected_context": "không được đồng thời là chủ doanh nghiệp tư nhân, thành viên hợp danh của công ty hợp danh trừ trường hợp được sự nhất trí của các thành viên hợp danh còn lại."
+  },
+  {
+    "question": "nghỉ bán hơn một tháng thì có phải báo cho ai không",
+    "expected_answer": "Có. Tạm ngừng kinh doanh từ 30 ngày trở lên thì hộ kinh doanh phải thông báo với Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký và Cơ quan thuế trực tiếp quản lý.",
+    "expected_context": "1. Trường hợp tạm ngừng kinh doanh từ 30 ngày trở lên, hộ kinh doanh phải thông báo với Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký kinh doanh và Cơ quan thuế trực tiếp quản lý."
+  },
+  {
+    "question": "không buôn bán nữa muốn dẹp hộ kinh doanh thì làm sao",
+    "expected_answer": "Gửi thông báo chấm dứt hoạt động hộ kinh doanh đến Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký, kèm thông báo về việc chấm dứt hiệu lực mã số thuế của Cơ quan thuế và các giấy tờ liên quan.",
+    "expected_context": "1. Khi chấm dứt hoạt động kinh doanh, hộ kinh doanh phải gửi thông báo về việc chấm dứt hoạt động hộ kinh doanh đến Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký. Kèm theo thông báo phải có các giấy tờ sau đây:\n\na) Thông báo về việc chấm dứt hiệu lực mã số thuế của Cơ quan thuế;"
+  },
+  {
+    "question": "bán được ít tiền thì có phải đóng thuế không",
+    "expected_answer": "Hộ kinh doanh có doanh thu trong năm dương lịch từ 100 triệu đồng trở xuống thì không phải nộp thuế GTGT và thuế TNCN.",
+    "expected_context": "Hộ kinh doanh, cá nhân kinh doanh có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì thuộc trường hợp không phải nộp thuế GTGT và không phải nộp thuế TNCN theo quy định pháp luật về thuế GTGT và thuế TNCN."
+  },
+  {
+    "question": "bán tạp hóa thì đóng thuế mấy phần trăm",
+    "expected_answer": "Bán tạp hóa thuộc nhóm phân phối, cung cấp hàng hóa: thuế GTGT 1% và thuế TNCN 0,5% trên doanh thu.",
+    "expected_context": "Cụ thể, tỷ lệ thuế GTGT với danh mục ngành nghề phân phối, cung cấp hàng hóa là 1%; Dịch vụ, xây dựng không bao thầu nguyên vật liệu là 5%; Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu là 3%; Hoạt động kinh doanh khác là 2%.\n\nTỷ lệ thuế TNCN với danh mục ngành nghề phân phối, cung cấp hàng hóa là 0,5%; Dịch vụ, xây dựng không bao thầu nguyên vật liệu là 2-5%; Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu là 1,5%; Hoạt động kinh doanh khác là 1%."
+  },
+  {
+    "question": "mở tiệm cắt tóc thì thuế tính thế nào",
+    "expected_answer": "Cắt tóc thuộc nhóm dịch vụ: thuế GTGT 5% trên doanh thu; thuế TNCN của nhóm dịch vụ là 2% (bài viết ghi 2–5% tùy hoạt động).",
+    "expected_context": "- Dịch vụ may đo, giặt là; cắt tóc, làm đầu, gội đầu;\n...\nCụ thể, tỷ lệ thuế GTGT với danh mục ngành nghề phân phối, cung cấp hàng hóa là 1%; Dịch vụ, xây dựng không bao thầu nguyên vật liệu là 5%; Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu là 3%; Hoạt động kinh doanh khác là 2%.\n\nTỷ lệ thuế TNCN với danh mục ngành nghề phân phối, cung cấp hàng hóa là 0,5%; Dịch vụ, xây dựng không bao thầu nguyên vật liệu là 2-5%; Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu là 1,5%; Hoạt động kinh doanh khác là 1%."
+  },
+  {
+    "question": "bán hàng trên facebook có phải đóng thuế không",
+    "expected_answer": "Có, nếu doanh thu trong năm từ trên 100 triệu đồng thì phải nộp lệ phí môn bài và nộp thuế; bán hàng online thuộc nhóm phân phối hàng hóa nên thuế TNCN là 0,5% doanh thu.",
+    "expected_context": "Những cá nhân, hộ kinh doanh online có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở lên có nghĩa vụ nộp lệ phí môn bài và nộp thuế như pháp luật đã quy định.\n\nVề mức thuế phải nộp sẽ phụ thuộc vào từng ngành nghề dựa trên tổng doanh thu. Ví dụ, hoạt động bán hàng online thuộc phạm vi phân phối và cung cấp hàng hóa nên tỷ lệ thuế TNCN phải nộp là 0,5% tổng doanh thu một năm theo quy định tại Phụ lục I Thông tư 40/2021/TT-BTC."
+  },
+  {
+    "question": "đóng thuế khoán mà khách đòi hóa đơn thì làm sao",
+    "expected_answer": "Hộ kinh doanh nộp thuế theo phương pháp khoán nếu có yêu cầu sử dụng hóa đơn thì cơ quan thuế cấp lẻ hóa đơn điện tử theo từng lần phát sinh.",
+    "expected_context": "b) Hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp khoán nếu có yêu cầu sử dụng hóa đơn thì cơ quan thuế cấp lẻ hóa đơn điện tử theo từng lần phát sinh;"
+  },
+  {
+    "question": "quán ăn bán đông khách có bắt buộc xài máy tính tiền in hóa đơn không",
+    "expected_answer": "Từ 1/6 theo Nghị định 70, hộ kinh doanh có doanh thu hàng năm từ một tỷ đồng bán trực tiếp cho người tiêu dùng phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế.",
+    "expected_context": "Từ ngày 1/6, theo quy định tại Nghị định 70, khi bán hàng hóa, cung cấp dịch vụ trực tiếp đến người tiêu dùng, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế giao cho người mua."
+  },
+  {
+    "question": "tiệm nhỏ có được tự chọn cách kê khai thuế không",
+    "expected_answer": "Có. Phương pháp kê khai áp dụng cho hộ kinh doanh quy mô lớn và cả hộ kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai.",
+    "expected_context": "4. “Hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai” là hộ kinh doanh, cá nhân kinh doanh quy mô lớn; hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai."
+  }
+]

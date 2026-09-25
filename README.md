@@ -117,6 +117,8 @@ Chi tiết trong [group_project/evaluation/RESULT.md](group_project/evaluation/R
 | C: B + LLM rerank (bonus) | 0.892 | 0.579 | 0.938 | 0.983 | 0.848 | 14/16 |
 | D: HyDE + B (bonus) | 0.979 | 0.552 | 0.906 | 0.928 | 0.842 | 14/16 |
 
+Trên 14 câu hỏi văn nói ([golden_casual.json](group_project/evaluation/golden_casual.json)), HyDE (D) so với B: context recall 0.786 → 0.905, average 0.717 → 0.757.
+
 ## Kiểm tra
 
 ```bash

@@ -1,0 +1,74 @@
+{
+  "run": {
+    "date": "2026-09-25T16:22:30+00:00",
+    "commit": "3689e84",
+    "golden_dataset": "golden_casual.json",
+    "golden_dataset_size": 14,
+    "top_k": 5,
+    "generator": "openai/gpt-4o-mini",
+    "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+    "embedding_model": "text-embedding-3-small",
+    "chunking": "legal_article+recursive, size=800, overlap=100",
+    "score_threshold": 0.5
+  },
+  "configs": {
+    "B": {
+      "name": "hybrid + RRF",
+      "faithfulness": 0.777,
+      "answer_relevancy": 0.4111,
+      "context_recall": 0.7857,
+      "context_precision": 0.894,
+      "average": 0.7169,
+      "questions": 14,
+      "refusals": 0,
+      "context_hit_rate": 0.3571,
+      "latency_mean_s": 6.78,
+      "latency_p50_s": 3.188,
+      "latency_max_s": 28.903,
+      "input_tokens_mean": 2100.1,
+      "output_tokens_mean": 165.4,
+      "aux_tokens_mean": 0.0,
+      "run": {
+        "date": "2026-09-25T16:22:30+00:00",
+        "commit": "3689e84",
+        "golden_dataset": "golden_casual.json",
+        "golden_dataset_size": 14,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
+    },
+    "D": {
+      "name": "HyDE + hybrid + RRF",
+      "faithfulness": 0.8238,
+      "answer_relevancy": 0.3744,
+      "context_recall": 0.9048,
+      "context_precision": 0.9233,
+      "average": 0.7566,
+      "questions": 14,
+      "refusals": 0,
+      "context_hit_rate": 0.5,
+      "latency_mean_s": 8.321,
+      "latency_p50_s": 5.191,
+      "latency_max_s": 29.257,
+      "input_tokens_mean": 2123.6,
+      "output_tokens_mean": 177.9,
+      "aux_tokens_mean": 275.4,
+      "run": {
+        "date": "2026-09-25T16:22:30+00:00",
+        "commit": "3689e84",
+        "golden_dataset": "golden_casual.json",
+        "golden_dataset_size": 14,
+        "top_k": 5,
+        "generator": "openai/gpt-4o-mini",
+        "evaluator": "RAGAS 0.4.3 / gpt-4o-mini + text-embedding-3-small",
+        "embedding_model": "text-embedding-3-small",
+        "chunking": "legal_article+recursive, size=800, overlap=100",
+        "score_threshold": 0.5
+      }
+    }
+  }
+}
