@@ -1,3 +1,10 @@
+# Nghị định 123/2020/NĐ-CP quy định về hóa đơn, chứng từ
+**Source:** https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=201509
+**Số hiệu:** 123/2020/NĐ-CP
+**Ngày ban hành:** 2020-10-19
+**Hiệu lực:** Còn hiệu lực
+---
+
 NGHỊ ĐỊNH 123/2020/NĐ-CP
 QUY ĐỊNH VỀ HÓA ĐƠN, CHỨNG TỪ ĐỐI VỚI HỘ KINH DOANH
 
