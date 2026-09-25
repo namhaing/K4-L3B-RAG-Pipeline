@@ -1,6 +1,6 @@
 # Cục Thuế - Bộ Tài Chính - Trang chủ
 **Source:** https://gdt.gov.vn/wps/portal/home/hotro/hoidapthue
-**Crawled:** 2026-09-25T10:43:46.403932
+**Crawled:** 2026-09-25T11:01:52.329696
 ---
 
   * [ ](https://gdt.gov.vn/wps/myportal/cms)
@@ -21,7 +21,7 @@
 [Tin bài về Thuế](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_CQKCVKV008FRE0IM9AV84E10L2) | [Thông tin kinh tế](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_CQKCVKV008FRE0IM9AV84E10L7) | [Thông báo](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_CQKCVKV008FRE0IM9AV84E10D1)
 [CSDL quốc gia về TTHC](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42LOV9E0Q1C0CL041KA2) | [Bộ TTHC thuế](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_049IL8VSOJ8800IHMB7OA42E87) | [TTHC qua Bưu chính](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42L8F630AFCKHEM63GK4) | [Tiếp nhận phản ánh, kiến nghị](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_QOHUBB1A0O1520A1523G6N1GS4)
 [Chính sách thuế ](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42L0DN806PVCN0741002) | [Nhóm NNT ](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42L0DN806PVCN0741084) | [Quản lý thuế ](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42L0DN806PVCN0741040) | [Ứng dụng hỗ trợ người nộp thuế ](https://gdt.gov.vn/wps/portal/?uri=nm:oid:Z6_JA9EHB42L0DN806PVCN07410K7)
-Thứ Sáu, 25/9/2026 | 10:43  NGÀNH THUẾ COI TRỌNG, XÂY DỰNG VÀ GÌN GIỮ CÁC GIÁ TRỊ “MINH BẠCH – CHUYÊN NGHIỆP – LIÊM CHÍNH – ĐỔI MỚI" 
+Thứ Sáu, 25/9/2026 | 11:01  NGÀNH THUẾ COI TRỌNG, XÂY DỰNG VÀ GÌN GIỮ CÁC GIÁ TRỊ “MINH BẠCH – CHUYÊN NGHIỆP – LIÊM CHÍNH – ĐỔI MỚI" 
 [](https://gdt.gov.vn/wps/portal/home/hotro/hoidapthue)
 Z7_CQKCVKV00OFV80IMQJ20RU08M1Web Content Viewer  
 |  [ ![](https://gdt.gov.vn/wps/wcm/connect/d6b1d43a-7189-455f-8aa4-3c02e5aae126/ABC.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACEd6b1d43a-7189-455f-8aa4-3c02e5aae126%20) ](https://gdt.gov.vn/wps/portal/home/news/detail?1dmy&current=true&urile=wcm:path:/gdt+content/sa_gdt/sa_news/sa_news_tax/2026/thang+9/18041016-170c-40dc-9e0c-94afa1637f88)
@@ -196,10 +196,10 @@ Z7_049IL8VSO3A420IU6F2U8B2MK6
 Chọn Website - Cơ quan Trung ương -- Bộ Tài chính  -- Cục Hải quan  -- Cơ sở dữ liệu Luật Việt Nam  - Tin tức -- Báo Lao Động  -- Báo Nhân Dân  -- Báo Đầu tư  -- Thông tấn xã Việt Nam  -- Thời báo Kinh tế  - Ngân hàng -- Ngân hàng Công thương Việt Nam  -- Ngân hàng Ngoại thương Việt Nam 
 Z7_6FCUBB1A006730A9KFJ1LQ1000Thống kê truy cập
 # Thống kê truy cập
-Tổng số truy cập: **127,254,253**
-Trong tháng: **847,608**
-Trong ngày: **13,543**
-Trực tuyến: **800**
+Tổng số truy cập: **127,255,085**
+Trong tháng: **848,440**
+Trong ngày: **14,374**
+Trực tuyến: **833**
   * [Trang chủ](https://gdt.gov.vn/wps/portal/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zind0dPUzMfQwMDEIsTQ08TZxMgiydXQzcnY31wwkpiAJKG-AAjgZA_VFgJXATLEzcDUAm-Pt5OAcaGngaQxXgMaMgN8Ig01FREQBUI32n/dz/d5/L2dJQSEvUUt3QS80TmxFL1o2X0NHQUg0N0wwMDBUOTUwSTRCNFI5Q0QwR0Mz/)
   * [Sơ đồ trang](https://gdt.gov.vn/wps/portal/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zind0dPUzMfQwMDEIsTQ08TZxMgiydXQzcnY31wwkpiAJKG-AAjgZA_VFgJXATLEzcDUAm-Pt5OAcaGngaQxXgMaMgN8Ig01FREQBUI32n/dz/d5/L2dJQSEvUUt3QS80TmxFL1o2X0NRS0NWS1YwMEdRNDIwSUVHSkJOUkUxNkwz/)
   * [Đường dây nóng](https://gdt.gov.vn/wps/portal/home/hotline)

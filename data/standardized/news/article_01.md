@@ -1,6 +1,6 @@
 # Hướng dẫn chi tiết thủ tục đăng ký hộ kinh doanh cá thể
 **Source:** https://dangkykinhdoanh.gov.vn/vn/tin-tuc/611/5842/huong-dan-dang-ky-ho-kinh-doanh.aspx
-**Crawled:** 2026-09-25T10:43:30.137319
+**Crawled:** 2026-09-25T11:01:27.645953
 ---
 
 # Hướng dẫn chi tiết thủ tục đăng ký hộ kinh doanh cá thể

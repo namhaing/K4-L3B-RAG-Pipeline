@@ -1,0 +1,82 @@
+[
+  {
+    "question": "Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?",
+    "expected_answer": "Hộ kinh doanh, cá nhân kinh doanh có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì thuộc trường hợp không phải nộp thuế GTGT và không phải nộp thuế TNCN.",
+    "expected_context": "Hộ kinh doanh, cá nhân kinh doanh có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì thuộc trường hợp không phải nộp thuế GTGT và không phải nộp thuế TNCN theo quy định pháp luật về thuế GTGT và thuế TNCN."
+  },
+  {
+    "question": "Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",
+    "expected_answer": "Đối với ngành phân phối, cung cấp hàng hóa, tỷ lệ thuế GTGT là 1% và tỷ lệ thuế TNCN là 0,5%.",
+    "expected_context": "Phân phối, cung cấp hàng hóa: tỷ lệ thuế GTGT là 1%; tỷ lệ thuế TNCN là 0,5%."
+  },
+  {
+    "question": "Hồ sơ đăng ký hộ kinh doanh cá thể bao gồm những giấy tờ gì?",
+    "expected_answer": "Hồ sơ đăng ký hộ kinh doanh gồm: 1. Giấy đề nghị đăng ký hộ kinh doanh; 2. Giấy tờ pháp lý của cá nhân đối với chủ hộ kinh doanh, thành viên hộ gia đình; 3. Bản sao biên bản họp thành viên hộ gia đình về việc thành lập hộ kinh doanh; 4. Bản sao văn bản ủy quyền của thành viên hộ gia đình cho một thành viên làm chủ hộ kinh doanh.",
+    "expected_context": "Điều 87. Hồ sơ đăng ký hộ kinh doanh\n1. Giấy đề nghị đăng ký hộ kinh doanh.\n2. Giấy tờ pháp lý của cá nhân đối với chủ hộ kinh doanh...\n3. Bản sao biên bản họp thành viên hộ gia đình...\n4. Bản sao văn bản ủy quyền..."
+  },
+  {
+    "question": "Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?",
+    "expected_answer": "Mỗi cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trên phạm vi toàn quốc.",
+    "expected_context": "Mỗi cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trên phạm vi toàn quốc và được quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân."
+  },
+  {
+    "question": "Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?",
+    "expected_answer": "Hộ kinh doanh đăng ký tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở. Thời hạn cấp Giấy chứng nhận đăng ký hộ kinh doanh là 03 ngày làm việc kể từ ngày nhận đủ hồ sơ hợp lệ.",
+    "expected_context": "Hộ kinh doanh đăng ký tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở hộ kinh doanh. Cơ quan đăng ký kinh doanh cấp huyện trao Giấy biên nhận và cấp Giấy chứng nhận đăng ký hộ kinh doanh cho hộ kinh doanh trong thời hạn 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ."
+  },
+  {
+    "question": "Hộ kinh doanh nộp thuế theo phương pháp kê khai phải áp dụng hóa đơn điện tử như thế nào?",
+    "expected_answer": "Hộ kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử có mã của cơ quan thuế khi bán hàng hóa, cung cấp dịch vụ.",
+    "expected_context": "Hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai phải sử dụng hóa đơn điện tử có mã của cơ quan thuế khi bán hàng hóa, cung cấp dịch vụ."
+  },
+  {
+    "question": "Hộ kinh doanh bán lẻ, nhà hàng, ăn uống được lựa chọn sử dụng loại hóa đơn điện tử nào?",
+    "expected_answer": "Hộ kinh doanh trong lĩnh vực trung tâm thương mại, siêu thị, bán lẻ hàng tiêu dùng, ăn uống, nhà hàng, khách sạn được lựa chọn sử dụng hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu điện tử với cơ quan thuế.",
+    "expected_context": "Hộ kinh doanh trong lĩnh vực trung tâm thương mại, siêu thị, bán lẻ hàng tiêu dùng, ăn uống, nhà hàng, khách sạn, tiệm vàng, thuốc tân dược trực tiếp bán lẻ đến người tiêu dùng được lựa chọn sử dụng hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu điện tử với cơ quan thuế."
+  },
+  {
+    "question": "Hộ kinh doanh bán hàng online trên các sàn thương mại điện tử như Shopee, TikTok Shop có phải nộp thuế không?",
+    "expected_answer": "Có. Cá nhân, hộ kinh doanh bán hàng online trên các sàn TMĐT có doanh thu trong năm trên 100 triệu đồng phải tự kê khai và nộp thuế GTGT và thuế TNCN theo quy định.",
+    "expected_context": "Doanh thu bán hàng qua mạng trên 100 triệu đồng/năm phải nộp thuế GTGT và TNCN tương ứng theo tỷ lệ ngành nghề phân phối hàng hóa (tổng 1.5%)."
+  },
+  {
+    "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",
+    "expected_answer": "Tỷ lệ thuế GTGT là 5% và tỷ lệ thuế TNCN là 2%.",
+    "expected_context": "Dịch vụ, xây dựng không bao thầu nguyên vật liệu: tỷ lệ thuế GTGT là 5%; tỷ lệ thuế TNCN là 2%."
+  },
+  {
+    "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với hoạt động sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",
+    "expected_answer": "Tỷ lệ thuế GTGT là 3% và tỷ lệ thuế TNCN là 1,5%.",
+    "expected_context": "Sản xuất, vận tải, dịch vụ có gắn với hàng hóa, xây dựng có bao thầu nguyên vật liệu: tỷ lệ thuế GTGT là 3%; tỷ lệ thuế TNCN là 1,5%."
+  },
+  {
+    "question": "Thông tư 40/2021/TT-BTC do cơ quan nào ban hành và hướng dẫn về nội dung gì?",
+    "expected_answer": "Thông tư 40/2021/TT-BTC do Bộ Tài chính ban hành, hướng dẫn về thuế giá trị gia tăng (GTGT), thuế thu nhập cá nhân (TNCN) và quản lý thuế đối với hộ kinh doanh, cá nhân kinh doanh.",
+    "expected_context": "THÔNG TƯ 40/2021/TT-BTC HƯỚNG DẪN THUẾ GIÁ TRỊ GIA TĂNG, THUẾ THU NHẬP CÁ NHÂN VÀ QUẢN LÝ THUẾ ĐỐI VỚI HỘ KINH DOANH, CÁ NHÂN KINH DOANH"
+  },
+  {
+    "question": "Nghị định 01/2021/NĐ-CP quy định thủ tục đăng ký hộ kinh doanh tại chương nào?",
+    "expected_answer": "Nghị định 01/2021/NĐ-CP quy định về đăng ký hộ kinh doanh tại Chương VIII.",
+    "expected_context": "NGHỊ ĐỊNH 01/2021/NĐ-CP VỀ ĐĂNG KÝ DOANH NGHIỆP - CHƯƠNG VIII: ĐĂNG KÝ HỘ KINH DOANH"
+  },
+  {
+    "question": "Nghị định 123/2020/NĐ-CP quy định về việc áp dụng hóa đơn điện tử cho hộ kinh doanh tại điều nào?",
+    "expected_answer": "Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử đối với hộ kinh doanh tại Điều 11.",
+    "expected_context": "Điều 11. Áp dụng hóa đơn điện tử đối với hộ kinh doanh, cá nhân kinh doanh"
+  },
+  {
+    "question": "Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong các doanh nghiệp khác không?",
+    "expected_answer": "Có. Mỗi cá nhân, thành viên hộ gia đình đăng ký hộ kinh doanh được quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân.",
+    "expected_context": "Mỗi cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trên phạm vi toàn quốc và được quyền góp vốn, mua cổ phần, mua phần vốn góp trong doanh nghiệp với tư cách cá nhân."
+  },
+  {
+    "question": "Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?",
+    "expected_answer": "Hộ kinh doanh nộp thuế theo phương pháp khoán nếu có yêu cầu sử dụng hóa đơn thì cơ quan thuế cấp hóa đơn điện tử có mã theo từng lần phát sinh.",
+    "expected_context": "Hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp khoán nếu có yêu cầu sử dụng hóa đơn thì cơ quan thuế cấp hóa đơn điện tử có mã theo từng lần phát sinh."
+  },
+  {
+    "question": "Phương pháp kê khai thuế áp dụng cho đối tượng hộ kinh doanh nào?",
+    "expected_answer": "Phương pháp kê khai áp dụng đối với hộ kinh doanh, cá nhân kinh doanh quy mô lớn; hoặc hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai.",
+    "expected_context": "Phương pháp kê khai áp dụng đối với hộ kinh doanh, cá nhân kinh doanh quy mô lớn; hoặc hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng lựa chọn nộp thuế theo phương pháp kê khai."
+  }
+]
