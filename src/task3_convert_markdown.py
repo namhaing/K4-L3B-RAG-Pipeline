@@ -27,7 +27,9 @@ LEGAL_METADATA = {
                      "Chính sách thuế hộ kinh doanh thay đổi từ 01/01/2026, cần đối chiếu quy định mới.",
     },
     "nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd": {
-        "title": "Nghị định 01/2021/NĐ-CP về đăng ký doanh nghiệp (Chương VIII: đăng ký hộ kinh doanh)",
+        # Tên chính thức. Không thêm "(Chương VIII: đăng ký hộ kinh doanh)": cụm này bị lặp
+        # vào mọi chunk của văn bản khiến dense/BM25 không phân biệt được Chương VIII.
+        "title": "Nghị định 01/2021/NĐ-CP về đăng ký doanh nghiệp",
         "source": "https://congbaocdn.chinhphu.vn/CongBaoCP/VanBan/2021/1/32981/34281-1-2021113-11401-2021-nd-cp.pdf",
         "doc_number": "01/2021/NĐ-CP",
         "issued_date": "2021-01-04",
@@ -56,7 +58,7 @@ _NOISE_LINE = re.compile(
     re.MULTILINE,
 )
 # Dòng mở đầu một mục mới: không nối vào dòng trước.
-_BLOCK_START = re.compile(r"^(Điều \d+|Chương [IVXLC]+|Mục \d+|Phụ lục|\d+\.\s|[a-zđ]\)\s|[-–•+|])")
+_BLOCK_START = re.compile(r"^(Điều \d+|Chương [IVXLC]+|Mục \d+|Phụ lục [IVXLC]+$|\d+\.\s|[a-zđ]\)\s|[-–•+|])")
 
 
 def _unwrap_lines(text: str) -> str:
@@ -98,6 +100,9 @@ def _clean_pdf_text(text: str, cut_from: str | None = None) -> str:
         if match:
             text = text[:match.start()]
     text = _NOISE_LINE.sub("", text)
+    # Bảng Phụ lục (danh mục ngành nghề, tỷ lệ thuế) -> text thường; giữ ký tự "|" thì
+    # sinh ra chunk gần rỗng mà BM25 lại chấm cao nhờ chuẩn hoá độ dài.
+    text = re.sub(r"[ \t]*\|[ \t|]*", " ", text)
     return re.sub(r"\n{3,}", "\n\n", _unwrap_lines(text)).strip()
 
 

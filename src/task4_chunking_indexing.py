@@ -13,7 +13,8 @@ chạy lại pipeline không tạo dữ liệu trùng. Task 5 phải dùng chung
 Strategy cho văn bản pháp luật: tách theo "Điều N" trước, Điều nào dài hơn
 CHUNK_SIZE thì cắt tiếp bằng RecursiveCharacterTextSplitter và lặp lại tiêu đề
 Điều ở đầu mỗi chunk con để chunk không mất ngữ cảnh. Bài báo chỉ dùng
-recursive splitter. Mọi chunk đều mở đầu bằng tên văn bản/bài viết.
+recursive splitter. Mọi chunk mở đầu bằng nhãn văn bản ngắn (loại + số hiệu, hoặc
+tiêu đề bài báo); BM25 bỏ qua nhãn này. Chunk gần như không có nội dung bị bỏ.
 """
 
 import os
@@ -68,10 +69,19 @@ _HEADER_FIELDS = {
 _HEADER_LINE = re.compile(r"^\*\*(?P<key>[^*]+?):\*\*\s*(?P<value>.*)$")
 # Tiêu đề Điều có dạng "Điều 4. Tên điều" ở đầu dòng; bắt buộc dấu chấm để không
 # nhầm với dòng PDF bị ngắt giữa câu như "Điều 4 của Luật này...". Nhận cả
-# "Dieu" vì một số PDF trích xuất ra văn bản mất dấu.
-_ARTICLE_HEADING = re.compile(r"^[ \t#*]*((?:Điều|Dieu)[ \t]+\d+[a-z]?\..*)$", re.MULTILINE)
+# "Dieu" vì một số PDF trích xuất ra văn bản mất dấu. Dòng "Phụ lục I" đứng riêng
+# cũng mở một mục mới, để bảng Phụ lục không bị gán nhầm vào Điều cuối cùng.
+_ARTICLE_HEADING = re.compile(
+    r"^[ \t#*]*((?:Điều|Dieu)[ \t]+\d+[a-z]?\..*|Phụ lục [IVXLC]+)[ \t]*$", re.MULTILINE
+)
+# Dòng "Chương VIII" đứng riêng; tên chương viết hoa ở các dòng ngay sau.
+_CHAPTER_LINE = re.compile(r"^[ \t#*]*(Chương[ \t]+[IVXLC]+)[ \t]*$", re.MULTILINE)
 _ARTICLE_PREFIX_MAX = 100
-_TITLE_PREFIX_MAX = 150
+_CHAPTER_MAX = 120
+_LABEL_MAX = 120
+# Chunk có phần thân (bỏ tiêu đề Điều) ít hơn chừng này ký tự chữ/số thì bỏ: thường chỉ
+# là dòng tiêu đề bị splitter tách riêng, không có nội dung để trả lời.
+MIN_BODY_WORD_CHARS = 40
 
 
 def _normalize(text: str) -> str:
@@ -195,18 +205,51 @@ def load_documents() -> list[dict]:
     return documents
 
 
-def _split_articles(text: str) -> list[tuple[str | None, str]]:
-    """Tách văn bản luật thành (tiêu đề Điều, nội dung); phần mở đầu có tiêu đề None."""
-    matches = list(_ARTICLE_HEADING.finditer(text))
-    if not matches:
-        return [(None, text)]
-    sections = []
-    if text[:matches[0].start()].strip():
-        sections.append((None, text[:matches[0].start()]))
-    for index, match in enumerate(matches):
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
-        heading = match.group(1).strip().strip("*").strip()
-        sections.append((heading, text[match.start():end]))
+def _chapters(text: str) -> list[tuple[int, int, str]]:
+    """Tìm tiêu đề Chương: (vị trí đầu, vị trí cuối, "Chương VIII\\nTÊN CHƯƠNG").
+
+    Tên chương là các dòng viết hoa ngay sau dòng "Chương N" (có thể xuống nhiều dòng).
+    """
+    chapters = []
+    for match in _CHAPTER_LINE.finditer(text):
+        lines = text[match.end():match.end() + 400].split("\n")
+        consumed, title = len(lines[0]) + 1, []
+        for line in lines[1:]:
+            stripped = line.strip()
+            is_title = stripped and stripped == stripped.upper() and any(ch.isalpha() for ch in stripped) \
+                and not _ARTICLE_HEADING.match(line)
+            if not is_title and (title or stripped):
+                break
+            consumed += len(line) + 1
+            if stripped:
+                title.append(stripped)
+        name = match.group(1).strip()
+        chapters.append((match.start(), match.end() + consumed,
+                         f"{name}\n{' '.join(title)}" if title else name))
+    return chapters
+
+
+def _split_articles(text: str) -> list[tuple[str | None, str | None, str]]:
+    """Tách văn bản luật thành (tiêu đề Điều, tiêu đề Chương, nội dung).
+
+    Tiêu đề Chương không thuộc Điều đứng trước nó (trước đây dòng "Chương VIII ..."
+    dính vào cuối chunk Điều 78); nó được gắn cho mọi Điều trong chương.
+    """
+    events = [(m.start(), m.start(), "article", m.group(1).strip().strip("*").strip())
+              for m in _ARTICLE_HEADING.finditer(text)]
+    events += [(start, end, "chapter", name) for start, end, name in _chapters(text)]
+    sections, heading, chapter, pos = [], None, None, 0
+    for start, end, kind, value in sorted(events):
+        if text[pos:start].strip():
+            sections.append((heading, chapter, text[pos:start]))
+        if kind == "chapter":
+            chapter, heading, pos = value, None, end
+        else:
+            heading, pos = value, start
+            if value.startswith("Phụ lục"):  # Phụ lục nằm sau Điều cuối, không thuộc chương nào
+                chapter = None
+    if text[pos:].strip():
+        sections.append((heading, chapter, text[pos:]))
     return sections
 
 
@@ -221,49 +264,79 @@ def _splitter(chunk_size: int):
     )
 
 
-def _chunk_texts(document: dict, budget: int) -> list[tuple[str | None, str]]:
-    """Cắt nội dung thành các đoạn dài tối đa ``budget`` ký tự."""
+def _chunk_texts(document: dict, label: str) -> list[tuple[str | None, str | None, str]]:
+    """Cắt nội dung thành (tiêu đề Điều, tiêu đề Chương, đoạn text).
+
+    Mỗi đoạn vừa với CHUNK_SIZE sau khi ghép nhãn văn bản và tiêu đề Chương vào đầu.
+    """
     content = document["content"]
     if document["metadata"].get("doc_type") != "legal":
-        return [(None, text) for text in _splitter(budget).split_text(content)]
+        budget = CHUNK_SIZE - len(label) - 1
+        return [(None, None, text) for text in _splitter(budget).split_text(content)]
 
     pieces = []
-    for heading, section in _split_articles(content):
+    for heading, chapter, section in _split_articles(content):
         section = section.strip()
+        chapter = chapter[:_CHAPTER_MAX] if chapter else None
+        budget = CHUNK_SIZE - len(label) - 1 - (len(chapter) + 1 if chapter else 0)
         if len(section) <= budget:
-            pieces.append((heading, section))
+            pieces.append((heading, chapter, section))
             continue
         prefix = heading[:_ARTICLE_PREFIX_MAX] if heading else ""
         parts = _splitter(budget - len(prefix) - 1).split_text(section)
         for part_index, part in enumerate(parts):
             # Chunk đầu đã chứa sẵn dòng tiêu đề Điều.
-            pieces.append((heading, f"{prefix}\n{part}" if prefix and part_index else part))
+            pieces.append((heading, chapter, f"{prefix}\n{part}" if prefix and part_index else part))
     return pieces
+
+
+def _doc_label(metadata: dict) -> str:
+    """Nhãn văn bản ngắn gắn đầu chunk: "Thông tư 40/2021/TT-BTC" hoặc tiêu đề bài báo.
+
+    Với văn bản luật chỉ lấy loại + số hiệu, không lấy cả tên dài: tên dài lặp lại
+    trong mọi chunk của văn bản (vd "...đăng ký hộ kinh doanh") làm mọi chunk trông
+    giống nhau với cả dense lẫn BM25.
+    """
+    title = metadata["title"]
+    number = metadata.get("doc_number")
+    if metadata.get("doc_type") == "legal" and number:
+        head, found, _ = title.partition(number)
+        return (head + number if found else number)[:_LABEL_MAX]
+    return title[:_LABEL_MAX]
+
+
+def _body_word_chars(text: str) -> int:
+    """Số ký tự chữ/số của chunk sau khi bỏ dòng tiêu đề Điều ở đầu."""
+    first, _, rest = text.partition("\n")
+    body = rest if _ARTICLE_HEADING.match(first) else text
+    return len(re.findall(r"\w", body))
 
 
 def chunk_documents(documents: list[dict]) -> list[dict]:
     """Chia Document thành chunks có id và chunk_index.
 
-    Mỗi chunk bắt đầu bằng tên văn bản (vd "Thông tư 40/2021/TT-BTC ...") vì số
-    hiệu chỉ xuất hiện ở header/trang đầu: thiếu dòng này thì chunk "Điều 7"
-    không chứa số hiệu, BM25 không khớp được query theo số hiệu và dense cũng
-    mất ngữ cảnh văn bản nào.
+    Mỗi chunk bắt đầu bằng nhãn văn bản (``_doc_label``) để dense biết chunk thuộc
+    văn bản nào; ``metadata["prefix_chars"]`` là độ dài phần nhãn đó để BM25 (Task 6)
+    bỏ qua khi tính điểm, vì token số hiệu có mặt ở mọi chunk của văn bản thì không
+    còn phân biệt được chunk nào liên quan. Tiếp theo là tiêu đề Chương (nếu có):
+    phần này BM25 vẫn chấm vì nó khác nhau giữa các chương.
     """
     chunks = []
     for document in documents:
-        doc_prefix = document["metadata"]["title"][:_TITLE_PREFIX_MAX]
-        budget = CHUNK_SIZE - len(doc_prefix) - 1
+        label = _doc_label(document["metadata"])
         index = 0
-        for heading, text in _chunk_texts(document, budget):
+        for heading, chapter, text in _chunk_texts(document, label):
             text = text.strip()
-            if not text:
+            if _body_word_chars(text) < MIN_BODY_WORD_CHARS:
                 continue
-            metadata = {**document["metadata"], "chunk_index": index}
+            metadata = {**document["metadata"], "chunk_index": index, "prefix_chars": len(label) + 1}
             if heading:
                 metadata["article"] = heading[:_ARTICLE_PREFIX_MAX]
+            if chapter:
+                metadata["chapter"] = chapter.replace("\n", ". ")
             chunks.append({
                 "id": f"{document['id']}::chunk-{index}",
-                "content": f"{doc_prefix}\n{text}",
+                "content": "\n".join(part for part in (label, chapter, text) if part),
                 "metadata": metadata,
             })
             index += 1

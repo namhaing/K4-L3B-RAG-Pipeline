@@ -5,7 +5,9 @@ Hai config dùng cùng golden dataset, generator, prompt, top_k và evaluator; c
 retrieval strategy (tham số use_reranking của _generate). Chấm bằng RAGAS 4 metric:
 faithfulness, answer relevancy, context recall, context precision (có reference).
 
-    python group_project/evaluation/run_eval.py                # chạy đủ hai config
+    python group_project/evaluation/run_eval.py                # chạy đủ các config A–D
+    python group_project/evaluation/run_eval.py --configs C D  # chỉ chạy bonus, giữ kết quả A/B
+    python group_project/evaluation/run_eval.py --golden group_project/evaluation/golden_casual.json --tag casual --configs B D
     python group_project/evaluation/run_eval.py --limit 3      # thử nhanh 3 câu
     python group_project/evaluation/run_eval.py --skip-ragas   # chỉ generate + đo latency
 
@@ -47,13 +49,24 @@ from src.task4_chunking_indexing import (  # noqa: E402
     EMBEDDING_MODEL,
     get_collection,
 )
+import src.task9_retrieval_pipeline as retrieval  # noqa: E402
+from src import llm_client  # noqa: E402
 from src.task9_retrieval_pipeline import SCORE_THRESHOLD  # noqa: E402
 
 
 GOLDEN_PATH = EVALUATION_DIR / "golden_dataset.json"
+# Hậu tố tên file kết quả; --tag casual -> eval_results_casual_B.json, eval_summary_casual.json
+OUTPUT_TAG = ""
+
+
+def _output(name: str, suffix: str) -> Path:
+    return EVALUATION_DIR / f"{name}{OUTPUT_TAG}{suffix}"
 CONFIGS = {
     "A": {"name": "dense-only", "use_reranking": False},
     "B": {"name": "hybrid + RRF", "use_reranking": True},
+    # Bonus: chỉ khác B ở một bước (reranker sau RRF / HyDE cho dense), còn lại giữ nguyên.
+    "C": {"name": "hybrid + RRF + LLM rerank", "use_reranking": True, "reranker": "llm"},
+    "D": {"name": "HyDE + hybrid + RRF", "use_reranking": True, "query_expansion": "hyde"},
 }
 METRICS = ("faithfulness", "answer_relevancy", "context_recall", "context_precision")
 EVAL_LLM_MODEL = os.getenv("EVAL_LLM_MODEL", "gpt-4o-mini")
@@ -83,9 +96,12 @@ def answer_for_scoring(answer: str) -> str:
 
 def generate_rows(config: str, items: list[dict], top_k: int) -> list[dict]:
     use_reranking = CONFIGS[config]["use_reranking"]
+    retrieval.RERANKER = CONFIGS[config].get("reranker", "none")
+    retrieval.QUERY_EXPANSION = CONFIGS[config].get("query_expansion", "none")
     rows = []
     for index, item in enumerate(items, 1):
         usage_before = dict(generation.LLM_USAGE)
+        aux_before = dict(llm_client.USAGE)
         started = time.perf_counter()
         result = generation._generate(item["question"], top_k=top_k, use_reranking=use_reranking)
         latency = time.perf_counter() - started
@@ -110,6 +126,8 @@ def generate_rows(config: str, items: list[dict], top_k: int) -> list[dict]:
             "latency_s": round(latency, 3),
             "input_tokens": generation.LLM_USAGE["input_tokens"] - usage_before["input_tokens"],
             "output_tokens": generation.LLM_USAGE["output_tokens"] - usage_before["output_tokens"],
+            # Token của lời gọi LLM phụ trong retrieval (reranker, HyDE); 0 ở config A/B.
+            "aux_tokens": sum(llm_client.USAGE[key] - aux_before[key] for key in ("input_tokens", "output_tokens")),
         }
         rows.append(row)
         print(
@@ -198,6 +216,7 @@ def summarize(rows: list[dict]) -> dict:
         "latency_max_s": latencies[-1],
         "input_tokens_mean": round(statistics.fmean(row["input_tokens"] for row in rows), 1),
         "output_tokens_mean": round(statistics.fmean(row["output_tokens"] for row in rows), 1),
+        "aux_tokens_mean": round(statistics.fmean(row.get("aux_tokens", 0) for row in rows), 1),
     })
     return summary
 
@@ -212,16 +231,33 @@ def _git_commit() -> str:
 
 
 def write_outputs(results: dict[str, list[dict]], summary: dict) -> None:
+    """Ghi kết quả; chạy một phần config (vd --configs C) thì giữ lại kết quả config khác."""
     for config, rows in results.items():
-        path = EVALUATION_DIR / f"eval_results_{config}.json"
+        path = _output("eval_results", f"_{config}.json")
         path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    summary_path = _output("eval_summary", ".json")
+    if summary_path.exists():
+        previous = json.loads(summary_path.read_text(encoding="utf-8"))
+        for config, stats in previous.get("configs", {}).items():
+            if config not in summary["configs"]:
+                summary["configs"][config] = {**stats, "run": stats.get("run", previous.get("run"))}
+    for config in summary["configs"]:
+        if config in results:
+            summary["configs"][config]["run"] = summary["run"]
+    summary["configs"] = dict(sorted(summary["configs"].items()))
+    results = {
+        config: results.get(config) or json.loads(_output("eval_results", f"_{config}.json").read_text(encoding="utf-8"))
+        for config in summary["configs"]
+        if config in results or _output("eval_results", f"_{config}.json").exists()
+    }
 
     columns = [
         "config", "id", "question", "faithfulness", "answer_relevancy", "context_recall",
         "context_precision", "context_hit", "refused", "retrieval_source", "citations",
-        "latency_s", "input_tokens", "output_tokens", "source_ids", "answer",
+        "latency_s", "input_tokens", "output_tokens", "aux_tokens", "source_ids", "answer",
     ]
-    with (EVALUATION_DIR / "eval_results.csv").open("w", encoding="utf-8-sig", newline="") as file:
+    with _output("eval_results", ".csv").open("w", encoding="utf-8-sig", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         for rows in results.values():
@@ -232,9 +268,7 @@ def write_outputs(results: dict[str, list[dict]], summary: dict) -> None:
                     "source_ids": " ".join(row["source_ids"]),
                 })
 
-    (EVALUATION_DIR / "eval_summary.json").write_text(
-        json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def print_report(summary: dict) -> None:
@@ -266,9 +300,13 @@ def main() -> None:
     parser.add_argument("--limit", type=int, help="chỉ chạy N câu đầu để thử nhanh")
     parser.add_argument("--concurrency", type=int, default=4, help="số lời gọi RAGAS song song")
     parser.add_argument("--skip-ragas", action="store_true", help="chỉ generate và đo latency")
+    parser.add_argument("--golden", type=Path, default=GOLDEN_PATH, help="bộ câu hỏi khác golden_dataset.json")
+    parser.add_argument("--tag", default="", help="hậu tố file kết quả, để không ghi đè kết quả chính")
     args = parser.parse_args()
 
-    items = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))[: args.limit]
+    global OUTPUT_TAG
+    OUTPUT_TAG = f"_{args.tag}" if args.tag else ""
+    items = json.loads(args.golden.read_text(encoding="utf-8"))[: args.limit]
     if get_collection().count() == 0:
         raise SystemExit("ChromaDB trống. Chạy trước: python -m src.task4_chunking_indexing")
     if not args.skip_ragas and not os.getenv("OPENAI_API_KEY"):
@@ -286,6 +324,7 @@ def main() -> None:
         "run": {
             "date": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "commit": _git_commit(),
+            "golden_dataset": args.golden.name,
             "golden_dataset_size": len(items),
             "top_k": args.top_k,
             "generator": f"{generation.LLM_PROVIDER}/{generation.LLM_MODEL or generation.DEFAULT_MODELS[generation.LLM_PROVIDER]}",
