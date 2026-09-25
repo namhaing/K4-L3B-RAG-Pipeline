@@ -118,4 +118,24 @@ Hạn chế của fallback:
 | Conversation memory: viết lại câu hỏi nối tiếp thành câu độc lập (`condense_question`) | Không nhớ ngữ cảnh: "Còn nếu bán hàng online thì sao?" retrieve theo nguyên câu mơ hồ | N/A (golden dataset là câu độc lập) | +1 lời gọi `gpt-4o-mini` cho câu có lịch sử (demo 5.8 s so với 2–3 s) | Demo thật: câu được viết lại thành "Tỷ lệ thuế GTGT và TNCN đối với dịch vụ bán hàng online là bao nhiêu?" và trả lời đúng có citation. Có test `test_follow_up_question_is_condensed_before_retrieval` |
 | Highlight câu nguồn được trích (`src/citation_highlight.py`) | Chỉ hiện đoạn trích 700 ký tự đầu của chunk | N/A (tính năng UI) | So khớp từ khoá, không gọi LLM, tốn không đáng kể | Mỗi `[Document n]` được nối với câu trong nguồn có nhiều từ khoá trùng nhất và tô vàng. Có test `test_supporting_span_matches_cited_claim` |
 | **Reranker LLM listwise** (config C: RRF top 15 → `gpt-4o-mini` xếp lại → top 5) | Config B (RRF) | Precision **+0.026** (0.957 → 0.983, cao nhất trong 4 config); recall **+0.031** (0.906 → 0.938, câu #15 phục hồi 0.5 → 1.0); faithfulness −0.042 (0.933 → 0.892, do #4 và #14 ở C: LLM thêm ý không có trong chunk); average +0.001 (0.8468 → 0.8477) | +1.2 s (2.51 → 3.72 s) và **+3.1k token** mỗi câu (1 lời gọi `gpt-4o-mini`) | Reranker cải thiện retrieval rõ nhất: câu #14 "góp vốn" từ 4/5 chunk nhiễu (Chương IV/VI về doanh nghiệp) thành 5/5 chunk Chương VIII (Điều 79–81); câu "hồ sơ đăng ký hộ kinh doanh" đưa Điều 87 lên hạng 1. Faithfulness giảm là ở bước generation, nằm trong độ dao động judge. Không bật mặc định vì chi phí token |
-| **HyDE** (config D: dense search bằng câu hỏi + đoạn giả định) | Config B (câu hỏi gốc) | Faithfulness +0.046 (0.979, cao nhất); recall bằng B (0.906); precision −0.028 (0.928); relevancy −0.038; average −0.005 (0.8468 → 0.8416) | +1.9 s (2.51 → 4.41 s) và +274 token mỗi câu | **Chưa chứng minh được cải thiện trên golden dataset**: 16 câu golden viết theo văn phong luật nên dense đã tìm tốt, HyDE không còn nhiều chỗ để giúp. HyDE giúp rõ với câu văn nói: "mở quán cà phê cần giấy tờ gì" có cosine 0.51 → 0.70 và dense hạng 1 đổi từ Điều 22 (doanh nghiệp) sang Điều 87 (đăng ký hộ kinh doanh). Cần bộ đánh giá gồm câu văn nói để đo đúng tác dụng |
+| **HyDE** (config D: dense search bằng câu hỏi + đoạn giả định) | Config B (câu hỏi gốc) | **Trên 14 câu văn nói (`golden_casual.json`): context recall +0.119 (0.786 → 0.905), precision +0.029, faithfulness +0.047, average +0.040 (0.717 → 0.757), context hit 5/14 → 7/14.** Trên 16 câu golden văn phong luật: average −0.005 (0.847 → 0.842), recall bằng B | +1.5–1.9 s và +275 token mỗi câu | **HyDE cải thiện câu hỏi văn nói**: dense của câu gốc lệch xa văn phong luật (cosine 0.46–0.72), đoạn giả định kéo về đúng Điều. Ví dụ "một người được mở mấy hộ kinh doanh" recall 0 → 1. Với câu golden đã viết theo văn phong luật thì HyDE không giúp thêm. Chi tiết ở mục "A/B HyDE trên câu hỏi văn nói" |
+
+### A/B HyDE trên câu hỏi văn nói
+
+Golden dataset viết theo văn phong luật nên không đo được tác dụng của HyDE. Nhóm thêm `golden_casual.json`: 14 câu hỏi viết như người dùng thật (không dùng thuật ngữ pháp lý), mỗi câu có `expected_context` là đoạn nguyên văn trong corpus, viết và gán đáp án trước khi chạy. Chạy `run_eval.py --golden group_project/evaluation/golden_casual.json --tag casual --configs B D`; kết quả ở `eval_summary_casual.json`, `eval_results_casual_*.json`. Hai config dùng cùng generator, judge, prompt, `top_k`, threshold; D chỉ khác B ở bước HyDE.
+
+| Metric            | B: hybrid + RRF | D: HyDE + hybrid | Delta D−B |
+| ----------------- | --------------: | ---------------: | --------: |
+| Faithfulness      | 0.7770 | 0.8238 | +0.0468 |
+| Answer relevance  | 0.4111 | 0.3744 | −0.0367 |
+| Context recall    | 0.7857 | **0.9048** | **+0.1191** |
+| Context precision | 0.8940 | 0.9233 | +0.0293 |
+| **Average**       | **0.7169** | **0.7566** | **+0.0397** |
+| Context hit       | 5/14 | 7/14 | +2 |
+| Latency trung bình | 6.78 s | 8.32 s | +1.54 s |
+
+- Recall theo từng câu: D thắng 4 câu (#3 "một người được mở mấy hộ kinh doanh" 0 → 1; #5 "có được làm chủ doanh nghiệp tư nhân nữa không" 0.5 → 1; #6 0.5 → 1; #11 "bán hàng trên facebook" 0.5 → 1), thua 2 câu (#4 "bán hàng rong" 1 → 0.5; #7 "dẹp hộ kinh doanh" 1 → 0.67).
+- #6 và #8 có best dense < 0.50 nên đi qua PageIndex ở cả hai config; chênh lệch ở hai câu này đến từ PageIndex/judge, không phải HyDE.
+- Answer relevance giảm nhẹ (−0.037) và faithfulness của một số câu (#10, #12, #13) giảm ở D: đoạn chunk khác làm LLM diễn đạt khác; không có câu nào bị từ chối.
+- Latency ở tập này cao hơn tập golden vì 2/14 câu đi qua PageIndex (18–35 s mỗi câu).
+- Hạn chế: tập nhỏ (14 câu); mức tăng recall +0.12 lớn hơn nhiều so với độ dao động của judge (khoảng ±0.03) nhưng cần tập lớn hơn để khẳng định chắc chắn.

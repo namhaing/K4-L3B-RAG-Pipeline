@@ -7,6 +7,7 @@ faithfulness, answer relevancy, context recall, context precision (có reference
 
     python group_project/evaluation/run_eval.py                # chạy đủ các config A–D
     python group_project/evaluation/run_eval.py --configs C D  # chỉ chạy bonus, giữ kết quả A/B
+    python group_project/evaluation/run_eval.py --golden group_project/evaluation/golden_casual.json --tag casual --configs B D
     python group_project/evaluation/run_eval.py --limit 3      # thử nhanh 3 câu
     python group_project/evaluation/run_eval.py --skip-ragas   # chỉ generate + đo latency
 
@@ -54,6 +55,12 @@ from src.task9_retrieval_pipeline import SCORE_THRESHOLD  # noqa: E402
 
 
 GOLDEN_PATH = EVALUATION_DIR / "golden_dataset.json"
+# Hậu tố tên file kết quả; --tag casual -> eval_results_casual_B.json, eval_summary_casual.json
+OUTPUT_TAG = ""
+
+
+def _output(name: str, suffix: str) -> Path:
+    return EVALUATION_DIR / f"{name}{OUTPUT_TAG}{suffix}"
 CONFIGS = {
     "A": {"name": "dense-only", "use_reranking": False},
     "B": {"name": "hybrid + RRF", "use_reranking": True},
@@ -226,10 +233,10 @@ def _git_commit() -> str:
 def write_outputs(results: dict[str, list[dict]], summary: dict) -> None:
     """Ghi kết quả; chạy một phần config (vd --configs C) thì giữ lại kết quả config khác."""
     for config, rows in results.items():
-        path = EVALUATION_DIR / f"eval_results_{config}.json"
+        path = _output("eval_results", f"_{config}.json")
         path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    summary_path = EVALUATION_DIR / "eval_summary.json"
+    summary_path = _output("eval_summary", ".json")
     if summary_path.exists():
         previous = json.loads(summary_path.read_text(encoding="utf-8"))
         for config, stats in previous.get("configs", {}).items():
@@ -240,10 +247,9 @@ def write_outputs(results: dict[str, list[dict]], summary: dict) -> None:
             summary["configs"][config]["run"] = summary["run"]
     summary["configs"] = dict(sorted(summary["configs"].items()))
     results = {
-        config: results.get(config) or json.loads(
-            (EVALUATION_DIR / f"eval_results_{config}.json").read_text(encoding="utf-8"))
+        config: results.get(config) or json.loads(_output("eval_results", f"_{config}.json").read_text(encoding="utf-8"))
         for config in summary["configs"]
-        if config in results or (EVALUATION_DIR / f"eval_results_{config}.json").exists()
+        if config in results or _output("eval_results", f"_{config}.json").exists()
     }
 
     columns = [
@@ -251,7 +257,7 @@ def write_outputs(results: dict[str, list[dict]], summary: dict) -> None:
         "context_precision", "context_hit", "refused", "retrieval_source", "citations",
         "latency_s", "input_tokens", "output_tokens", "aux_tokens", "source_ids", "answer",
     ]
-    with (EVALUATION_DIR / "eval_results.csv").open("w", encoding="utf-8-sig", newline="") as file:
+    with _output("eval_results", ".csv").open("w", encoding="utf-8-sig", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         for rows in results.values():
@@ -294,9 +300,13 @@ def main() -> None:
     parser.add_argument("--limit", type=int, help="chỉ chạy N câu đầu để thử nhanh")
     parser.add_argument("--concurrency", type=int, default=4, help="số lời gọi RAGAS song song")
     parser.add_argument("--skip-ragas", action="store_true", help="chỉ generate và đo latency")
+    parser.add_argument("--golden", type=Path, default=GOLDEN_PATH, help="bộ câu hỏi khác golden_dataset.json")
+    parser.add_argument("--tag", default="", help="hậu tố file kết quả, để không ghi đè kết quả chính")
     args = parser.parse_args()
 
-    items = json.loads(GOLDEN_PATH.read_text(encoding="utf-8"))[: args.limit]
+    global OUTPUT_TAG
+    OUTPUT_TAG = f"_{args.tag}" if args.tag else ""
+    items = json.loads(args.golden.read_text(encoding="utf-8"))[: args.limit]
     if get_collection().count() == 0:
         raise SystemExit("ChromaDB trống. Chạy trước: python -m src.task4_chunking_indexing")
     if not args.skip_ragas and not os.getenv("OPENAI_API_KEY"):
@@ -314,6 +324,7 @@ def main() -> None:
         "run": {
             "date": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "commit": _git_commit(),
+            "golden_dataset": args.golden.name,
             "golden_dataset_size": len(items),
             "top_k": args.top_k,
             "generator": f"{generation.LLM_PROVIDER}/{generation.LLM_MODEL or generation.DEFAULT_MODELS[generation.LLM_PROVIDER]}",

@@ -1,0 +1,208 @@
+﻿config,id,question,faithfulness,answer_relevancy,context_recall,context_precision,context_hit,refused,retrieval_source,citations,latency_s,input_tokens,output_tokens,aux_tokens,source_ids,answer
+B,1,mở quán cà phê cần giấy tờ gì,0.7143,0.4395,1.0,1.0,False,False,hybrid,1 3,7.629,2226,190,0,news/article_02.md::chunk-2 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-66 news/article_02.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-396 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-102,"Để mở quán cà phê, bạn cần thực hiện các bước đăng ký hộ kinh doanh và chuẩn bị các giấy tờ sau:
+
+- **Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu** của chủ hộ kinh doanh.
+- Nếu có các thành viên trong gia đình cùng góp vốn, cần bổ sung:
+  - **Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu** của các thành viên.
+  - **Bản sao biên bản họp** của các thành viên về việc thành lập hộ kinh doanh.
+
+Các giấy tờ này cần được gửi đến **phòng tài chính - kế hoạch** thuộc ủy ban nhân dân cấp huyện nơi bạn dự định đặt trụ sở hộ kinh doanh để được hướng dẫn cụ thể [Document 1][Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,2,"đăng ký kinh doanh cho gia đình thì nộp ở đâu, bao lâu có giấy",1.0,0.3218,1.0,1.0,True,False,hybrid,3 2,3.622,2077,89,0,news/article_02.md::chunk-3 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-416 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415 news/article_02.md::chunk-0 news/article_02.md::chunk-2,"Bạn cần nộp hồ sơ đăng ký kinh doanh tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở hộ kinh doanh. Thời gian cấp Giấy chứng nhận đăng ký hộ kinh doanh là trong vòng 03 ngày làm việc kể từ ngày nộp hồ sơ đầy đủ và hợp lệ [Document 3][Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,3,một người được mở mấy hộ kinh doanh,0.4,0.6729,0.0,0.95,False,False,hybrid,3,2.62,2148,136,0,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 news/article_02.md::chunk-3 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-398 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-396 news/article_02.md::chunk-1,"Theo quy định tại Điều 79 Nghị định 01/2021/NĐ-CP, một cá nhân có thể đăng ký nhiều hộ kinh doanh, nhưng mỗi hộ kinh doanh phải được đăng ký riêng và cá nhân đó phải chịu trách nhiệm bằng toàn bộ tài sản của mình đối với hoạt động kinh doanh của từng hộ [Document 3]. 
+
+Tuy nhiên, cần lưu ý rằng việc quản lý và điều hành nhiều hộ kinh doanh có thể gặp khó khăn, do đó, cá nhân nên cân nhắc kỹ lưỡng trước khi quyết định mở thêm hộ kinh doanh mới.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,4,đi bán hàng rong có cần đăng ký kinh doanh không,0.8,0.471,1.0,1.0,True,False,hybrid,2,3.375,2225,196,0,news/article_01.md::chunk-3 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-399 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-196 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415,"Theo Nghị định 01/2021/NĐ-CP, hộ gia đình sản xuất nông, lâm, ngư nghiệp, làm muối và những người bán hàng rong, quà vặt, buôn chuyến, kinh doanh lưu động, kinh doanh thời vụ, làm dịch vụ có thu nhập thấp không phải đăng ký hộ kinh doanh, trừ trường hợp kinh doanh các ngành, nghề đầu tư kinh doanh có điều kiện. Mức thu nhập thấp áp dụng sẽ được Ủy ban nhân dân tỉnh, thành phố trực thuộc Trung ương quy định [Document 2].
+
+Do đó, nếu bạn đi bán hàng rong và không thuộc vào các trường hợp phải đăng ký, thì bạn không cần phải đăng ký hộ kinh doanh. Tuy nhiên, bạn nên kiểm tra quy định cụ thể của địa phương nơi bạn hoạt động để đảm bảo tuân thủ đúng.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,5,đang có hộ kinh doanh rồi thì có được làm chủ doanh nghiệp tư nhân nữa không,0.5,0.3708,0.5,1.0,True,False,hybrid,5,4.039,2216,127,0,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-402 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-398 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-400,"Theo quy định tại Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân, thành viên hộ gia đình đăng ký hộ kinh doanh không được đồng thời là chủ doanh nghiệp tư nhân, trừ trường hợp được sự nhất trí của các thành viên hợp danh còn lại [Document 5]. 
+
+Do đó, nếu bạn đang có hộ kinh doanh thì bạn không thể làm chủ doanh nghiệp tư nhân trừ khi có sự đồng ý của các thành viên hợp danh (nếu có) trong doanh nghiệp tư nhân đó.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,6,nghỉ bán hơn một tháng thì có phải báo cho ai không,1.0,0.3234,0.5,0.8875,False,False,pageindex,1 3,28.903,2523,147,0,pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0088 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0017 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0024 pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0063 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0023,"Khi hộ kinh doanh tạm ngưng kinh doanh từ 30 ngày trở lên (hơn một tháng), bạn phải thông báo cho:
+
+- Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký kinh doanh.
+- Cơ quan thuế trực tiếp quản lý.
+
+Thông báo này cần được gửi bằng văn bản ít nhất 03 ngày làm việc trước ngày tạm ngưng [Document 1]. 
+
+Ngoài ra, trong thời gian tạm ngưng, nếu bạn cần lập hóa đơn điện tử để giao cho người mua, bạn phải sử dụng hóa đơn điện tử được cấp theo từng lần phát sinh [Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,7,không buôn bán nữa muốn dẹp hộ kinh doanh thì làm sao,0.0,0.2828,1.0,0.4778,False,False,hybrid,5,3.288,2237,200,0,news/article_02.md::chunk-0 news/article_02.md::chunk-3 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-345 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-399,"Để chấm dứt hoạt động hộ kinh doanh, bạn cần thực hiện các bước sau:
+
+- **Chuẩn bị hồ sơ**: 
+  - Thông báo chấm dứt hoạt động hộ kinh doanh.
+  - Nghị quyết hoặc quyết định của các thành viên trong hộ gia đình về việc chấm dứt hoạt động.
+
+- **Nộp hồ sơ**: Đến Phòng Đăng ký kinh doanh nơi bạn đã đăng ký hộ kinh doanh để nộp hồ sơ.
+
+- **Thời gian xử lý**: Sau khi nộp hồ sơ, bạn sẽ nhận được xác nhận về việc chấm dứt hoạt động hộ kinh doanh.
+
+Theo Điều 79 Nghị định 01/2021/NĐ-CP, hộ kinh doanh có thể chấm dứt hoạt động theo quyết định của các thành viên [Document 5]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,8,bán được ít tiền thì có phải đóng thuế không,0.8571,0.3724,1.0,0.5,False,False,pageindex,2,24.817,2310,166,0,pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0004 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0009 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0005 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0015 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0017,"Theo quy định tại Điều 4 Thông tư 40/2021/TT-BTC, hộ kinh doanh hoặc cá nhân kinh doanh có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì không phải nộp thuế giá trị gia tăng (GTGT) và thuế thu nhập cá nhân (TNCN). Tuy nhiên, vẫn cần phải khai thuế chính xác và nộp hồ sơ thuế đúng hạn [Document 2].
+
+Do đó, nếu doanh thu của bạn dưới 100 triệu đồng trong năm, bạn sẽ không phải đóng thuế. Nếu doanh thu trên 100 triệu đồng, bạn sẽ phải nộp thuế theo quy định.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,9,bán tạp hóa thì đóng thuế mấy phần trăm,1.0,0.2172,1.0,0.7,True,False,hybrid,1,2.216,1916,114,0,news/article_06.md::chunk-6 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-193 news/article_06.md::chunk-12 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-82 news/article_06.md::chunk-7,"Khi bán tạp hóa, hộ kinh doanh sẽ áp dụng tỷ lệ thuế GTGT là 1% và thuế TNCN là 0,5% theo quy định hiện hành. Cụ thể:
+
+- **Thuế GTGT**: 1% đối với ngành nghề phân phối, cung cấp hàng hóa.
+- **Thuế TNCN**: 0,5% đối với ngành nghề phân phối, cung cấp hàng hóa [Document 1].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,10,mở tiệm cắt tóc thì thuế tính thế nào,1.0,0.5087,1.0,1.0,False,False,hybrid,1 4,3.078,1694,228,0,news/article_06.md::chunk-7 news/article_06.md::chunk-12 news/article_06.md::chunk-4 news/article_06.md::chunk-5 news/article_06.md::chunk-3,"Đối với hộ kinh doanh mở tiệm cắt tóc, bạn sẽ phải thực hiện kê khai và tính thuế theo tỷ lệ thuế tính trên doanh thu áp dụng cho lĩnh vực dịch vụ cắt tóc. Cụ thể:
+
+- **Doanh thu tính thuế**: Bao gồm toàn bộ tiền thu từ dịch vụ cắt tóc, bao gồm cả các khoản thưởng, hỗ trợ đạt doanh số, khuyến mại, chiết khấu thương mại, và các khoản thu khác liên quan đến hoạt động kinh doanh.
+- **Tỷ lệ thuế**: Bạn sẽ phải nộp thuế GTGT và thuế TNCN. Tỷ lệ cụ thể sẽ được quy định trong Phụ lục I ban hành kèm theo Thông tư hướng dẫn về thuế.
+
+Nếu bạn không xác định được doanh thu tính thuế của từng lĩnh vực, cơ quan thuế sẽ ấn định doanh thu tính thuế theo quy định của pháp luật về quản lý thuế [Document 1][Document 4].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,11,bán hàng trên facebook có phải đóng thuế không,1.0,0.6489,0.5,1.0,False,False,hybrid,1 3,2.665,1891,169,0,news/article_06.md::chunk-0 news/article_06.md::chunk-11 news/article_06.md::chunk-8 news/article_06.md::chunk-12 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-193,"Có, bán hàng trên Facebook cũng phải đóng thuế. Theo quy định của pháp luật Việt Nam, cá nhân và tổ chức kinh doanh, bao gồm cả việc bán hàng online, đều có nghĩa vụ thực hiện nghĩa vụ thuế. Nếu doanh thu hàng năm từ hoạt động bán hàng trên Facebook đạt từ 100 triệu đồng trở lên, bạn sẽ phải nộp lệ phí môn bài, với mức phí từ 300.000 đồng đến 1 triệu đồng tùy theo doanh thu [Document 1].
+
+Ngoài ra, nếu không nộp thuế đúng hạn, bạn có thể bị phạt hành chính theo quy định tại khoản 1 Điều 42 Nghị định 125/2020/NĐ-CP [Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,12,đóng thuế khoán mà khách đòi hóa đơn thì làm sao,0.8571,0.2974,1.0,1.0,False,False,hybrid,1 2 3,3.088,2127,232,0,legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-56 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-55 news/article_07.md::chunk-5 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-193 news/article_07.md::chunk-4,"Khi hộ kinh doanh đóng thuế khoán mà khách hàng yêu cầu hóa đơn, bạn cần thực hiện các bước sau:
+
+- **Lập hóa đơn**: Bạn cần lập hóa đơn cho khách hàng theo quy định. Nếu bạn sử dụng hóa đơn điện tử, hãy đảm bảo rằng bạn đã cập nhật đầy đủ thông tin của khách hàng (tên, địa chỉ, mã số thuế) vào phần mềm hoặc đơn vị cung cấp dịch vụ [Document 1].
+
+- **Thời điểm lập hóa đơn**: Hóa đơn phải được lập tại thời điểm giao dịch, tức là khi bạn hoàn tất việc cung cấp hàng hóa hoặc dịch vụ cho khách [Document 2].
+
+- **Gửi thông tin đến cơ quan thuế**: Sau khi lập hóa đơn, bạn cần truyền dữ liệu hóa đơn đến cơ quan thuế theo quy định [Document 1].
+
+Nếu bạn chưa đủ điều kiện kỹ thuật để sử dụng hóa đơn điện tử, cơ quan thuế sẽ hỗ trợ bạn chuyển đổi theo lộ trình quy định [Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,13,quán ăn bán đông khách có bắt buộc xài máy tính tiền in hóa đơn không,0.75,0.2575,1.0,1.0,True,False,hybrid,4 5,2.848,1971,173,0,news/article_07.md::chunk-4 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-49 news/article_07.md::chunk-2 news/article_07.md::chunk-0 news/article_07.md::chunk-5,"Theo quy định tại Nghị định 70/2025/NĐ-CP, từ ngày 1/6/2025, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng trở lên phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế khi bán hàng hóa, cung cấp dịch vụ trực tiếp đến người tiêu dùng. Do đó, nếu quán ăn của bạn có doanh thu đạt mức này, bạn sẽ phải sử dụng máy tính tiền để in hóa đơn điện tử [Document 4].
+
+Nếu quán ăn của bạn chưa đủ điều kiện kỹ thuật để triển khai, cơ quan thuế sẽ hỗ trợ chuyển đổi theo lộ trình quy định [Document 5].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+B,14,tiệm nhỏ có được tự chọn cách kê khai thuế không,1.0,0.5714,0.5,1.0,False,False,hybrid,1 5 2,2.731,1840,149,0,news/article_04.md::chunk-3 news/article_04.md::chunk-5 news/article_03.md::chunk-10 news/article_04.md::chunk-2 news/article_05.md::chunk-1,"Tiệm nhỏ có thể tự chọn cách kê khai thuế nếu đáp ứng một số điều kiện. Cụ thể:
+
+- Tiệm nhỏ phải là hộ kinh doanh quy mô lớn hoặc chưa đạt quy mô lớn nhưng muốn lựa chọn nộp thuế theo phương pháp kê khai [Document 1][Document 5].
+- Hộ kinh doanh nộp thuế theo phương pháp kê khai phải thực hiện đầy đủ chế độ kế toán, hóa đơn, chứng từ [Document 2].
+
+Nếu tiệm nhỏ của bạn không thuộc quy mô lớn nhưng bạn muốn kê khai thuế, bạn cần cam kết thực hiện đầy đủ các yêu cầu này. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,1,mở quán cà phê cần giấy tờ gì,1.0,0.5271,1.0,0.9167,False,False,hybrid,1 4,6.26,2031,194,280,news/article_02.md::chunk-2 news/article_01.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-396 news/article_01.md::chunk-3 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-102,"Để mở quán cà phê dưới hình thức hộ kinh doanh, bạn cần chuẩn bị các giấy tờ sau:
+
+- **Giấy đề nghị đăng ký hộ kinh doanh**.
+- **Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu** của chủ hộ kinh doanh.
+- Nếu có nhiều thành viên trong gia đình cùng góp vốn:
+  - **Bản sao chứng minh nhân dân/căn cước công dân/hộ chiếu** của các thành viên.
+  - **Bản sao biên bản họp** của các thành viên trong gia đình về việc thành lập hộ kinh doanh.
+
+Các giấy tờ này cần được gửi đến **phòng tài chính - kế hoạch** thuộc ủy ban nhân dân cấp huyện nơi bạn dự định đặt trụ sở quán cà phê [Document 1][Document 4].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,2,"đăng ký kinh doanh cho gia đình thì nộp ở đâu, bao lâu có giấy",1.0,0.463,1.0,1.0,True,False,hybrid,1 4 5,3.858,2007,95,272,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-416 news/article_02.md::chunk-3 news/article_01.md::chunk-0 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415 news/article_01.md::chunk-1,"- Đăng ký hộ kinh doanh cho gia đình được thực hiện tại Cơ quan đăng ký kinh doanh cấp huyện nơi đặt trụ sở hộ kinh doanh [Document 1][Document 4].
+- Thời gian cấp Giấy chứng nhận đăng ký hộ kinh doanh là trong vòng 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ [Document 1][Document 5].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,3,một người được mở mấy hộ kinh doanh,1.0,0.5255,1.0,0.8875,True,False,hybrid,2,4.203,2320,80,278,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-396 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-10 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-398,"Theo quy định tại Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân, thành viên hộ gia đình chỉ được đăng ký một hộ kinh doanh trong phạm vi toàn quốc. Điều này có nghĩa là mỗi người chỉ có thể mở một hộ kinh doanh duy nhất [Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,4,đi bán hàng rong có cần đăng ký kinh doanh không,0.8,0.0,0.5,1.0,True,False,hybrid,2,5.346,2229,193,284,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-415 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-399 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-417 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-406,"Theo Điều 79 Nghị định 01/2021/NĐ-CP, hộ gia đình sản xuất nông, lâm, ngư nghiệp, làm muối và những người bán hàng rong, quà vặt, buôn chuyến, kinh doanh lưu động, kinh doanh thời vụ, làm dịch vụ có thu nhập thấp không phải đăng ký hộ kinh doanh, trừ trường hợp kinh doanh các ngành, nghề đầu tư kinh doanh có điều kiện. Tuy nhiên, mức thu nhập thấp áp dụng sẽ do Ủy ban nhân dân tỉnh, thành phố trực thuộc Trung ương quy định [Document 2].
+
+Do đó, nếu bạn thuộc nhóm bán hàng rong và không kinh doanh các ngành nghề có điều kiện, bạn không cần đăng ký hộ kinh doanh. Tuy nhiên, bạn nên kiểm tra quy định cụ thể tại địa phương nơi bạn hoạt động.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,5,đang có hộ kinh doanh rồi thì có được làm chủ doanh nghiệp tư nhân nữa không,0.75,0.5258,1.0,1.0,True,False,hybrid,3,4.388,2322,123,286,legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-401 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-402 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-398 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-213,"Theo quy định tại Điều 80 Nghị định 01/2021/NĐ-CP, cá nhân, thành viên hộ gia đình đã đăng ký hộ kinh doanh không được đồng thời là chủ doanh nghiệp tư nhân, trừ trường hợp được sự nhất trí của các thành viên hợp danh còn lại [Document 3]. 
+
+Do đó, nếu bạn đã có hộ kinh doanh thì bạn không thể làm chủ doanh nghiệp tư nhân trừ khi có sự đồng ý của các thành viên hợp danh khác (nếu có). 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,6,nghỉ bán hơn một tháng thì có phải báo cho ai không,1.0,0.2431,1.0,1.0,False,False,pageindex,1 3,26.525,2505,140,250,pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0088 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0032 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0017 pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0063 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0024,"Nếu hộ kinh doanh tạm ngưng kinh doanh từ 30 ngày trở lên (hơn một tháng), bạn phải thông báo cho:
+
+- Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký kinh doanh.
+- Cơ quan thuế trực tiếp quản lý.
+
+Thông báo này cần được gửi ít nhất 03 ngày làm việc trước thời điểm tạm ngưng kinh doanh [Document 1][Document 3]. 
+
+Trong thời gian tạm ngừng, bạn không phải nộp hồ sơ khai thuế nếu thời gian tạm ngừng là trọn tháng [Document 3]. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,7,không buôn bán nữa muốn dẹp hộ kinh doanh thì làm sao,1.0,0.3129,0.6667,1.0,True,False,hybrid,1 3,5.571,2244,267,266,legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-432 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-9 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-433 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-399 legal/nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd.md::chunk-408,"Để chấm dứt hoạt động hộ kinh doanh, bạn cần thực hiện các bước sau:
+
+1. **Gửi thông báo chấm dứt hoạt động** đến Cơ quan đăng ký kinh doanh cấp huyện nơi đã đăng ký.
+2. **Kèm theo thông báo**, bạn cần chuẩn bị các giấy tờ sau:
+   - Thông báo về việc chấm dứt hiệu lực mã số thuế của Cơ quan thuế.
+   - Bản sao biên bản họp thành viên hộ gia đình về việc chấm dứt hoạt động hộ kinh doanh (nếu có nhiều thành viên).
+   - Bản gốc Giấy chứng nhận đăng ký hộ kinh doanh [Document 1].
+
+3. **Thanh toán đầy đủ các khoản nợ** (bao gồm nợ thuế và nghĩa vụ tài chính) trước khi nộp hồ sơ chấm dứt hoạt động, trừ khi có thỏa thuận khác với chủ nợ [Document 3].
+
+4. **Cơ quan đăng ký kinh doanh** sẽ xem xét tính hợp lệ của hồ sơ và ra thông báo về việc chấm dứt hoạt động của hộ kinh doanh cho bạn [Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,8,bán được ít tiền thì có phải đóng thuế không,0.8333,0.39,1.0,0.3667,False,False,pageindex,3 4,29.257,2101,222,257,pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0076 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0004 pageindex::tt-40-2021-tt-btc-thue-ho-kinh-doanh::0009 pageindex::nd-01-2021-nd-cp-dang-ky-doanh-nghiep-hkd::0078 pageindex::nd-123-2020-nd-cp-hoa-don-chung-tu::0005,"Theo quy định hiện hành, hộ kinh doanh có doanh thu từ hoạt động sản xuất, kinh doanh trong năm dương lịch từ 100 triệu đồng trở xuống thì không phải nộp thuế giá trị gia tăng (GTGT) và thuế thu nhập cá nhân (TNCN) [Document 3]. Tuy nhiên, hộ kinh doanh vẫn phải khai thuế chính xác, trung thực, đầy đủ và nộp hồ sơ đúng hạn.
+
+Ngoài ra, Điều 81 Nghị định 01/2021/NĐ-CP cũng quy định rằng chủ hộ kinh doanh có nghĩa vụ thực hiện các nghĩa vụ về thuế theo quy định của pháp luật, nhưng không nêu rõ về trường hợp doanh thu thấp có phải đóng thuế hay không [Document 4].
+
+Tóm lại, nếu doanh thu của hộ kinh doanh dưới 100 triệu đồng/năm thì không phải nộp thuế GTGT và TNCN, nhưng vẫn cần thực hiện nghĩa vụ khai thuế. 
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,9,bán tạp hóa thì đóng thuế mấy phần trăm,0.8333,0.4171,1.0,0.7556,False,False,hybrid,1 3,5.749,2078,183,287,news/article_06.md::chunk-2 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-193 news/article_06.md::chunk-4 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-82 news/article_06.md::chunk-5,"Theo quy định hiện hành, hộ kinh doanh bán hàng tạp hóa sẽ phải nộp thuế TNCN với tỷ lệ 0,5% trên tổng doanh thu một năm nếu doanh thu từ hoạt động kinh doanh đạt từ 100 triệu đồng trở lên. Mức thuế này được quy định tại Phụ lục I Thông tư 40/2021/TT-BTC [Document 1].
+
+Ngoài ra, hộ kinh doanh cũng có thể phải nộp thuế GTGT, nhưng tỷ lệ cụ thể sẽ phụ thuộc vào doanh thu tính thuế GTGT của hộ kinh doanh. Cách tính thuế GTGT là: Số thuế GTGT phải nộp = Doanh thu tính thuế GTGT x Tỷ lệ thuế GTGT [Document 3].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,10,mở tiệm cắt tóc thì thuế tính thế nào,0.6667,0.4286,1.0,1.0,False,False,hybrid,1 5 2,6.08,1795,298,278,news/article_06.md::chunk-4 news/article_06.md::chunk-7 news/article_06.md::chunk-5 news/article_06.md::chunk-12 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-31,"Để tính thuế cho hộ kinh doanh cắt tóc, bạn cần thực hiện theo các bước sau:
+
+- **Doanh thu tính thuế**: Doanh thu bao gồm toàn bộ tiền thu từ dịch vụ cắt tóc, bao gồm cả các khoản thưởng, hỗ trợ, khuyến mại nếu có. Doanh thu này sẽ được tính cả thuế (nếu thuộc diện chịu thuế) [Document 1].
+
+- **Tính thuế GTGT**:
+  - Số thuế GTGT phải nộp = Doanh thu tính thuế GTGT x Tỷ lệ thuế GTGT.
+  
+- **Tính thuế TNCN**:
+  - Số thuế TNCN phải nộp = Doanh thu tính thuế TNCN x Tỷ lệ thuế TNCN.
+
+- **Tỷ lệ thuế**: Tỷ lệ thuế GTGT và TNCN áp dụng cụ thể cho lĩnh vực cắt tóc sẽ được hướng dẫn tại các quy định liên quan. Bạn cần tham khảo Phụ lục I ban hành kèm theo Thông tư 40/2021/TT-BTC để biết tỷ lệ cụ thể cho ngành nghề này [Document 5].
+
+Nếu bạn hoạt động trong nhiều lĩnh vực, hãy tính thuế theo tỷ lệ tương ứng cho từng lĩnh vực [Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,11,bán hàng trên facebook có phải đóng thuế không,1.0,0.5104,1.0,1.0,True,False,hybrid,2 3 4 5,4.498,1944,187,265,news/article_06.md::chunk-11 news/article_06.md::chunk-0 news/article_06.md::chunk-2 news/article_06.md::chunk-3 news/article_06.md::chunk-8,"- Cá nhân và hộ kinh doanh bán hàng online, bao gồm cả trên Facebook, có nghĩa vụ nộp thuế nếu doanh thu từ hoạt động kinh doanh trong năm dương lịch đạt từ 100 triệu đồng trở lên.
+- Các loại thuế phải nộp bao gồm:
+  - Lệ phí môn bài (từ 300.000 đồng đến 1 triệu đồng tùy theo doanh thu) theo Điều 4 Nghị định 139/2016/NĐ-CP [Document 2].
+  - Thuế TNCN (0,5% tổng doanh thu) và thuế GTGT (1%) trên tổng doanh thu [Document 3][Document 4].
+  
+Nếu không thực hiện nghĩa vụ thuế, người bán có thể bị xử phạt hành chính theo quy định [Document 5].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,12,đóng thuế khoán mà khách đòi hóa đơn thì làm sao,0.4,0.2224,1.0,1.0,False,False,hybrid,3,4.843,2153,198,276,news/article_03.md::chunk-16 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-193 legal/tt-40-2021-tt-btc-thue-ho-kinh-doanh.md::chunk-30 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-194 news/article_07.md::chunk-0,"Khi hộ kinh doanh áp dụng phương pháp thuế khoán và khách hàng yêu cầu hóa đơn, bạn cần thực hiện các bước sau:
+
+- **Yêu cầu cấp hóa đơn lẻ**: Hộ kinh doanh có thể yêu cầu cơ quan thuế cấp hóa đơn lẻ theo từng lần phát sinh. Điều này được quy định tại Điều 7 Thông tư 40/2021/TT-BTC [Document 3].
+
+- **Lưu trữ chứng từ**: Bạn cần lưu trữ và xuất trình các hóa đơn, chứng từ, hợp đồng, hồ sơ chứng minh hàng hóa, dịch vụ hợp pháp khi đề nghị cấp hóa đơn lẻ [Document 3].
+
+- **Thực hiện theo quy định**: Đảm bảo rằng việc cấp hóa đơn lẻ được thực hiện đúng theo quy định của cơ quan thuế để tránh các vấn đề phát sinh.
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,13,quán ăn bán đông khách có bắt buộc xài máy tính tiền in hóa đơn không,0.5,0.2579,1.0,1.0,True,False,hybrid,3 1,4.875,2161,163,303,news/article_07.md::chunk-4 news/article_07.md::chunk-2 news/article_07.md::chunk-0 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-49 legal/nd-123-2020-nd-cp-hoa-don-chung-tu.md::chunk-94,"Theo quy định tại Nghị định 70/2025/NĐ-CP, từ ngày 1/6/2025, hộ kinh doanh và cá nhân kinh doanh có doanh thu hàng năm từ một tỷ đồng trở lên phải lập hóa đơn điện tử khởi tạo từ máy tính tiền có kết nối chuyển dữ liệu đến cơ quan thuế khi bán hàng hóa, cung cấp dịch vụ trực tiếp đến người tiêu dùng [Document 3]. 
+
+Nếu quán ăn của bạn có doanh thu hàng năm đạt mức này, thì việc sử dụng máy tính tiền in hóa đơn điện tử là bắt buộc. Nếu không thực hiện đúng quy định, bạn có thể bị xử phạt vi phạm hành chính [Document 1].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
+D,14,tiệm nhỏ có được tự chọn cách kê khai thuế không,0.75,0.4176,0.5,1.0,False,False,hybrid,1 3 5 2,5.035,1840,148,273,news/article_04.md::chunk-2 news/article_04.md::chunk-5 news/article_04.md::chunk-3 news/article_03.md::chunk-10 news/article_05.md::chunk-1,"Tiệm nhỏ có thể tự chọn cách kê khai thuế theo phương pháp kê khai nếu đáp ứng các điều kiện quy định. Cụ thể:
+
+- Hộ kinh doanh, cá nhân kinh doanh quy mô lớn.
+- Hộ kinh doanh, cá nhân kinh doanh chưa đáp ứng quy mô lớn nhưng vẫn lựa chọn nộp thuế theo phương pháp kê khai và cam kết thực hiện đầy đủ chế độ kế toán, chứng từ, hóa đơn [Document 1][Document 3][Document 5].
+
+Ngoài ra, hộ kinh doanh nộp thuế theo phương pháp kê khai không phải quyết toán thuế [Document 2].
+
+Thông tin chỉ mang tính tham khảo, không thay thế tư vấn pháp lý."
