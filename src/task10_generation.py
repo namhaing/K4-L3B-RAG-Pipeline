@@ -60,6 +60,18 @@ rồi gợi ý ngắn gọn người dùng nên hỏi cơ quan nào.
 7. Kết thúc câu trả lời bằng dòng: "{DISCLAIMER}"
 """
 
+# Bonus conversation memory: viết lại câu hỏi nối tiếp ("Còn bán online thì sao?")
+# thành câu hỏi độc lập trước khi retrieve, vì retriever không thấy lịch sử chat.
+HISTORY_MESSAGES = 6
+CONDENSE_PROMPT = """Bạn viết lại câu hỏi cho hệ thống tra cứu pháp luật dành cho hộ kinh doanh.
+Dựa vào lịch sử hội thoại, viết lại câu hỏi mới nhất thành MỘT câu hỏi độc lập, tự đủ nghĩa bằng tiếng Việt:
+điền lại chủ thể, chủ đề, ngành nghề hoặc số hiệu văn bản đã nhắc ở các lượt trước.
+Không trả lời câu hỏi và không thêm thông tin mới. Nếu câu hỏi đã độc lập thì giữ nguyên.
+Chỉ in ra câu hỏi đã viết lại."""
+
+# Cộng dồn token của mọi lần gọi LLM; run_eval.py lấy chênh lệch trước/sau mỗi câu.
+LLM_USAGE = {"calls": 0, "input_tokens": 0, "output_tokens": 0}
+
 _CITATION_PATTERN = re.compile(r"\[Document\s+(\d+)\]", re.IGNORECASE)
 
 # Thông tin mở rộng do Task 4 gắn vào metadata (nếu có), theo thứ tự hiển thị.
@@ -106,6 +118,12 @@ def _require_key(env_name: str) -> str:
     return key
 
 
+def _record_usage(input_tokens: int | None, output_tokens: int | None) -> None:
+    LLM_USAGE["calls"] += 1
+    LLM_USAGE["input_tokens"] += input_tokens or 0
+    LLM_USAGE["output_tokens"] += output_tokens or 0
+
+
 def call_llm(system_prompt: str, user_message: str) -> str:
     """Gọi OpenAI, Gemini hoặc Anthropic theo cấu hình."""
     provider = LLM_PROVIDER
@@ -127,6 +145,8 @@ def call_llm(system_prompt: str, user_message: str) -> str:
             top_p=TOP_P,
             max_completion_tokens=MAX_OUTPUT_TOKENS,
         )
+        usage = response.usage
+        _record_usage(usage and usage.prompt_tokens, usage and usage.completion_tokens)
         return (response.choices[0].message.content or "").strip()
 
     if provider == "gemini":
@@ -147,6 +167,8 @@ def call_llm(system_prompt: str, user_message: str) -> str:
                 max_output_tokens=MAX_OUTPUT_TOKENS,
             ),
         )
+        usage = response.usage_metadata
+        _record_usage(usage and usage.prompt_token_count, usage and usage.candidates_token_count)
         return (response.text or "").strip()
 
     import anthropic
@@ -160,6 +182,7 @@ def call_llm(system_prompt: str, user_message: str) -> str:
         temperature=TEMPERATURE,
         max_tokens=MAX_OUTPUT_TOKENS,
     )
+    _record_usage(response.usage.input_tokens, response.usage.output_tokens)
     return "".join(block.text for block in response.content if block.type == "text").strip()
 
 
@@ -190,11 +213,62 @@ def extract_citations(answer: str) -> list[int]:
     return list(dict.fromkeys(int(n) for n in _CITATION_PATTERN.findall(answer)))
 
 
-def _generate(query: str, top_k: int = TOP_K, use_reranking: bool = True) -> dict:
-    """Pipeline đầy đủ; use_reranking=False là Config A (dense-only) cho A/B."""
+def condense_question(query: str, history: list[dict] | None) -> str:
+    """Viết lại câu hỏi nối tiếp thành câu độc lập dựa trên vài lượt chat gần nhất.
+
+    history là list {"role": "user" | "assistant", "content": str}. LLM lỗi
+    hoặc trả kết quả bất thường thì giữ nguyên câu hỏi gốc.
+    """
+    turns = [
+        message for message in (history or [])
+        if message.get("role") in ("user", "assistant") and str(message.get("content", "")).strip()
+    ][-HISTORY_MESSAGES:]
+    if not turns:
+        return query
+
+    lines = []
+    for message in turns:
+        text = _CITATION_PATTERN.sub("", message["content"]).replace(DISCLAIMER, "").strip(" _\n")
+        speaker = "Người dùng" if message["role"] == "user" else "Trợ lý"
+        lines.append(f"{speaker}: {text[:600]}")
+    user_message = (
+        "Lịch sử hội thoại:\n" + "\n".join(lines)
+        + f"\n\nCâu hỏi mới nhất: {query}\n\nCâu hỏi độc lập:"
+    )
+    try:
+        rewritten = call_llm(CONDENSE_PROMPT, user_message)
+    except Exception:
+        logger.exception("Condense question failed, using original query")
+        return query
+
+    lines = (rewritten or "").strip().splitlines()
+    rewritten = lines[0].strip().strip('"“”') if lines else ""
+    return rewritten if 0 < len(rewritten) <= 500 else query
+
+
+def _generate(
+    query: str,
+    top_k: int = TOP_K,
+    use_reranking: bool = True,
+    history: list[dict] | None = None,
+) -> dict:
+    """Pipeline đầy đủ; use_reranking=False là Config A (dense-only) cho A/B.
+
+    history (tuỳ chọn) bật conversation memory: câu hỏi được viết lại thành
+    câu độc lập và trả kèm trong key "rewritten_query" nếu khác câu gốc.
+    """
     if not query or not query.strip():
         return _refusal()
 
+    query = query.strip()
+    standalone = condense_question(query, history) if history else query
+    result = _answer(standalone, top_k, use_reranking)
+    if standalone != query:
+        result["rewritten_query"] = standalone
+    return result
+
+
+def _answer(query: str, top_k: int, use_reranking: bool) -> dict:
     try:
         chunks = retrieve(query, top_k=top_k, use_reranking=use_reranking)
     except Exception:
@@ -204,7 +278,7 @@ def _generate(query: str, top_k: int = TOP_K, use_reranking: bool = True) -> dic
         return _refusal()
 
     reordered = reorder_for_llm(chunks)
-    user_message = f"Context:\n{format_context(reordered)}\n\nQuestion: {query.strip()}"
+    user_message = f"Context:\n{format_context(reordered)}\n\nQuestion: {query}"
     try:
         answer = call_llm(SYSTEM_PROMPT, user_message)
     except Exception:
@@ -214,7 +288,11 @@ def _generate(query: str, top_k: int = TOP_K, use_reranking: bool = True) -> dic
         return _refusal()
 
     answer = _remap_citations(answer, reordered, chunks)
-    if REFUSAL_MESSAGE not in answer and DISCLAIMER not in answer:
+    if REFUSAL_MESSAGE in answer and not extract_citations(answer):
+        # LLM từ chối vì context không đủ căn cứ: không gắn nguồn không dùng tới vào câu
+        # trả lời. "retrieved" giữ lại chunk đã xét để eval vẫn chấm được retrieval.
+        return {"answer": answer, "sources": [], "retrieval_source": "none", "retrieved": chunks}
+    if DISCLAIMER not in answer:
         answer = f"{answer}\n\n_{DISCLAIMER}_"
 
     # Config A trả retrieval_method="dense", nhưng GenerationResult chỉ nhận hybrid/pageindex/none.

@@ -27,7 +27,13 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 
-def _threshold_from_env(default: float = 0.3) -> float:
+# Calibrate bằng `python -m src.calibrate_threshold` (text-embedding-3-small): in-domain
+# min 0.589, out-domain max 0.551 -> 0.57 tách đúng 22/22 câu. Xem
+# group_project/evaluation/threshold_calibration.json. Đổi embedding model thì phải calibrate lại.
+CALIBRATED_THRESHOLD = 0.57
+
+
+def _threshold_from_env(default: float = CALIBRATED_THRESHOLD) -> float:
     """Đọc SCORE_THRESHOLD đã calibrate; .env để trống thì dùng default."""
     raw = os.getenv("SCORE_THRESHOLD", "").strip()
     try:
@@ -80,8 +86,8 @@ def retrieve(
             fallback = pageindex_search(query, top_k=top_k)
             if fallback:
                 return fallback[:top_k]
-        except Exception:
-            logger.exception("PageIndex fallback failed, returning hybrid results")
+        except Exception as error:
+            logger.warning("PageIndex fallback unavailable (%r), returning hybrid results", error)
 
     return candidates[:top_k]
 

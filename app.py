@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from src.citation_highlight import claims_by_citation, supporting_spans  # noqa: E402
 from src.task10_generation import (  # noqa: E402  (cần load .env trước khi import)
     DISCLAIMER,
     REFUSAL_MESSAGE,
@@ -214,7 +215,10 @@ STYLE = """
     border-left: 2px solid var(--rule);
     max-width: 38rem;
 }
-.slip-quote mark { background: var(--marker); color: inherit; padding: 0 0.1em; border-radius: 2px; }
+.slip-quote mark { background: var(--marker); color: inherit; padding: 0.05em 0.1em; border-radius: 2px; }
+.slip-quote .article { color: var(--signature); font-weight: 600; }
+.rewritten { color: var(--ink-soft); font-size: 0.85rem; margin: 0 0 0.5rem; }
+.rewritten b { color: var(--ink); font-weight: 500; }
 .slip-link { margin-left: 2.2rem; font-size: 0.82rem; }
 
 .disclaimer {
@@ -267,20 +271,43 @@ def render_answer(answer: str, sources: list[dict]) -> str:
     return CITATION_PATTERN.sub(seal, text)
 
 
-def render_excerpt(content: str) -> str:
-    excerpt = content.strip()
-    if len(excerpt) > EXCERPT_CHARS:
-        excerpt = excerpt[:EXCERPT_CHARS].rsplit(" ", 1)[0] + " …"
-    excerpt = html.escape(excerpt)
-    excerpt = ARTICLE_PATTERN.sub(r"<mark>\1</mark>", excerpt)
-    return excerpt.replace("\n", "<br>")
+def _escape_piece(text: str) -> str:
+    return ARTICLE_PATTERN.sub(r'<span class="article">\1</span>', html.escape(text))
 
 
-def render_sources(sources: list[dict], cited: set[int]) -> str:
+def render_excerpt(content: str, spans: list[tuple[int, int]] | None = None) -> str:
+    """Trích đoạn nguồn; câu khớp với ý được trích dẫn bọc <mark>, tên Điều/Khoản tô màu mực."""
+    spans = spans or []
+    start = 0
+    if spans and spans[0][0] > EXCERPT_CHARS // 3:
+        # Dời cửa sổ để câu được trích luôn nằm trong phần hiển thị.
+        start = content.rfind(" ", 0, spans[0][0] - EXCERPT_CHARS // 4) + 1
+    end = max(start + EXCERPT_CHARS, spans[0][1] if spans else 0)
+    if end < len(content):
+        end = max(content.rfind(" ", start, end), start + 1)
+
+    parts, cursor = [], start
+    for span_start, span_end in spans:
+        span_start, span_end = max(span_start, cursor), min(span_end, end)
+        if span_start >= span_end:
+            continue
+        parts.append(_escape_piece(content[cursor:span_start]))
+        parts.append(f"<mark>{_escape_piece(content[span_start:span_end])}</mark>")
+        cursor = span_end
+    parts.append(_escape_piece(content[cursor:end]))
+
+    prefix = "… " if start > 0 else ""
+    suffix = " …" if end < len(content) else ""
+    return (prefix + "".join(parts).strip() + suffix).replace("\n", "<br>")
+
+
+def render_sources(sources: list[dict], claims: dict[int, list[str]]) -> str:
     slips = []
     for n, source in enumerate(sources, 1):
         metadata = source.get("metadata", {})
-        is_cited = n in cited
+        content = source.get("content", "")
+        is_cited = n in claims
+        spans = supporting_spans(content, claims[n]) if is_cited else []
         details = [
             metadata.get("doc_number"),
             metadata.get("article"),
@@ -302,7 +329,7 @@ def render_sources(sources: list[dict], cited: set[int]) -> str:
             f'<div class="slip-head"><span class="seal{"" if is_cited else " muted"}">{n}</span>'
             f'<div><div class="slip-title">{html.escape(metadata.get("title", "Không rõ tiêu đề"))}</div>'
             f'<div class="slip-meta">{meta}</div></div></div>'
-            f'<div class="slip-quote">{render_excerpt(source.get("content", ""))}</div>'
+            f'<div class="slip-quote">{render_excerpt(content, spans)}</div>'
             f"{link}</div>"
         )
     return "".join(slips)
@@ -311,6 +338,12 @@ def render_sources(sources: list[dict], cited: set[int]) -> str:
 def render_assistant_message(message: dict) -> None:
     sources = message.get("sources", [])
     retrieval_source = message.get("retrieval_source", "none")
+
+    if message.get("rewritten_query"):
+        st.markdown(
+            f'<p class="rewritten">Đã hiểu câu hỏi là: <b>{html.escape(message["rewritten_query"])}</b></p>',
+            unsafe_allow_html=True,
+        )
 
     if retrieval_source == "none" or not sources:
         body = html.escape(message["content"])
@@ -324,6 +357,7 @@ def render_assistant_message(message: dict) -> None:
     else:
         st.markdown(render_answer(message["content"], sources), unsafe_allow_html=True)
 
+    claims = claims_by_citation(message["content"]) if sources else {}
     cited = set(extract_citations(message["content"]))
     chips = [
         f'<span class="chip{" warn" if retrieval_source == "none" else ""}">'
@@ -337,13 +371,13 @@ def render_assistant_message(message: dict) -> None:
 
     if sources:
         with st.expander(f"Xem {len(sources)} đoạn văn bản đã dùng", icon=":material/description:"):
-            st.markdown(render_sources(sources, cited), unsafe_allow_html=True)
+            st.markdown(render_sources(sources, claims), unsafe_allow_html=True)
 
 
-def answer_query(query: str, top_k: int, use_hybrid: bool) -> dict:
+def answer_query(query: str, top_k: int, use_hybrid: bool, history: list[dict] | None) -> dict:
     start = time.perf_counter()
     try:
-        result = _generate(query, top_k=top_k, use_reranking=use_hybrid)
+        result = _generate(query, top_k=top_k, use_reranking=use_hybrid, history=history)
         error = None
     except Exception:
         logger.exception("Generation failed")
@@ -354,6 +388,7 @@ def answer_query(query: str, top_k: int, use_hybrid: bool) -> dict:
         "content": result["answer"],
         "sources": result["sources"],
         "retrieval_source": result["retrieval_source"],
+        "rewritten_query": result.get("rewritten_query"),
         "latency": time.perf_counter() - start,
         "error": error,
     }
@@ -389,6 +424,11 @@ with st.sidebar:
         help="Kết hợp (dense + BM25 + RRF) bắt tốt câu hỏi có số hiệu văn bản như 40/2021/TT-BTC.",
     )
     use_hybrid = mode == "Kết hợp ngữ nghĩa và từ khoá"
+    use_memory = st.toggle(
+        "Nhớ ngữ cảnh hội thoại",
+        value=True,
+        help="Hiểu câu hỏi nối tiếp như “Còn nếu bán online thì sao?” dựa trên các lượt trước.",
+    )
 
     if st.session_state.messages:
         st.button("Xoá cuộc trò chuyện", on_click=clear_chat, icon=":material/delete:", type="tertiary")
@@ -430,13 +470,17 @@ if not query:
 
 if query and query.strip():
     query = query.strip()
+    history = (
+        [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
+        if use_memory else None
+    )
     st.session_state.messages.append({"role": "user", "content": query})
     with st.chat_message("user", avatar=USER_AVATAR):
         st.markdown(query)
 
     with st.chat_message("assistant", avatar=ASSISTANT_AVATAR):
         with st.spinner("Đang tra văn bản…"):
-            reply = answer_query(query, top_k, use_hybrid)
+            reply = answer_query(query, top_k, use_hybrid, history)
         render_assistant_message(reply)
     st.session_state.messages.append(reply)
     # Chạy lại để ẩn khung chủ đề gợi ý và hiện nút xoá ở sidebar.
