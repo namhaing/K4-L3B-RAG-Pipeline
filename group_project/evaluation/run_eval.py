@@ -70,6 +70,17 @@ def context_hit(expected_context: str, contexts: list[str], probe_chars: int = 6
     return bool(probe) and any(probe in _normalize(context) for context in contexts)
 
 
+def answer_for_scoring(answer: str) -> str:
+    """Phần nội dung để RAGAS chấm: bỏ disclaimer và nhãn [Document n].
+
+    Hai phần này là lớp trình bày. Để nguyên thì AnswerRelevancy coi disclaimer
+    là câu trả lời lảng tránh (điểm = 0) và Faithfulness đếm nó là khẳng định
+    không có trong context; thử trên câu #6: relevancy 0.00 -> 0.71, faithfulness 0.50 -> 1.00.
+    """
+    text = generation._CITATION_PATTERN.sub("", answer).replace(generation.DISCLAIMER, "")
+    return re.sub(r"[ \t]+([.,;:])", r"\1", text).strip(" _\n") or answer
+
+
 def generate_rows(config: str, items: list[dict], top_k: int) -> list[dict]:
     use_reranking = CONFIGS[config]["use_reranking"]
     rows = []
@@ -132,8 +143,9 @@ def build_metrics():
 
 
 async def _score_row(row: dict, metrics: dict, semaphore: asyncio.Semaphore) -> None:
-    question, answer, contexts = row["question"], row["answer"], row["contexts"]
+    question, answer, contexts = row["question"], answer_for_scoring(row["answer"]), row["contexts"]
     reference = row["expected_answer"]
+    row["scored_answer"] = answer
     calls = {"answer_relevancy": lambda: metrics["answer_relevancy"].ascore(
         user_input=question, response=answer)}
     if contexts:

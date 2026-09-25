@@ -35,9 +35,6 @@ htmlcov/
 .env.*
 !.env.example
 
-# Vector store (build lại bằng python -m src.task4_chunking_indexing)
-chroma_db/
-
 # Streamlit secrets
 .streamlit/secrets.toml
 
