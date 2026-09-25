@@ -27,10 +27,11 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 
-# Calibrate bằng `python -m src.calibrate_threshold` (text-embedding-3-small): in-domain
-# min 0.589, out-domain max 0.551 -> 0.57 tách đúng 22/22 câu. Xem
-# group_project/evaluation/threshold_calibration.json. Đổi embedding model thì phải calibrate lại.
-CALIBRATED_THRESHOLD = 0.57
+# Calibrate bằng `python -m src.calibrate_threshold` (text-embedding-3-small): 24 câu in-domain
+# (16 golden + 8 văn nói, min 0.509) và 8 câu out/sát domain (max 0.551) -> đề xuất 0.497,
+# accuracy 30/32. Xem group_project/evaluation/threshold_calibration.json. Đổi embedding model
+# hoặc cách chunk thì phải calibrate lại.
+CALIBRATED_THRESHOLD = 0.50
 
 
 def _threshold_from_env(default: float = CALIBRATED_THRESHOLD) -> float:
@@ -45,6 +46,13 @@ def _threshold_from_env(default: float = CALIBRATED_THRESHOLD) -> float:
 
 SCORE_THRESHOLD = _threshold_from_env()
 DEFAULT_TOP_K = 5
+
+# Bonus, mặc định tắt (bật trong .env hoặc run_eval config C/D):
+#   RERANKER=llm          RRF lấy RERANK_POOL ứng viên rồi LLM xếp lại (rerank_llm, Task 7)
+#   QUERY_EXPANSION=hyde  dense search bằng "câu hỏi + đoạn giả định" (query_expansion.hyde_query)
+RERANKER = os.getenv("RERANKER", "none").strip().lower()
+QUERY_EXPANSION = os.getenv("QUERY_EXPANSION", "none").strip().lower()
+RERANK_POOL = 15
 
 
 def _safe_search(search_fn, query: str, top_k: int) -> list[dict]:
@@ -72,15 +80,26 @@ def retrieve(
 
     candidate_k = top_k * 2
     dense = _safe_search(semantic_search, query, candidate_k)
+    # Threshold luôn tính trên cosine của câu hỏi gốc (giá trị đã calibrate), kể cả khi dùng HyDE.
+    best_dense_score = dense[0]["score"] if dense else 0.0
+    if QUERY_EXPANSION == "hyde":
+        from .query_expansion import hyde_query
+
+        dense = _safe_search(semantic_search, hyde_query(query), candidate_k) or dense
 
     if use_reranking:
         sparse = _safe_search(lexical_search, query, candidate_k)
-        candidates = rerank_rrf([dense, sparse], top_k=top_k)
+        if RERANKER == "llm":
+            from .task7_reranking import rerank_llm
+
+            pool = rerank_rrf([dense, sparse], top_k=RERANK_POOL)
+            candidates = rerank_llm(query, pool, top_k=top_k)
+        else:
+            candidates = rerank_rrf([dense, sparse], top_k=top_k)
     else:
         candidates = dense[:top_k]
 
     # Threshold so với cosine gốc của dense, không phải RRF score.
-    best_dense_score = dense[0]["score"] if dense else 0.0
     if best_dense_score < score_threshold:
         try:
             fallback = pageindex_search(query, top_k=top_k)
