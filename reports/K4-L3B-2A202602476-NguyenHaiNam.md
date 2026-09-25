@@ -5,23 +5,23 @@
 - Họ và tên: Nguyễn Hải Nam
 - Mã học viên: 2A202602476
 - Nhóm: Khê (Leader)
-- Repository/branch: K4-L3B-RAG-Pipeline / `02476-NguyenHaiNam` (code và data đã merge vào `main`)
+- Repository/branch: K4-L3B-RAG-Pipeline / `02476-NguyenHaiNam` (code, data, eval và README đã lên `main`; hash commit trong bảng là hash trên `main`, trừ các commit đầu của nhánh)
 
 ## Phần việc đã thực hiện
 
 | Module/deliverable | Việc tôi trực tiếp làm | File/commit/PR | Trạng thái |
 |---|---|---|---|
 | Cấu hình embedding | Chốt OpenAI `text-embedding-3-small` (1536 chiều) cho cả nhóm | `.env.example`, `pyproject.toml` — `e69771b` | Done |
-| Task 4 — Chunking, embedding, ChromaDB | Chia chunk văn bản luật theo cấu trúc: **Chương → Điều → recursive**. Mỗi chunk mở đầu bằng nhãn văn bản ngắn và tiêu đề Chương; bỏ chunk gần rỗng; upsert theo batch, xoá chunk cũ, kiểm tra model của collection. Index **1.025 chunk**, index lần 2 không trùng | `src/task4_chunking_indexing.py` — `bb872c8`, sửa theo kết quả eval | Done |
+| Task 4 — Chunking, embedding, ChromaDB | Chia chunk văn bản luật theo cấu trúc: **Chương → Điều → recursive**. Mỗi chunk mở đầu bằng nhãn văn bản ngắn và tiêu đề Chương; bỏ chunk gần rỗng; upsert theo batch, xoá chunk cũ, kiểm tra model của collection. Index **1.025 chunk**, index lần 2 không trùng | `src/task4_chunking_indexing.py` — `bb872c8`, sửa theo kết quả eval `9218106` | Done |
 | Task 5 — Dense search | score = cosine gốc `1 − distance` (Task 9 dùng để quyết định fallback) | `src/task5_semantic_search.py` — `3500941` | Done |
-| Task 6 — BM25 | Tokenizer giữ số hiệu văn bản; IDF luôn dương; **chấm trên thân chunk, bỏ nhãn văn bản** | `src/task6_lexical_search.py` — `3500941`, sửa theo kết quả eval | Done |
+| Task 6 — BM25 | Tokenizer giữ số hiệu văn bản; IDF luôn dương; **chấm trên thân chunk, bỏ nhãn văn bản** | `src/task6_lexical_search.py` — `3500941`, sửa theo kết quả eval `9218106` | Done |
 | Task 7 — RRF | `sum(1/(k+rank))`, một phiếu cho mỗi ID trong mỗi danh sách, không mutate input | `src/task7_reranking.py` — `753bd36` | Done |
-| Calibrate `SCORE_THRESHOLD` | Chọn ngưỡng từ best dense score của 16 câu golden + **8 câu văn nói đúng domain** và 8 câu ngoài/sát domain. Kết quả **0,50** (đề xuất 0,497, accuracy 94%), thay cho 0,57 lần đầu (ngưỡng đó lệch cao) | `src/calibrate_threshold.py`, `threshold_calibration.json` | Done |
+| Calibrate `SCORE_THRESHOLD` | Chọn ngưỡng từ best dense score của 16 câu golden + **8 câu văn nói đúng domain** và 8 câu ngoài/sát domain. Kết quả **0,50** (đề xuất 0,497, accuracy 94%), thay cho 0,57 lần đầu (ngưỡng đó lệch cao) | `src/calibrate_threshold.py` — `db7738a`, `9218106`; `threshold_calibration.json` — `9218106` | Done |
 | Làm lại dữ liệu (hỗ trợ Task 1–3) | Phát hiện data cũ không dùng được: PDF là file text đổi đuôi, URL `Source` trỏ sai văn bản, 4/5 bài báo là menu/404/nội dung tự viết. Thay bằng 3 PDF Công báo và 7 bài báo thật; viết lại Task 1–3 | `data/` — `01a4b88`; `src/task1–3` — `1d848a5` | Done |
-| Sửa Task 8 — PageIndex fallback (hỗ trợ) | Bản trước không chạy được: import class không có trong SDK (`PageIndex`), gọi hàm không tồn tại (`client.search`), upload `.md` trong khi SDK chỉ nhận PDF, output sai contract. Viết lại theo SDK `pageindex` 0.2.8 (upload PDF gốc, `submit_query` → chờ `get_retrieval`), parse đúng response thật, metadata đúng contract, timeout 45 s để UI không treo; thêm 7 test giả lập. **Chạy thật:** câu dưới ngưỡng "shop quần áo nhỏ có cần giấy phép không" (dense 0,47) được PageIndex trả Điều 79–80 NĐ 01, trả lời có citation | `src/task8_pageindex_vectorless.py`, `tests/test_pageindex.py` | Done |
-| Cập nhật `RESULT.md` | Ghi lại run info, overall scores, A/B, worst performers, recommendations theo lần eval sau khi sửa retrieval; thêm bảng trước/sau và demo fallback PageIndex | `group_project/evaluation/RESULT.md` | Done |
+| Sửa Task 8 — PageIndex fallback (hỗ trợ) | Bản trước không chạy được: import class không có trong SDK (`PageIndex`), gọi hàm không tồn tại (`client.search`), upload `.md` trong khi SDK chỉ nhận PDF, output sai contract. Viết lại theo SDK `pageindex` 0.2.8 (upload PDF gốc, `submit_query` → chờ `get_retrieval`), parse đúng response thật, metadata đúng contract, timeout 45 s để UI không treo; thêm 7 test giả lập. **Chạy thật:** câu dưới ngưỡng "shop quần áo nhỏ có cần giấy phép không" (dense 0,47) được PageIndex trả Điều 79–80 NĐ 01, trả lời có citation | `src/task8_pageindex_vectorless.py`, `tests/test_pageindex.py` — `9bc9cf4` | Done |
+| Cập nhật `RESULT.md` | Ghi lại run info, overall scores, A/B, worst performers, recommendations theo lần eval sau khi sửa retrieval; thêm bảng trước/sau và demo fallback PageIndex | `group_project/evaluation/RESULT.md`, `eval_results_*.json` — `10732b2` | Done |
 | Golden dataset | 16 câu; mọi `expected_context` được script kiểm tra là đoạn nguyên văn trong corpus | `golden_dataset.json` — `01a4b88` | Done |
-| Leader | Chọn đề tài, chia việc A/B/C, viết kế hoạch, hướng dẫn và lý thuyết phần B | `docs/TEAM_PLAN.md`, `docs/GUIDE_B.md` — `5634cc7` | Done |
+| Leader | Chọn đề tài, chia việc A/B/C, viết kế hoạch, hướng dẫn và lý thuyết phần B; viết lại README (bảng nguồn dữ liệu, cấu hình `.env`, các bước chạy lại, ghi chú phiên bản corpus) | `docs/TEAM_PLAN.md`, `docs/GUIDE_B.md` — `5634cc7`; `README.md` — `6dc4ddf`, `277e5c3` | Done |
 
 ## Quyết định kỹ thuật quan trọng
 
