@@ -411,21 +411,16 @@ GTGT, không phải khai thuế GTGT, thuộc diện chịu thuế
 GTGT 0% theo pháp luật về thuế GTGT;
 - Khoản bồi thường vi phạm hợp đồng, bồi thường khác.
 
-| | | Tỷ lệ % | Thuế |
-
-| | | tính | suất |
-| STT | Danh mục ngành nghề | | |
-| | | thuế | thuế |
-| | | GTGT | TNCN |
-| 2 Dịch vụ, xây dựng không bao thầu nguyên vật liệu | | | |
+Tỷ lệ % Thuế tính suất
+STT Danh mục ngành nghề thuế thuế
+GTGT TNCN 2 Dịch vụ, xây dựng không bao thầu nguyên vật liệu
 - Dịch vụ lưu trú gồm: Hoạt động cung cấp cơ sở lưu trú ngắn hạn cho khách du lịch, khách vãng lai khác; hoạt động cung cấp cơ sở lưu trú dài hạn không phải là căn hộ cho sinh viên, công nhân và những đối tượng tương tự;
 hoạt động cung cấp cơ sở lưu trú cùng dịch vụ ăn uống hoặc các phương tiện giải trí;
 - Dịch vụ bốc xếp hàng hóa và hoạt động dịch vụ hỗ trợ khác liên quan đến vận tải như kinh doanh bến bãi, bán vé, trông giữ phương tiện;
 - Dịch vụ bưu chính, chuyển phát thư tín và bưu kiện;
 - Dịch vụ môi giới, đấu giá và hoa hồng đại lý;
 - Dịch vụ tư vấn pháp luật, tư vấn tài chính, kế toán, kiểm toán; dịch vụ làm thủ tục hành chính thuế, hải quan;
-- Dịch vụ xử lý dữ liệu, cho thuê cổng thông tin, thiết bị
-| | | 5% | 2% | công nghệ thông tin, viễn thông; quảng cáo trên sản phẩm, dịch vụ nội dung thông tin số;
+- Dịch vụ xử lý dữ liệu, cho thuê cổng thông tin, thiết bị 5% 2% công nghệ thông tin, viễn thông; quảng cáo trên sản phẩm, dịch vụ nội dung thông tin số;
 - Dịch vụ hỗ trợ văn phòng và các dịch vụ hỗ trợ kinh doanh khác;
 - Dịch vụ tắm hơi, massage, karaoke, vũ trường, bi-a, internet, game;
 - Dịch vụ may đo, giặt là; cắt tóc, làm đầu, gội đầu;
@@ -476,25 +471,18 @@ Phụ lục II
 DANH MỤC MẪU BIỂU
 (Ban hành kèm theo Thông tư số 40/2021/TT-BTC ngày 01 tháng 6 năm 2021 của Bộ trưởng Bộ Tài chính)
 
-| STT | Mẫu số | | | Tên Mẫu biểu | | |
+STT Mẫu số Tên Mẫu biểu
 
-Tờ khai thuế đối với hộ kinh doanh, cá nhân
-| 1 01/CNKD | | | | | | | kinh doanh
+Tờ khai thuế đối với hộ kinh doanh, cá nhân 1 01/CNKD kinh doanh
 Phụ lục Bảng kê chi tiết cá nhân kinh doanh
-(Kèm theo Tờ khai 01/CNKD áp dụng đối với tổ chức, cá nhân khai thuế thay, nộp thuế thay cho
-| | | cá nhân; | cá nhân | hợp tác | kinh doanh | với tổ |
-
-| 2 01-1/BK-CNKD | | | | | | | chức; tổ chức chi trả cho cá nhân đạt doanh số;
+(Kèm theo Tờ khai 01/CNKD áp dụng đối với tổ chức, cá nhân khai thuế thay, nộp thuế thay cho cá nhân; cá nhân hợp tác kinh doanh với tổ 2 01-1/BK-CNKD chức; tổ chức chi trả cho cá nhân đạt doanh số;
 tổ chức là chủ sở hữu sàn giao dịch thương mại điện tử; tổ chức tại Việt Nam là đối tác của nhà cung cấp nền tảng số ở nước ngoài)
 Phụ lục Bảng kê hoạt động kinh doanh trong kỳ của hộ kinh doanh, cá nhân kinh doanh 3 01-2/BK-HĐKD (Kèm theo Tờ khai 01/CNKD áp dụng đối với hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai)
-| | | Thông | báo về việc | dự kiến | doanh | thu, mức | thuế khoán
-| 4 01/TBTDK-CNKD | | | | | | |
+Thông báo về việc dự kiến doanh thu, mức thuế khoán 4 01/TBTDK-CNKD
 
 (Áp dụng cho hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp khoán)
-Bảng công khai thông tin cá nhân kinh doanh
-| 5 01/CKTT- CNKD | | | | | | | nộp thuế theo phương pháp khoán
-Thông báo về việc không điều chỉnh mức thuế khoán
-| 6 01/TBKĐC-CNKD | | | | | | |
+Bảng công khai thông tin cá nhân kinh doanh 5 01/CKTT- CNKD nộp thuế theo phương pháp khoán
+Thông báo về việc không điều chỉnh mức thuế khoán 6 01/TBKĐC-CNKD
 
 (Áp dụng cho hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp khoán)
 

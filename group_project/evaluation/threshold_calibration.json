@@ -1,26 +1,26 @@
 {
-  "threshold": 0.5699,
-  "accuracy": 1.0,
+  "threshold": 0.4972,
+  "accuracy": 0.9375,
   "rows": [
     {
       "question": "Hộ kinh doanh cá thể có doanh thu bao nhiêu một năm thì không phải nộp thuế GTGT và thuế TNCN?",
       "group": "in",
-      "best_dense_score": 0.6924213767051697
+      "best_dense_score": 0.6824746131896973
     },
     {
       "question": "Tỷ lệ thuế GTGT và thuế TNCN tính trên doanh thu đối với hộ kinh doanh ngành phân phối, cung cấp hàng hóa là bao nhiêu?",
       "group": "in",
-      "best_dense_score": 0.7555127143859863
+      "best_dense_score": 0.7555305361747742
     },
     {
       "question": "Hồ sơ đăng ký hộ kinh doanh bao gồm những giấy tờ gì?",
       "group": "in",
-      "best_dense_score": 0.7528769969940186
+      "best_dense_score": 0.7528148889541626
     },
     {
       "question": "Mỗi cá nhân hoặc thành viên hộ gia đình được đăng ký tối đa bao nhiêu hộ kinh doanh trên toàn quốc?",
       "group": "in",
-      "best_dense_score": 0.5891390442848206
+      "best_dense_score": 0.5692781805992126
     },
     {
       "question": "Nộp hồ sơ đăng ký hộ kinh doanh ở đâu và thời hạn cấp Giấy chứng nhận là bao lâu?",
@@ -30,52 +30,52 @@
     {
       "question": "Hộ kinh doanh nộp thuế theo phương pháp kê khai có phải sử dụng hóa đơn điện tử không?",
       "group": "in",
-      "best_dense_score": 0.7388246059417725
+      "best_dense_score": 0.7387948036193848
     },
     {
       "question": "Từ ngày 1/6 theo Nghị định 70, hộ kinh doanh nào phải lập hóa đơn điện tử khởi tạo từ máy tính tiền?",
       "group": "in",
-      "best_dense_score": 0.7740625739097595
+      "best_dense_score": 0.7740605473518372
     },
     {
       "question": "Hộ kinh doanh bán hàng online có doanh thu bao nhiêu thì phải nộp thuế, và tỷ lệ thuế TNCN là bao nhiêu?",
       "group": "in",
-      "best_dense_score": 0.7563654780387878
+      "best_dense_score": 0.7564677000045776
     },
     {
       "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với dịch vụ, xây dựng không bao thầu nguyên vật liệu là bao nhiêu?",
       "group": "in",
-      "best_dense_score": 0.6870961785316467
+      "best_dense_score": 0.6950947046279907
     },
     {
       "question": "Tỷ lệ thuế GTGT và thuế TNCN đối với sản xuất, vận tải, dịch vụ có gắn với hàng hóa là bao nhiêu?",
       "group": "in",
-      "best_dense_score": 0.7050551176071167
+      "best_dense_score": 0.713062584400177
     },
     {
       "question": "Thông tư 40/2021/TT-BTC do ai ban hành và hướng dẫn về nội dung gì?",
       "group": "in",
-      "best_dense_score": 0.7224186658859253
+      "best_dense_score": 0.7485162019729614
     },
     {
       "question": "Nghị định 01/2021/NĐ-CP quy định về hộ kinh doanh và đăng ký hộ kinh doanh tại chương nào?",
       "group": "in",
-      "best_dense_score": 0.8183546662330627
+      "best_dense_score": 0.7478315830230713
     },
     {
       "question": "Nghị định 123/2020/NĐ-CP quy định việc áp dụng hóa đơn điện tử khi bán hàng hóa, cung cấp dịch vụ tại điều nào?",
       "group": "in",
-      "best_dense_score": 0.802437424659729
+      "best_dense_score": 0.8141812086105347
     },
     {
       "question": "Chủ hộ kinh doanh có được quyền góp vốn, mua cổ phần trong doanh nghiệp không?",
       "group": "in",
-      "best_dense_score": 0.6305938959121704
+      "best_dense_score": 0.6416049003601074
     },
     {
       "question": "Hộ kinh doanh nộp thuế theo phương pháp khoán khi có nhu cầu sử dụng hóa đơn thì làm như thế nào?",
       "group": "in",
-      "best_dense_score": 0.7231188416481018
+      "best_dense_score": 0.723232090473175
     },
     {
       "question": "Phương pháp kê khai thuế áp dụng cho những hộ kinh doanh nào?",
@@ -83,14 +83,54 @@
       "best_dense_score": 0.7520079612731934
     },
     {
+      "question": "mở quán cà phê cần giấy tờ gì",
+      "group": "in",
+      "best_dense_score": 0.5086049437522888
+    },
+    {
+      "question": "doanh thu ít thì có phải nộp thuế không",
+      "group": "in",
+      "best_dense_score": 0.6354460716247559
+    },
+    {
+      "question": "bán hàng trên facebook có phải xuất hóa đơn không",
+      "group": "in",
+      "best_dense_score": 0.5760468244552612
+    },
+    {
+      "question": "hộ kinh doanh là gì",
+      "group": "in",
+      "best_dense_score": 0.59413743019104
+    },
+    {
+      "question": "đăng ký hộ kinh doanh mất mấy ngày",
+      "group": "in",
+      "best_dense_score": 0.5814685225486755
+    },
+    {
+      "question": "bán tạp hóa thì đóng thuế bao nhiêu phần trăm",
+      "group": "in",
+      "best_dense_score": 0.5356443524360657
+    },
+    {
+      "question": "hộ khoán muốn xuất hóa đơn cho khách thì làm sao",
+      "group": "in",
+      "best_dense_score": 0.5298086404800415
+    },
+    {
+      "question": "một người được mở mấy hộ kinh doanh",
+      "group": "in",
+      "best_dense_score": 0.5207469463348389
+    },
+    {
       "question": "Thủ tục ly hôn thuận tình gồm những bước nào?",
       "group": "out",
-      "best_dense_score": 0.4477846622467041
+      "best_dense_score": 0.447765588760376
     },
     {
       "question": "Giá vàng hôm nay là bao nhiêu?",
       "group": "out",
-      "best_dense_score": 0.3613607883453369
+      "best_dense_score": 0.351126492023468
     },
     {
       "question": "Cách nấu phở bò ngon tại nhà?",
@@ -100,17 +140,27 @@
     {
       "question": "Đội tuyển Việt Nam đá trận tiếp theo khi nào?",
       "group": "out",
-      "best_dense_score": 0.2745361328125
+      "best_dense_score": 0.2631843090057373
     },
     {
       "question": "Thủ tục thành lập công ty cổ phần cần bao nhiêu cổ đông?",
       "group": "out",
-      "best_dense_score": 0.5317257046699524
+      "best_dense_score": 0.5261539220809937
     },
     {
       "question": "Thuế thu nhập doanh nghiệp của công ty TNHH là bao nhiêu phần trăm?",
       "group": "out",
-      "best_dense_score": 0.5507338047027588
+      "best_dense_score": 0.550729513168335
+    },
+    {
+      "question": "Thủ tục cấp hộ chiếu mới cần những gì?",
+      "group": "out",
+      "best_dense_score": 0.48572826385498047
+    },
+    {
+      "question": "Mức phạt vượt đèn đỏ với xe máy là bao nhiêu?",
+      "group": "out",
+      "best_dense_score": 0.4388580918312073
     }
   ]
 }

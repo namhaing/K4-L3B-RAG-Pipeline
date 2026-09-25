@@ -4,7 +4,8 @@ Task 6 — Lexical search bằng BM25.
 Dùng cùng corpus chunks với Task 5. BM25 phù hợp với từ khóa chính xác, mã tài
 liệu và tên riêng. Output phải theo SearchResult và sort score giảm dần.
 
-Tokenizer giữ nguyên số hiệu văn bản ("123/2020/nđ-cp") làm một token, đồng
+BM25 chấm trên phần thân chunk (bỏ nhãn văn bản Task 4 gắn ở đầu). Tokenizer giữ
+nguyên số hiệu văn bản ("123/2020/nđ-cp") làm một token, đồng
 thời thêm các phần con ("123", "2020", "nđ", "cp") để query "Nghị định
 123/2020" vẫn khớp với văn bản ghi đầy đủ "123/2020/NĐ-CP".
 """
@@ -43,7 +44,16 @@ def build_bm25_index(corpus: list[dict]):
             for word, freq in nd.items():
                 self.idf[word] = math.log(1 + (self.corpus_size - freq + 0.5) / (freq + 0.5))
 
-    return _BM25([tokenize(item["content"]) for item in corpus])
+    return _BM25([tokenize(_bm25_text(item)) for item in corpus])
+
+
+def _bm25_text(item: dict) -> str:
+    """Nội dung chunk bỏ nhãn văn bản ở đầu (Task 4 ghi độ dài vào ``prefix_chars``).
+
+    Nhãn "Thông tư 40/2021/TT-BTC" có mặt ở mọi chunk của văn bản nên không giúp phân
+    biệt chunk; giữ lại thì chunk ngắn chỉ chứa nhãn + tiêu đề được BM25 chấm cao.
+    """
+    return item["content"][item["metadata"].get("prefix_chars", 0):]
 
 
 def _get_corpus() -> list[dict]:

@@ -1,4 +1,4 @@
-# Nghị định 01/2021/NĐ-CP về đăng ký doanh nghiệp (Chương VIII: đăng ký hộ kinh doanh)
+# Nghị định 01/2021/NĐ-CP về đăng ký doanh nghiệp
 **Source:** https://congbaocdn.chinhphu.vn/CongBaoCP/VanBan/2021/1/32981/34281-1-2021113-11401-2021-nd-cp.pdf
 **Số hiệu:** 01/2021/NĐ-CP
 **Ngày ban hành:** 2021-01-04
