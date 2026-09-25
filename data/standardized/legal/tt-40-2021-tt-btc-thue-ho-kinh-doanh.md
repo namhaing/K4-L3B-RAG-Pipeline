@@ -1,3 +1,10 @@
+# Thông tư 40/2021/TT-BTC hướng dẫn thuế đối với hộ kinh doanh
+**Source:** https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=203403
+**Số hiệu:** 40/2021/TT-BTC
+**Ngày ban hành:** 2021-06-01
+**Hiệu lực:** Còn hiệu lực
+---
+
 THÔNG TƯ 40/2021/TT-BTC
 HƯỚNG DẪN THUẾ GIÁ TRỊ GIA TĂNG, THUẾ THU NHẬP CÁ NHÂN VÀ QUẢN LÝ THUẾ ĐỐI VỚI HỘ KINH DOANH, CÁ NHÂN KINH DOANH
 
