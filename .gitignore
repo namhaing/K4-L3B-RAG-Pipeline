@@ -35,6 +35,9 @@ htmlcov/
 .env.*
 !.env.example
 
+# Streamlit secrets
+.streamlit/secrets.toml
+
 # Temp PDF conversion cache
 data/_tmp_pdf/
 
